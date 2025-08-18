@@ -1,6 +1,9 @@
 /* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Reset default margins/padding */
+/* ---------- GLOBAL RESET ---------- */
 html,
 body,
 #root {
@@ -14,7 +17,16 @@ body,
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Respect iPhone notch (safe area insets) */
+/* ---------- RTL & LANGUAGE ---------- */
+html,
+body {
+  direction: rtl;
+  text-align: right;
+  background: #f9fafb;
+  /* Tailwind gray-50 */
+}
+
+/* ---------- SAFE AREA (iPhone Notch + Home Indicator) ---------- */
 body {
   padding-top: env(safe-area-inset-top);
   padding-left: env(safe-area-inset-left);
@@ -22,22 +34,20 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* Make sure React root fills the screen */
+/* ---------- ROOT CONTAINER ---------- */
 #root {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
   overflow: hidden;
   background-color: #ffffff;
 }
 
-/* Optional: smooth scrolling on iOS */
+/* ---------- iOS SMOOTH SCROLL ---------- */
 * {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Prevent overscroll bounce background showing through */
+/* Prevent overscroll background flash */
 body,
 #root {
   overscroll-behavior-y: none;
