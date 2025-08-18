@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState } from 'react';
 import {
   Home,
@@ -22,23 +23,173 @@ import {
   Send
 } from 'lucide-react';
 
+// IMPORTANT: your data files should be placed in src/data/
+// Example imports (change if your filenames differ):
+// - If your file is src/data/students.js -> default export an object or array
+// - If your file is src/data/courses.js -> default export an object or array
+import { students as studentsRaw } from "./data/students";
+import { courses as coursesRaw } from "./data/courses";
+
+
 // Single-file, production-ready mobile-style app (no phone frame)
 // TailwindCSS + lucide-react
 
 export default function StudentApp() {
+  // ---------- auth & core state ----------
+  const [currentUser, setCurrentUser] = useState(null);
   const [activeTab, setActiveTab] = useState('home');
   const [currentScreen, setCurrentScreen] = useState('main');
   const [openChat, setOpenChat] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileFilter, setFileFilter] = useState('all');
-  // new: control dropdown visibility for file filter
   const [showFileFilterMenu, setShowFileFilterMenu] = useState(false);
+  const [assignments, setAssignments] = useState([]);
 
-  const [assignments, setAssignments] = useState([
-    { id: 1, title: 'مشروع النهائي', subject: 'هندسة البرمجيات', dueDate: '20-08-2025', status: 'لم يتم التسليم', grade: null },
-    { id: 2, title: 'تحليل النظم', subject: 'تحليل وتصميم النظم', dueDate: '15-08-2025', status: 'تم التسليم', grade: '85/100' },
-    { id: 3, title: 'تطبيق قواعد البيانات', subject: 'قواعد البيانات', dueDate: '16-08-2025', status: 'قيد المراجعة', grade: null },
-  ]);
+  // Data normalization
+  const students = Array.isArray(studentsRaw) ? studentsRaw : (studentsRaw ? Object.values(studentsRaw) : []);
+  const courses = coursesRaw || [];
+
+  // Memoized helpers
+  const getFacultyData = React.useCallback((student) => {
+    if (!student) return null;
+    const uni = courses.find(u => u.university === student.university);
+    if (!uni) return null;
+    const faculty = (uni.faculties || []).find(f =>
+      f.name === student.faculty || f.faculty === student.faculty
+    );
+    return faculty || null;
+  }, [courses]);
+
+  // Helper functions - must be defined before use
+  function getFacultyStudents(student) {
+    if (!student) return [];
+    return students.filter(
+      s => s.university === student.university && s.faculty === student.faculty
+    );
+  }
+
+  function getFacultyProfessors(faculty) {
+    if (!faculty || !faculty.courses) return [];
+    const profs = faculty.courses.map(c => c.professor).filter(Boolean);
+    return Array.from(new Set(profs));
+  }
+
+  function buildAssignments(student, faculty) {
+    if (!student || !faculty || !faculty.courses) return [];
+    return student.enrolledCourses.map((courseName, idx) => {
+      const course = faculty.courses.find(c => c.subtitle === courseName);
+      return {
+        id: idx + 1,
+        title: `واجب ${courseName}`,
+        subject: courseName,
+        dueDate: '20-08-2025',
+        status: 'لم يتم التسليم',
+        grade: null,
+        file: course ? course.file : null,
+      };
+    });
+  }
+
+  function buildFiles(faculty) {
+    if (!faculty || !faculty.courses) return [];
+    return faculty.courses.flatMap((c, courseIdx) =>
+      (c.files || []).map((f, fileIdx) => ({
+        id: `${courseIdx}-${fileIdx}`,
+        name: f.name,
+        type: f.type,
+        color: 'blue',
+        course: c.subtitle,
+        professor: c.professor,
+        room: c.room,
+        file: f.file,
+        title: c.title,
+      }))
+    );
+  }
+
+  // Effect for assignments
+  React.useEffect(() => {
+    if (currentUser) {
+      const facultyData = getFacultyData(currentUser);
+      if (facultyData) {
+        const newAssignments = buildAssignments(currentUser, facultyData);
+        setAssignments(newAssignments);
+      }
+    }
+  }, [currentUser, getFacultyData]);
+
+  // Current user's faculty data - memoized
+  const facultyData = React.useMemo(() => getFacultyData(currentUser) || {}, [currentUser, getFacultyData]);
+  const facultyCourses = facultyData.courses || [];
+  const facultyProfessors = getFacultyProfessors(facultyData);
+  const facultyStudents = getFacultyStudents(currentUser);
+
+  // -------------------- AUTH / LOGIN SCREEN --------------------
+  const LoginScreen = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const tryLogin = () => {
+      setError('');
+      // match by username / id / email - be permissive
+      const match = students.find(s =>
+        (s.username && s.username === username) ||
+        (s.id && String(s.id) === username) ||
+        (s.email && s.email === username)
+      );
+
+      if (!match) {
+        setError('اسم مستخدم غير موجود');
+        return;
+      }
+
+      // If your student objects include passwords:
+      if (match.password) {
+        if (match.password !== password) {
+          setError('كلمة المرور غير صحيحة');
+          return;
+        }
+      } else {
+        // if no password in data, accept any non-empty password (dev mode)
+        if (!password) {
+          setError('أدخل كلمة المرور (اختبارية)');
+          return;
+        }
+      }
+
+      setCurrentUser(match);
+    };
+
+    // quick demo helper: if students list is present show example usernames
+    const demoHint = students.slice(0, 6).map(s => s.username || s.id || s.name).join(' , ');
+
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <div className="w-full max-w-md bg-white rounded-xl p-6 shadow">
+          <h2 className="text-xl font-bold mb-4 text-center">تسجيل دخول - بوابة الطالب</h2>
+          <input value={username} onChange={e => setUsername(e.target.value)} className="w-full border px-3 py-2 rounded mb-3" placeholder="Username / id / email" />
+          <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full border px-3 py-2 rounded mb-3" placeholder="Password" />
+          {error && <div className="text-red-600 mb-3">{error}</div>}
+          <button onClick={tryLogin} className="w-full bg-blue-600 text-white py-2 rounded">تسجيل الدخول</button>
+
+          <div className="text-sm text-gray-600 mt-4 text-right">
+            <div>نموذج البيانات المستخدمة: {students.length} حساب</div>
+            <div className="truncate">أمثلة أسماء مستخدمين: {demoHint || '—'}</div>
+            <div className="mt-2 text-xs text-gray-500">إذا لم يكن لديك كلمات مرور في ملف الطلاب، أدخل أي كلمة (dev mode).</div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // If not logged in show login screen and stop (keeps all pages intact)
+  if (!currentUser) {
+    return <LoginScreen />;
+  }
+
+  // ---------- dynamic faculty data for current user ----------
+  // (facultyCourses, facultyProfessors, and facultyStudents are already declared above)
 
   // -------------------- UTIL --------------------
   const PageWrapper = ({ children, paddedBottom = true }) => (
@@ -52,27 +203,24 @@ export default function StudentApp() {
     </div>
   );
 
-  const StatPill = ({ color, label, value }) => {
-    const cls = {
+  const StatPill = ({ color, label, value }) => (
+    <div className={{
       blue: 'bg-blue-100 text-blue-700',
       green: 'bg-green-100 text-green-700',
       red: 'bg-red-100 text-red-700',
       yellow: 'bg-yellow-100 text-yellow-700',
-    }[color] + ' p-4 rounded-xl';
-    return (
-      <div className={cls}>
-        <div className="text-sm mb-1">{label}</div>
-        <div className="text-2xl font-bold">{value}</div>
-      </div>
-    );
-  };
+    }[color] + ' p-4 rounded-xl'}>
+      <div className="text-sm mb-1">{label}</div>
+      <div className="text-2xl font-bold">{value}</div>
+    </div>
+  );
 
   const Header = () => (
     <div className="px-4 pb-2">
       <div className="flex items-center justify-between">
         <div className="text-right">
-          <div className="font-bold text-lg">مرحبا 👋</div>
-          <div className="text-sm text-gray-600">نتمنى لك يوماً دراسياً موفقاً</div>
+          <div className="font-bold text-lg">{currentUser && (currentUser.displayName || currentUser.username || currentUser.name)} 👋</div>
+          <div className="text-sm text-gray-600">جامعة: {currentUser.university || '—'} — كلية: {currentUser.faculty || '—'}</div>
         </div>
         <div className="flex items-center gap-2">
           <button className="p-2 rounded-lg bg-white shadow-sm"><Search size={18} /></button>
@@ -80,6 +228,7 @@ export default function StudentApp() {
             <Bell size={18} />
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full" />
           </button>
+          <button onClick={() => { setCurrentUser(null); }} title="Logout" className="p-2 rounded-lg bg-white shadow-sm text-sm">خروج</button>
         </div>
       </div>
     </div>
@@ -91,32 +240,28 @@ export default function StudentApp() {
       <Header />
 
       <div className="grid grid-cols-2 gap-4 mb-4">
-        <StatPill color="green" label="نسبة الحضور" value="81%" />
-        <StatPill color="blue" label="المعدل التراكمي" value="3.4" />
+        <StatPill color="green" label="نسبة الحضور" value={`${currentUser.attendance ?? '—'}%`} />
+        <StatPill color="blue" label="المعدل التراكمي" value={`${currentUser.gpa ?? '—'}`} />
       </div>
 
       <SectionCard title="جدول اليوم">
         <div className="space-y-3">
-          <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-            <div className="text-right">
-              <div className="font-medium">هندسة البرمجيات</div>
-              <div className="text-sm text-gray-600">د. سارة أحمد - قاعة 101</div>
+          {/* try to show today's schedule from facultyData or fallback */}
+          {(facultyData.schedule || [
+            { name: 'هندسة البرمجيات', place: 'قاعة 101', time: '9:00 AM', type: 'محاضرة' },
+            { name: 'قواعد البيانات', place: 'معمل 205', time: '11:00 AM', type: 'عملي' },
+          ]).map((s, idx) => (
+            <div key={idx} className={`flex items-center justify-between p-3 ${idx === 0 ? 'bg-blue-50' : 'bg-gray-50'} rounded-lg`}>
+              <div className="text-right">
+                <div className="font-medium">{s.name}</div>
+                <div className="text-sm text-gray-600">{s.instructor || s.teacher || 'د. غير محدد'} - {s.place}</div>
+              </div>
+              <div className="text-left">
+                <div className={`${idx === 0 ? 'text-blue-600' : 'text-gray-600'} font-medium`}>{s.time}</div>
+                <div className={`text-xs ${idx === 0 ? 'text-blue-500 bg-blue-100' : 'text-gray-500 bg-gray-100'} px-2 py-1 rounded`}>{s.type}</div>
+              </div>
             </div>
-            <div className="text-left">
-              <div className="text-blue-600 font-medium">9:00 AM</div>
-              <div className="text-xs text-blue-500 bg-blue-100 px-2 py-1 rounded">محاضرة</div>
-            </div>
-          </div>
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div className="text-right">
-              <div className="font-medium">قواعد البيانات</div>
-              <div className="text-sm text-gray-600">د. محمد علي - معمل 205</div>
-            </div>
-            <div className="text-left">
-              <div className="text-gray-600 font-medium">11:00 AM</div>
-              <div className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">عملي</div>
-            </div>
-          </div>
+          ))}
         </div>
         <button className="text-blue-500 text-sm mt-3 text-center w-full">عرض الجدول كاملاً</button>
       </SectionCard>
@@ -141,7 +286,7 @@ export default function StudentApp() {
             </div>
           </div>
 
-          {/* NEW: extra announcements (same style) */}
+          {/* extra announcements */}
           <div className="flex gap-3 p-3 bg-green-50 rounded-lg border-r-4 border-green-400">
             <CheckCircle className="text-green-600 mt-1" size={20} />
             <div className="text-right flex-1">
@@ -170,23 +315,22 @@ export default function StudentApp() {
       <h2 className="text-lg font-semibold mb-4 text-right">الجدول الدراسي</h2>
       <SectionCard>
         <div className="space-y-3">
-          {[
-            { name: 'هندسة البرمجيات', place: 'قاعة 101', time: '9:00 AM' },
-            { name: 'قواعد البيانات', place: 'قاعة 101', time: '12:00 PM' },
-            { name: 'الشبكات', place: 'قاعة 108', time: '3:00 PM' },
-          ].map((s, idx) => (
-            <div key={idx} className="flex items-center justify-between p-3 border rounded-lg">
-              <div className="flex items-center gap-2">
-                <FileText size={16} className="text-blue-500" />
-                <span className="text-blue-500 text-sm">محاضرة</span>
+          {facultyCourses.length
+            ? facultyCourses.map((s, idx) => (
+              <div key={idx} className="flex items-center justify-between p-3 border rounded-lg">
+                <div className="flex items-center gap-2">
+                  <FileText size={16} className="text-blue-500" />
+                  <span className="text-blue-500 text-sm">{s.title || 'محاضرة'}</span>
+                </div>
+                <div className="text-right flex-1 mx-4">
+                  <div className="font-medium">{s.subtitle}</div>
+                  <div className="text-sm text-gray-600">{s.professor || 'د. غير محدد'} - {s.room || 'قاعة غير محددة'}</div>
+                </div>
+                <div className="text-blue-600 font-medium">—</div>
               </div>
-              <div className="text-right flex-1 mx-4">
-                <div className="font-medium">{s.name}</div>
-                <div className="text-sm text-gray-600">د. سارة أحمد - {s.place}</div>
-              </div>
-              <div className="text-blue-600 font-medium">{s.time}</div>
-            </div>
-          ))}
+            ))
+            : <div className="text-gray-500 text-center">لا يوجد جدول متاح</div>
+          }
         </div>
       </SectionCard>
     </PageWrapper>
@@ -202,13 +346,17 @@ export default function StudentApp() {
       }
     };
 
-    const files = [
-      { id: 1, name: 'Lecture1_IntroToCS.pdf', type: 'lecture', color: 'blue' },
-      { id: 2, name: 'Lecture4_ComputerArchit...', type: 'lecture', color: 'blue' },
-      { id: 3, name: 'HW2_ProgrammingInC++...', type: 'assignment', color: 'green' },
-      { id: 4, name: 'ورقة مراجعة الرياضيات المتقدمة', type: 'summary', color: 'purple' },
-    ];
+    // Update filter options to include all types
+    const fileTypes = ['all', 'lecture', 'exercise', 'project'];
+    const fileTypeLabels = {
+      all: 'الكل',
+      lecture: 'محاضرات',
+      exercise: 'تمارين',
+      project: 'مشاريع'
+    };
 
+    // Build files from faculty courses
+    const files = buildFiles(facultyData);
     const filteredFiles = fileFilter === 'all' ? files : files.filter(f => f.type === fileFilter);
 
     return (
@@ -250,7 +398,7 @@ export default function StudentApp() {
 
         <SectionCard className="mt-4">
           <div className="flex items-center justify-between mb-4">
-            {/* REPLACED: static filter buttons -> filter icon + dropdown */}
+            {/* filter icon + dropdown */}
             <div className="relative">
               <button
                 onClick={() => setShowFileFilterMenu(prev => !prev)}
@@ -262,18 +410,15 @@ export default function StudentApp() {
 
               {showFileFilterMenu && (
                 <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg p-2 z-50">
-                  {['all', 'lecture', 'assignment', 'summary'].map(opt => {
-                    const label = opt === 'all' ? 'الكل' : opt === 'lecture' ? 'محاضرات' : opt === 'assignment' ? 'واجبات' : 'ملخصات';
-                    return (
-                      <button
-                        key={opt}
-                        onClick={() => { setFileFilter(opt); setShowFileFilterMenu(false); }}
-                        className={`w-full text-right px-3 py-2 rounded text-sm ${fileFilter === opt ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'}`}
-                      >
-                        {label}
-                      </button>
-                    );
-                  })}
+                  {fileTypes.map(opt => (
+                    <button
+                      key={opt}
+                      onClick={() => { setFileFilter(opt); setShowFileFilterMenu(false); }}
+                      className={`w-full text-right px-3 py-2 rounded text-sm ${fileFilter === opt ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'}`}
+                    >
+                      {fileTypeLabels[opt]}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
@@ -282,19 +427,16 @@ export default function StudentApp() {
           </div>
 
           <div className="space-y-3">
-            {filteredFiles.map(file => (
-              <div key={file.id} className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+            {filteredFiles.map((file, idx) => (
+              <div key={file.id ?? idx} className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
                 <div className="flex items-center gap-3">
                   <Download className="text-blue-500" size={20} />
-                  <span className={`text-xs px-2 py-1 rounded ${file.color === 'blue' ? 'text-blue-600 bg-blue-100' :
-                    file.color === 'green' ? 'text-green-600 bg-green-100' :
-                      'text-purple-600 bg-purple-100'
-                    }`}>
-                    {file.type === 'lecture' ? 'محاضرة' : file.type === 'assignment' ? 'واجبات' : 'ملخصات'}
+                  <span className={`text-xs px-2 py-1 rounded text-blue-600 bg-blue-100`}>
+                    {fileTypeLabels[file.type] || file.type}
                   </span>
                 </div>
                 <div className="text-right flex-1 mx-4">
-                  <div className="text-sm font-medium truncate">{file.name}</div>
+                  <div className="text-sm font-medium truncate">{file.name || file.title || (file.course && `${file.course} - ملف`)}</div>
                 </div>
               </div>
             ))}
@@ -353,17 +495,16 @@ export default function StudentApp() {
   };
 
   const MessagesScreen = () => {
-    // expanded filters: include 'admin' (الإدارة)
     const [activeFilter, setActiveFilter] = useState('all');
 
-    const chats = [
-      { id: 1, name: 'د. هاني صالح', message: 'يا جماعة يذكر في محاضرة ومحادثة المحضر', time: '12:34PM', unread: true, type: 'faculty' },
-      { id: 2, name: 'أيمن بكري', message: 'حاضر أستاذ شكراً لك في باقي', time: '12:34PM', unread: false, type: 'students' },
-      { id: 3, name: 'أ. ليلي مصطفى', message: 'والنظام العام فين الأسئلة', time: '12:30PM', unread: false, type: 'faculty' },
-      { id: 4, name: 'أحمد سمير', message: 'السلام عليكم ممكن سؤال معتمدين', time: '11:45AM', unread: true, type: 'students' },
-      // NEW: administration example
-      { id: 5, name: 'شئون الطلاب', message: 'إرشادات التسجيل للفصل القادم الآن متاحة', time: '10:10AM', unread: false, type: 'admin' },
-    ];
+    // Build chat list from facultyData: professors and students (exclude current user)
+    const profChats = (facultyProfessors || []).map((p, idx) => ({ id: `prof-${idx}`, name: typeof p === 'string' ? p : p.name || p.title, message: 'مرحباً', time: '12:30PM', unread: false, type: 'faculty' }));
+    const studentChats = (facultyStudents || []).filter(s => (s.username || s.id || s.name) !== (currentUser.username || currentUser.id || currentUser.name)).map((s, idx) => ({ id: `stu-${idx}`, name: s.username || s.name || s.id, message: '', time: '11:00AM', unread: false, type: 'students' }));
+
+    const adminChats = [{ id: 'admin-1', name: 'شئون الطلاب', message: 'إرشادات التسجيل متاحة', time: '10:10AM', unread: false, type: 'admin' }];
+
+    // combine
+    const chats = [...profChats, ...studentChats, ...adminChats];
 
     const filteredChats = activeFilter === 'all' ? chats : chats.filter(c => c.type === activeFilter);
 
@@ -404,11 +545,11 @@ export default function StudentApp() {
     <PageWrapper>
       <div className="bg-white p-6 rounded-xl shadow-sm text-center mb-6">
         <div className="w-20 h-20 bg-purple-200 rounded-full mx-auto mb-4 flex items-center justify-center"><User className="text-purple-600" size={32} /></div>
-        <h2 className="text-xl font-bold">أحمد محمد #34215</h2>
+        <h2 className="text-xl font-bold">{currentUser.displayName || currentUser.username || currentUser.name} {currentUser.studentId ? `#${currentUser.studentId}` : ''}</h2>
         <div className="text-gray-600 text-sm mt-2">
-          <div>جامعة الإسكندرية</div>
-          <div>كلية الهندسة</div>
-          <div>السنة الثالثة</div>
+          <div>{currentUser.university || '—'}</div>
+          <div>{currentUser.faculty || '—'}</div>
+          <div>{currentUser.year ? `السنة ${currentUser.year}` : ''}</div>
         </div>
       </div>
 
@@ -434,13 +575,25 @@ export default function StudentApp() {
       <SectionCard title="إحصائيات الطالب" className="mt-6">
         <div className="grid grid-cols-2 gap-4">
           <div className="text-center p-3 bg-blue-50 rounded-lg">
-            <div className="text-2xl font-bold text-blue-600">24</div>
+            <div className="text-2xl font-bold text-blue-600">{currentUser.credits || 24}</div>
             <div className="text-sm text-blue-700">الساعات المجتازة</div>
           </div>
           <div className="text-center p-3 bg-green-50 rounded-lg">
-            <div className="text-2xl font-bold text-green-600">15</div>
+            <div className="text-2xl font-bold text-green-600">{currentUser.projectsCompleted || 15}</div>
             <div className="text-sm text-green-700">المشاريع المكتملة</div>
           </div>
+        </div>
+      </SectionCard>
+
+      <SectionCard title="الأساتذة في الكلية" className="mt-6">
+        <div className="space-y-2">
+          {facultyProfessors.length ? facultyProfessors.map((p, i) => <div key={i} className="p-3 bg-white rounded shadow">{typeof p === 'string' ? p : p.name || p.title}</div>) : <div className="text-sm text-gray-500">لا توجد بيانات للمحاضرين في هذه الكلية</div>}
+        </div>
+      </SectionCard>
+
+      <SectionCard title="الزملاء" className="mt-4">
+        <div className="space-y-2">
+          {facultyStudents.length ? facultyStudents.map((s, i) => <div key={i} className="p-3 bg-white rounded shadow">{s.username || s.name || s.id}</div>) : <div className="text-sm text-gray-500">لا توجد بيانات للزملاء في هذه الكلية</div>}
         </div>
       </SectionCard>
     </PageWrapper>
@@ -455,14 +608,14 @@ export default function StudentApp() {
 
       <SectionCard title="إحصائيات عامة">
         <div className="grid grid-cols-3 gap-4 text-center">
-          <div className="p-3 bg-blue-50 rounded-lg"><div className="text-2xl font-bold text-blue-600">81%</div><div className="text-xs text-blue-700">النسبة الكلية</div></div>
-          <div className="p-3 bg-red-50 rounded-lg"><div className="text-2xl font-bold text-red-600">7</div><div className="text-xs text-red-700">إجمالي الغياب</div></div>
-          <div className="p-3 bg-green-50 rounded-lg"><div className="text-2xl font-bold text-green-600">30</div><div className="text-xs text-green-700">إجمالي الحضور</div></div>
+          <div className="p-3 bg-blue-50 rounded-lg"><div className="text-2xl font-bold text-blue-600">{currentUser.attendance ?? '—'}%</div><div className="text-xs text-blue-700">النسبة الكلية</div></div>
+          <div className="p-3 bg-red-50 rounded-lg"><div className="text-2xl font-bold text-red-600">{currentUser.absences ?? 7}</div><div className="text-xs text-red-700">إجمالي الغياب</div></div>
+          <div className="p-3 bg-green-50 rounded-lg"><div className="text-2xl font-bold text-green-600">{currentUser.attended ?? 30}</div><div className="text-xs text-green-700">إجمالي الحضور</div></div>
         </div>
       </SectionCard>
 
       <div className="space-y-4 mt-4">
-        {[{ name: 'هندسة البرمجيات', pct: 80, abs: 3, pres: 12 }, { name: 'قواعد البيانات', pct: 83, abs: 2, pres: 10 }].map((c) => (
+        {(facultyData.attendanceSummary || [{ name: 'هندسة البرمجيات', pct: 80, abs: 3, pres: 12 }, { name: 'قواعد البيانات', pct: 83, abs: 2, pres: 10 }]).map((c) => (
           <div key={c.name} className="bg-white p-4 rounded-xl shadow-sm">
             <div className="flex justify-between items-center mb-3"><span className="text-green-600 font-bold">{c.pct}%</span><span className="font-medium">{c.name}</span></div>
             <div className="flex justify-between text-sm text-gray-600 mb-2"><span>{c.abs} غياب</span><span>حضور {c.pres}</span></div>
