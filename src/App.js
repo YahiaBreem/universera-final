@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import {
   Home,
@@ -168,8 +167,23 @@ export default function StudentApp() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-white rounded-xl p-6 shadow">
           <h2 className="text-xl font-bold mb-4 text-center">تسجيل دخول - بوابة الطالب</h2>
-          <input value={username} onChange={e => setUsername(e.target.value)} className="w-full border px-3 py-2 rounded mb-3" placeholder="Username / id / email" />
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full border px-3 py-2 rounded mb-3" placeholder="Password" />
+          {/* Ensure type="text" for username input */}
+          <input
+            type="text"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            className="w-full border px-3 py-2 rounded mb-3"
+            placeholder="Username / id / email"
+            autoComplete="username"
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            className="w-full border px-3 py-2 rounded mb-3"
+            placeholder="Password"
+            autoComplete="current-password"
+          />
           {error && <div className="text-red-600 mb-3">{error}</div>}
           <button onClick={tryLogin} className="w-full bg-blue-600 text-white py-2 rounded">تسجيل الدخول</button>
 
@@ -192,8 +206,11 @@ export default function StudentApp() {
   // (facultyCourses, facultyProfessors, and facultyStudents are already declared above)
 
   // -------------------- UTIL --------------------
+  // Make PageWrapper a flex column and scrollable
   const PageWrapper = ({ children, paddedBottom = true }) => (
-    <div className={`bg-gray-50 min-h-screen pt-4 ${paddedBottom ? 'pb-20' : ''} px-4 overflow-y-auto`}>{children}</div>
+    <div className={`flex flex-col h-screen bg-gray-50 pt-4 ${paddedBottom ? 'pb-20' : ''} px-4`}>
+      <div className="flex-1 overflow-y-auto">{children}</div>
+    </div>
   );
 
   const SectionCard = ({ title, children, className }) => (
@@ -219,8 +236,9 @@ export default function StudentApp() {
     <div className="px-4 pb-2">
       <div className="flex items-center justify-between">
         <div className="text-right">
-          <div className="font-bold text-lg">{currentUser && (currentUser.displayName || currentUser.username || currentUser.name)} 👋</div>
-          <div className="text-sm text-gray-600">جامعة: {currentUser.university || '—'} — كلية: {currentUser.faculty || '—'}</div>
+          <div className="font-bold text-lg"> مرحباََ {currentUser && (currentUser.firstName)} 👋</div>
+          <div className="text-sm text-gray-600"> {currentUser.university || '—'}</div>
+          <div className="text-sm text-gray-600"> {currentUser.faculty || '—'}</div>
         </div>
         <div className="flex items-center gap-2">
           <button className="p-2 rounded-lg bg-white shadow-sm"><Search size={18} /></button>
@@ -463,7 +481,7 @@ export default function StudentApp() {
     };
 
     return (
-      <div className="bg-gray-50 min-h-screen flex flex-col">
+      <div className="bg-gray-50 min-h-screen flex flex-col h-screen">
         <div className="bg-white p-4 flex items-center gap-3 shadow-sm">
           <button onClick={onBack}><ChevronLeft className="text-gray-600" size={24} /></button>
           <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
@@ -475,6 +493,7 @@ export default function StudentApp() {
           </div>
         </div>
 
+        {/* Make chat messages area scrollable */}
         <div className="flex-1 p-4 space-y-3 overflow-y-auto pb-24">
           {messages.map(m => (
             <div key={m.id} className={`flex ${m.sender === 'me' ? 'justify-start' : 'justify-end'}`}>
@@ -488,7 +507,16 @@ export default function StudentApp() {
 
         <div className="fixed bottom-14 left-0 right-0 bg-white p-3 flex gap-2 shadow-[0_-2px_8px_rgba(0,0,0,0.04)]">
           <button onClick={sendMessage} className="bg-blue-500 text-white p-2 rounded-lg"><Send size={20} /></button>
-          <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="اكتب رسالة..." className="flex-1 border rounded-lg px-3 py-2 text-right" onKeyDown={(e) => { if (e.key === 'Enter') sendMessage(); }} />
+          {/* Ensure type="text" for chat input */}
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="اكتب رسالة..."
+            className="flex-1 border rounded-lg px-3 py-2 text-right"
+            onKeyDown={(e) => { if (e.key === 'Enter') sendMessage(); }}
+            autoComplete="off"
+          />
         </div>
       </div>
     );
@@ -496,46 +524,275 @@ export default function StudentApp() {
 
   const MessagesScreen = () => {
     const [activeFilter, setActiveFilter] = useState('all');
+    const [showSearch, setShowSearch] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [activeChats, setActiveChats] = useState([]);
+    const [searchHistory, setSearchHistory] = useState([]);
+    const [selectedStudent, setSelectedStudent] = useState(null);
 
-    // Build chat list from facultyData: professors and students (exclude current user)
-    const profChats = (facultyProfessors || []).map((p, idx) => ({ id: `prof-${idx}`, name: typeof p === 'string' ? p : p.name || p.title, message: 'مرحباً', time: '12:30PM', unread: false, type: 'faculty' }));
-    const studentChats = (facultyStudents || []).filter(s => (s.username || s.id || s.name) !== (currentUser.username || currentUser.id || currentUser.name)).map((s, idx) => ({ id: `stu-${idx}`, name: s.username || s.name || s.id, message: '', time: '11:00AM', unread: false, type: 'students' }));
+    // Load and persist chats
+    React.useEffect(() => {
+      const savedChats = localStorage.getItem(`chats-${currentUser.id}`);
+      const studentChats = savedChats ? JSON.parse(savedChats) : [];
 
-    const adminChats = [{ id: 'admin-1', name: 'شئون الطلاب', message: 'إرشادات التسجيل متاحة', time: '10:10AM', unread: false, type: 'admin' }];
+      // Standard chats that are always present
+      const baseChats = [
+        // Admin chat
+        {
+          id: 'admin-1',
+          name: 'شئون الطلاب',
+          message: 'إرشادات التسجيل متاحة',
+          time: '10:10AM',
+          type: 'admin'
+        },
+        // Faculty chats
+        ...(facultyProfessors || []).map((p, idx) => ({
+          id: `prof-${idx}`,
+          name: typeof p === 'string' ? p : p.name || p.title,
+          message: 'مرحباً',
+          time: '12:30PM',
+          type: 'faculty'
+        })),
+        // Saved student chats
+        ...studentChats
+      ];
 
-    // combine
-    const chats = [...profChats, ...studentChats, ...adminChats];
+      setActiveChats(baseChats);
+    }, [currentUser.id, facultyProfessors]);
 
-    const filteredChats = activeFilter === 'all' ? chats : chats.filter(c => c.type === activeFilter);
+    // Filter chats - simplified to show all types
+    const filteredChats = React.useMemo(() => {
+      if (activeFilter === 'all') {
+        return activeChats;
+      }
+      return activeChats.filter(chat => chat.type === activeFilter);
+    }, [activeChats, activeFilter]);
+
+    const startNewChat = (student) => {
+      const newChat = {
+        id: `stu-${Date.now()}`,
+        name: student.displayName || student.username || student.name,
+        message: 'تم بدء المحادثة',
+        time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
+        type: 'students',
+        university: student.university,
+        faculty: student.faculty,
+        studentId: student.id,
+      };
+
+      // Update chats
+      const updatedChats = [...activeChats, newChat];
+      setActiveChats(updatedChats);
+
+      // Save student chats
+      const studentChats = updatedChats.filter(c => c.type === 'students');
+      localStorage.setItem(`chats-${currentUser.id}`, JSON.stringify(studentChats));
+
+      // Open the chat
+      setOpenChat(newChat);
+      setShowSearch(false);
+      setSearchQuery('');
+      setSelectedStudent(null);
+    };
+
+    // Modified search function to include full name search
+    const searchResults = showSearch && searchQuery ? students.filter(s => {
+      // Don't show current user
+      if ((s.username || s.id || s.name) === (currentUser.username || currentUser.id || currentUser.name)) {
+        return false;
+      }
+
+      // Normalize the search query and student names
+      const query = searchQuery.toLowerCase().trim();
+      const studentId = String(s.id);
+      const username = (s.username || '').toLowerCase();
+      const fullName = `${s.firstName || ''} ${s.lastName || ''}`.toLowerCase().trim();
+      const displayName = (s.displayName || '').toLowerCase();
+      const name = (s.name || '').toLowerCase();
+
+      // Match by exact ID, username, or full name
+      return studentId === query ||
+             username === query ||
+             fullName === query ||
+             displayName === query ||
+             name === query;
+    }) : [];
+
+    const handleSearch = (query) => {
+      setSearchQuery(query);
+      setSelectedStudent(null); // Clear selected student when search changes
+    };
+
+    const viewStudentProfile = (student) => {
+      setSelectedStudent(student);
+      // Add to search history if not already there
+      setSearchHistory(prev => {
+        const exists = prev.find(s => s.id === student.id);
+        if (!exists) {
+          return [...prev, student];
+        }
+        return prev;
+      });
+    };
 
     if (openChat) return <ChatScreen chat={openChat} onBack={() => setOpenChat(null)} />;
 
+    // Helper: count admin chats
+    const adminChatsCount = activeChats.filter(c => c.type === 'admin').length;
+
     return (
       <PageWrapper>
-        <h2 className="text-lg font-semibold mb-4 text-right">المحادثات</h2>
-
-        <div className="flex bg-gray-200 p-1 rounded-lg mb-4 text-sm">
-          <button onClick={() => setActiveFilter('all')} className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'all' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>الكل</button>
-          <button onClick={() => setActiveFilter('admin')} className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'admin' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>الإدارة</button>
-          <button onClick={() => setActiveFilter('students')} className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'students' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>الطلاب</button>
-          <button onClick={() => setActiveFilter('faculty')} className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'faculty' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>هيئة التدريس</button>
+        <div className="flex items-center justify-between mb-4">
+          <button
+            onClick={() => setShowSearch(true)}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm"
+          >
+            محادثة جديدة +
+          </button>
+          <h2 className="text-lg font-semibold">المحادثات</h2>
         </div>
 
-        <div className="space-y-3">
-          {filteredChats.map(chat => (
-            <div key={chat.id} onClick={() => setOpenChat({ id: chat.id, name: chat.name })} className={`bg-white p-4 rounded-lg shadow-sm flex items-center gap-3 hover:bg-gray-50 cursor-pointer ${chat.unread ? 'border-l-4 border-blue-500' : ''}`}>
-              <div className="relative">
-                <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center"><User className="text-gray-600" size={20} /></div>
-                {chat.unread && <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full"></div>}
-              </div>
-              <div className="flex-1 text-right">
-                <div className={`text-sm ${chat.unread ? 'font-bold' : 'font-medium'}`}>{chat.name}</div>
-                <div className="text-gray-600 text-xs mt-1 truncate">{chat.message}</div>
-              </div>
-              <div className="text-xs text-gray-500">{chat.time}</div>
+        {showSearch ? (
+          <div className="mb-4">
+            <div className="flex items-center justify-between mb-2">
+              <button
+                onClick={() => {
+                  setShowSearch(false);
+                  setSearchQuery('');
+                  setSelectedStudent(null);
+                }}
+                className="text-gray-500"
+              >
+                إلغاء
+              </button>
+              <h3 className="font-medium">البحث عن طالب</h3>
             </div>
-          ))}
-        </div>
+
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              placeholder="ابحث بالرقم التعريفي او الاسم الكامل..."
+              className="w-full border rounded-lg px-4 py-2 mb-3"
+              autoFocus
+            />
+
+            {selectedStudent ? (
+              // Student Profile Card
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <div className="flex justify-between items-start mb-4">
+                  <button
+                    onClick={() => startNewChat(selectedStudent)}
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm"
+                  >
+                    إرسال طلب محادثة
+                  </button>
+                  <div className="text-right">
+                    <h4 className="font-bold text-lg">
+                      {selectedStudent.displayName || selectedStudent.name}
+                    </h4>
+                    <p className="text-gray-600">#{selectedStudent.id}</p>
+                  </div>
+                </div>
+                <div className="space-y-2 text-right">
+                  <p className="text-gray-600">الجامعة: {selectedStudent.university}</p>
+                  <p className="text-gray-600">الكلية: {selectedStudent.faculty}</p>
+                  <p className="text-gray-600">السنة: {selectedStudent.year || '—'}</p>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {searchQuery && !searchResults.length && (
+                  <div className="text-center text-gray-500 py-4">
+                    لا توجد نتائج للبحث
+                  </div>
+                )}
+                {searchResults.map(student => (
+                  <div
+                    key={student.id}
+                    onClick={() => viewStudentProfile(student)}
+                    className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-gray-50"
+                  >
+                    <div className="text-blue-500 text-sm">عرض الملف</div>
+                    <div className="text-right">
+                      <div className="font-medium">
+                        {student.displayName || student.name}
+                      </div>
+                      <div className="text-sm text-gray-500">#{student.id}</div>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Search History */}
+                {!searchQuery && searchHistory.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-sm text-gray-500 mb-2 text-right">سجل البحث</h4>
+                    {searchHistory.map(student => (
+                      <div
+                        key={student.id}
+                        onClick={() => viewStudentProfile(student)}
+                        className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 mb-2"
+                      >
+                        <div className="text-blue-500 text-sm">عرض الملف</div>
+                        <div className="text-right">
+                          <div className="font-medium">
+                            {student.displayName || student.name}
+                          </div>
+                          <div className="text-sm text-gray-500">#{student.id}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="flex bg-gray-200 p-1 rounded-lg mb-4 text-sm">
+              <button onClick={() => setActiveFilter('all')}
+                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'all' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>
+                الكل ({activeChats.length})
+              </button>
+              <button onClick={() => setActiveFilter('students')}
+                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'students' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>
+                الطلاب ({activeChats.filter(c => c.type === 'students').length})
+              </button>
+              <button onClick={() => setActiveFilter('faculty')}
+                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'faculty' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>
+                هيئة التدريس ({activeChats.filter(c => c.type === 'faculty').length})
+              </button>
+              <button onClick={() => setActiveFilter('admin')}
+                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'admin' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>
+                الإدارة ({adminChatsCount})
+              </button>
+            </div>
+
+            <div className="space-y-3">
+              {filteredChats.map(chat => (
+                <div key={chat.id}
+                  onClick={() => setOpenChat(chat)}
+                  className="bg-white p-4 rounded-lg shadow-sm flex items-center gap-3 hover:bg-gray-50 cursor-pointer"
+                >
+                  <div className="relative">
+                    <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                      <User className="text-gray-600" size={20} />
+                    </div>
+                  </div>
+                  <div className="flex-1 text-right">
+                    <div className="font-medium">{chat.name}</div>
+                    {chat.type === 'students' && chat.university && (
+                      <div className="text-xs text-gray-500">
+                        {chat.university} - {chat.faculty}
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-xs text-gray-500">{chat.time}</div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </PageWrapper>
     );
   };
@@ -709,9 +966,9 @@ export default function StudentApp() {
       {/* Bottom Nav */}
       {currentScreen === 'main' && !openChat && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around py-2 shadow-sm">
-          <TabButton id="home" icon={Home} />
           <TabButton id="calendar" icon={Calendar} />
           <TabButton id="assignments" icon={FileText} />
+          <TabButton id="home" icon={Home} />
           <TabButton id="messages" icon={MessageSquare} />
           <TabButton id="profile" icon={User} />
         </div>
