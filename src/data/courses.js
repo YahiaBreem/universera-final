@@ -1335,7 +1335,7 @@ export const courses = [
         university: "Alexandria National University",
         faculties: [
             {
-                name: "Faculty of Computers and Artificial Intelligence",
+                name: "Faculty of Computer Science",
                 courses: [
                     {
                         title: "محاضرة",
