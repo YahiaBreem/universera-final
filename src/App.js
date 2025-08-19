@@ -160,9 +160,6 @@ export default function StudentApp() {
       setCurrentUser(match);
     };
 
-    // quick demo helper: if students list is present show example usernames
-    const demoHint = students.slice(0, 6).map(s => s.username || s.id || s.name).join(' , ');
-
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-white rounded-xl p-6 shadow">
@@ -186,12 +183,6 @@ export default function StudentApp() {
           />
           {error && <div className="text-red-600 mb-3">{error}</div>}
           <button onClick={tryLogin} className="w-full bg-blue-600 text-white py-2 rounded">تسجيل الدخول</button>
-
-          <div className="text-sm text-gray-600 mt-4 text-right">
-            <div>نموذج البيانات المستخدمة: {students.length} حساب</div>
-            <div className="truncate">أمثلة أسماء مستخدمين: {demoHint || '—'}</div>
-            <div className="mt-2 text-xs text-gray-500">إذا لم يكن لديك كلمات مرور في ملف الطلاب، أدخل أي كلمة (dev mode).</div>
-          </div>
         </div>
       </div>
     );
@@ -612,10 +603,10 @@ export default function StudentApp() {
 
       // Match by exact ID, username, or full name
       return studentId === query ||
-             username === query ||
-             fullName === query ||
-             displayName === query ||
-             name === query;
+        username === query ||
+        fullName === query ||
+        displayName === query ||
+        name === query;
     }) : [];
 
     const handleSearch = (query) => {
