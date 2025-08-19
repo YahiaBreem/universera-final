@@ -28,6 +28,7 @@ import {
 // - If your file is src/data/courses.js -> default export an object or array
 import { students as studentsRaw } from "./data/students";
 import { courses as coursesRaw } from "./data/courses";
+import banner from './banner.svg';
 
 
 // Single-file, production-ready mobile-style app (no phone frame)
@@ -161,28 +162,68 @@ export default function StudentApp() {
     };
 
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="w-full max-w-md bg-white rounded-xl p-6 shadow">
-          <h2 className="text-xl font-bold mb-4 text-center">تسجيل دخول - بوابة الطالب</h2>
-          {/* Ensure type="text" for username input */}
+      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-xl">
+          {/* App banner logo */}
+          <div className="flex justify-center mb-6">
+            <img
+              src={banner}
+              alt="App Logo"
+              className="w-42 h-30 object-contain"
+            />
+          </div>
+
+          {/* Arabic title */}
+          <h1 className="text-2xl font-bold text-center text-gray-800 mb-2" dir="rtl">
+            بوابة الطالب
+          </h1>
+
+          {/* Arabic subtitle */}
+          <p className="text-center text-gray-600 mb-8 text-sm" dir="rtl">
+            ادخل بياناتك للوصول للمنصة
+          </p>
+
+          {/* Username input */}
           <input
             type="text"
             value={username}
             onChange={e => setUsername(e.target.value)}
-            className="w-full border px-3 py-2 rounded mb-3"
-            placeholder="Username / id / email"
+            className="w-full border border-gray-200 px-4 py-3 rounded-xl mb-4 text-right bg-gray-50 focus:bg-white focus:border-blue-500 focus:outline-none transition-colors"
+            placeholder="اسم المستخدم أو البريد الإلكتروني"
             autoComplete="username"
+            dir="rtl"
           />
+
+          {/* Password input */}
           <input
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            className="w-full border px-3 py-2 rounded mb-3"
-            placeholder="Password"
+            className="w-full border border-gray-200 px-4 py-3 rounded-xl mb-6 text-right bg-gray-50 focus:bg-white focus:border-blue-500 focus:outline-none transition-colors"
+            placeholder="كلمة المرور"
             autoComplete="current-password"
+            dir="rtl"
           />
-          {error && <div className="text-red-600 mb-3">{error}</div>}
-          <button onClick={tryLogin} className="w-full bg-blue-600 text-white py-2 rounded">تسجيل الدخول</button>
+
+          {/* Error message */}
+          {error && (
+            <div className="text-red-600 mb-4 text-center text-sm" dir="rtl">
+              {error}
+            </div>
+          )}
+
+          {/* Login button */}
+          <button
+            onClick={tryLogin}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-medium transition-colors mb-6"
+          >
+            دخول
+          </button>
+
+          {/* Test credentials */}
+          <p className="text-center text-gray-400 text-xs" dir="rtl">
+            للتجربة: 1 / test
+          </p>
         </div>
       </div>
     );
@@ -461,6 +502,7 @@ export default function StudentApp() {
       { id: 1, text: 'مرحباً! كيف يمكنني مساعدتك؟', sender: 'other', timestamp: '12:30' },
     ]);
     const [input, setInput] = useState('');
+    const [showChatDetails, setShowChatDetails] = useState(false);
 
     const sendMessage = () => {
       if (!input.trim()) return;
@@ -471,43 +513,153 @@ export default function StudentApp() {
       setInput('');
     };
 
-    return (
-      <div className="bg-gray-50 min-h-screen flex flex-col h-screen">
-        <div className="bg-white p-4 flex items-center gap-3 shadow-sm">
-          <button onClick={onBack}><ChevronLeft className="text-gray-600" size={24} /></button>
-          <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-            <User className="text-gray-600" size={20} />
-          </div>
-          <div className="text-right">
-            <h3 className="font-semibold">{chat.name}</h3>
-            <div className="text-xs text-green-500">متصل الآن</div>
-          </div>
-        </div>
+    // Mock data for photos and files
+    const mockPhotos = Array(8).fill(null).map((_, i) => ({ id: i + 1, url: '#' }));
+    const mockFiles = Array(4).fill(null).map((_, i) => ({ id: i + 1, name: `ملف ${i + 1}`, type: 'pdf' }));
 
-        {/* Make chat messages area scrollable */}
-        <div className="flex-1 p-4 space-y-3 overflow-y-auto pb-24">
-          {messages.map(m => (
-            <div key={m.id} className={`flex ${m.sender === 'me' ? 'justify-start' : 'justify-end'}`}>
-              <div className={`max-w-[70%] p-3 rounded-lg ${m.sender === 'me' ? 'bg-blue-500 text-white' : 'bg-white shadow-sm'}`}>
-                <div className="text-sm">{m.text}</div>
-                <div className={`text-xs mt-1 ${m.sender === 'me' ? 'text-blue-100' : 'text-gray-500'}`}>{m.timestamp}</div>
+    // Get chat participant data
+    const getChatParticipantData = () => {
+      if (chat.type === 'students' && chat.studentId) {
+        const student = students.find(s => s.id === chat.studentId);
+        if (student) {
+          return {
+            name: student.displayName || `${student.firstName} ${student.lastName}`,
+            university: student.university,
+            faculty: student.faculty
+          };
+        }
+      }
+
+      // For non-student chats, use the chat's stored data or current user's data as fallback
+      return {
+        name: chat.name,
+        university: chat.university || currentUser.university || 'جامعة غير محددة',
+        faculty: chat.faculty || currentUser.faculty || 'كلية غير محددة'
+      };
+    };
+
+    const participantData = getChatParticipantData();
+
+    return (
+      <div className="bg-gray-50 min-h-screen flex h-screen">
+        {/* Left Panel - Chat Details (Toggleable) */}
+        {showChatDetails && (
+          <div className="w-1/3 bg-white border-r border-gray-200 flex flex-col">
+            {/* Header */}
+            <div className="p-4 border-b border-gray-200 flex items-center gap-3">
+              <button onClick={() => setShowChatDetails(false)}>
+                <ChevronLeft className="text-gray-600" size={20} />
+              </button>
+              <h2 className="text-lg font-semibold text-gray-800">chat details</h2>
+            </div>
+
+            {/* Profile Section */}
+            <div className="p-6 text-center border-b border-gray-200">
+              <div className="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <User className="text-gray-600" size={40} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-1">{participantData.name}</h3>
+              <p className="text-sm text-gray-500 mb-1">{participantData.university}</p>
+              <p className="text-sm text-gray-500">{participantData.faculty}</p>
+            </div>
+
+            {/* Photos Section */}
+            <div className="p-4 border-b border-gray-200">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm text-gray-600">صور</span>
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {mockPhotos.map((photo) => (
+                  <div key={photo.id} className="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-gray-300 rounded"></div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
 
-        <div className="fixed bottom-14 left-0 right-0 bg-white p-3 flex gap-2 shadow-[0_-2px_8px_rgba(0,0,0,0.04)]">
-          <button onClick={sendMessage} className="bg-blue-500 text-white p-2 rounded-lg"><Send size={20} /></button>
-          {/* Ensure type="text" for chat input */}
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="اكتب رسالة..."
-            className="flex-1 border rounded-lg px-3 py-2 text-right"
-            onKeyDown={(e) => { if (e.key === 'Enter') sendMessage(); }}
-            autoComplete="off"
-          />
+            {/* Files Section */}
+            <div className="p-4 flex-1">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm text-gray-600">ملفات</span>
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {mockFiles.map((file) => (
+                  <div key={file.id} className="aspect-square bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center">
+                    <FileText className="text-gray-400" size={24} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Right Panel - Chat Interface */}
+        <div className="flex-1 flex flex-col">
+          {/* Chat Header */}
+          <div className="bg-white p-4 border-b border-gray-200 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <button onClick={onBack}>
+                <ChevronLeft className="text-gray-600" size={20} />
+              </button>
+              <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                <User className="text-gray-600" size={20} />
+              </div>
+              <div className="text-right">
+                <h3 className="font-semibold text-gray-800">{chat.name}</h3>
+                <div className="text-xs text-green-500">متصل الآن</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-gray-800">Chat</h2>
+              <button
+                onClick={() => setShowChatDetails(!showChatDetails)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <div className="flex flex-col gap-1">
+                  <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+                  <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+                  <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+                  <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* Messages Area */}
+          <div className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50">
+            {messages.map(m => (
+              <div key={m.id} className={`flex ${m.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`max-w-[70%] p-3 rounded-2xl ${m.sender === 'me'
+                  ? 'bg-blue-500 text-white rounded-br-md'
+                  : 'bg-white shadow-sm rounded-bl-md border'
+                  }`}>
+                  <div className="text-sm">{m.text}</div>
+                  <div className={`text-xs mt-1 ${m.sender === 'me' ? 'text-blue-100' : 'text-gray-500'}`}>
+                    {m.timestamp}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Input Area */}
+          <div className="bg-white p-4 border-t border-gray-200 flex gap-3 items-center">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="اكتب رسالة..."
+              className="flex-1 border border-gray-300 rounded-full px-4 py-2 text-right focus:outline-none focus:border-blue-500"
+              onKeyDown={(e) => { if (e.key === 'Enter') sendMessage(); }}
+              autoComplete="off"
+            />
+            <button
+              onClick={sendMessage}
+              className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors"
+            >
+              <Send size={20} />
+            </button>
+          </div>
         </div>
       </div>
     );
