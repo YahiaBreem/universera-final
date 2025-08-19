@@ -3,7 +3,7 @@ export const courses = [
         university: "Cairo University",
         faculties: [
             {
-                name: "Faculty of Computer Science",
+                name: "Faculty of Computers and Artificial Intelligence",
                 courses: [
                     {
                         title: "محاضرة",
@@ -11,21 +11,9 @@ export const courses = [
                         professor: "د. خالد حسني",
                         room: "قاعة 101",
                         files: [
-                            {
-                                name: "مقدمة عن هياكل البيانات",
-                                type: "lecture",
-                                file: "data_structures_intro.pdf"
-                            },
-                            {
-                                name: "تمارين الفصل الأول",
-                                type: "exercise",
-                                file: "data_structures_ch1.pdf"
-                            },
-                            {
-                                name: "مشروع تطبيقي",
-                                type: "project",
-                                file: "data_structures_project.pdf"
-                            }
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
                         ]
                     },
                     {
@@ -34,325 +22,32 @@ export const courses = [
                         professor: "د. نادر فهمي",
                         room: "قاعة 102",
                         files: [
-                            {
-                                name: "أساسيات الخوارزميات",
-                                type: "lecture",
-                                file: "algorithms_basics.pdf"
-                            },
-                            {
-                                name: "حل المسائل",
-                                type: "exercise",
-                                file: "algorithms_problems.pdf"
-                            }
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
                         ]
-                    }
-                ],
-                schedule: [
-                    {
-                        name: "هياكل البيانات",
-                        place: "قاعة 101",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. خالد حسني"
                     },
-                    {
-                        name: "الخوارزميات",
-                        place: "معمل 205",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. نادر فهمي"
-                    }
-                ],
-                attendanceSummary: [
-                    {
-                        name: "هياكل البيانات",
-                        pct: 80,
-                        abs: 3,
-                        pres: 12
-                    },
-                    {
-                        name: "الخوارزميات",
-                        pct: 83,
-                        abs: 2,
-                        pres: 10
-                    }
-                ]
-            },
-            {
-                name: "Faculty of Artificial Intelligence",
-                courses: [
                     {
                         title: "محاضرة",
-                        subtitle: "مقدمة في الذكاء الاصطناعي",
-                        professor: "د. منى عبد الله",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
                         room: "قاعة 201",
-                        file: "ai_intro.pdf"
-                    },
-                    {
-                        title: "محاضرة",
-                        subtitle: "تعلم الآلة",
-                        professor: "د. سامي خالد",
-                        room: "قاعة 202",
-                        file: "machine_learning.pdf"
-                    }
-                ],
-                schedule: [
-                    {
-                        name: "مقدمة في الذكاء الاصطناعي",
-                        place: "قاعة 201",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. منى عبد الله"
-                    },
-                    {
-                        name: "تعلم الآلة",
-                        place: "معمل 301",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. سامي خالد"
-                    }
-                ],
-                attendanceSummary: [
-                    {
-                        name: "مقدمة في الذكاء الاصطناعي",
-                        pct: 85,
-                        abs: 2,
-                        pres: 13
-                    },
-                    {
-                        name: "تعلم الآلة",
-                        pct: 78,
-                        abs: 4,
-                        pres: 11
-                    }
-                ]
-            },
-            {
-                name: "Faculty of Information Systems",
-                courses: [
-                    {
-                        title: "محاضرة",
-                        subtitle: "قواعد البيانات",
-                        professor: "د. أحمد علي",
-                        room: "قاعة 301",
-                        file: "databases.pdf"
-                    },
-                    {
-                        title: "محاضرة",
-                        subtitle: "نظم المعلومات الإدارية",
-                        professor: "د. سارة محمود",
-                        room: "قاعة 302",
-                        file: "mis.pdf"
-                    }
-                ],
-                schedule: [
-                    {
-                        name: "قواعد البيانات",
-                        place: "قاعة 301",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. أحمد علي"
-                    },
-                    {
-                        name: "نظم المعلومات الإدارية",
-                        place: "معمل 401",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. سارة محمود"
-                    }
-                ],
-                attendanceSummary: [
-                    {
-                        name: "قواعد البيانات",
-                        pct: 90,
-                        abs: 1,
-                        pres: 14
-                    },
-                    {
-                        name: "نظم المعلومات الإدارية",
-                        pct: 88,
-                        abs: 2,
-                        pres: 13
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        university: "Alexandria National University",
-        faculties: [
-            {
-                name: "Faculty of Computer Science",
-                courses: [
-                    {
-                        title: "محاضرة",
-                        subtitle: "هياكل البيانات",
-                        professor: "د. خالد حسني",
-                        room: "قاعة 101",
                         files: [
-                            {
-                                name: "مقدمة عن هياكل البيانات",
-                                type: "lecture",
-                                file: "data_structures_intro.pdf"
-                            },
-                            {
-                                name: "تمارين الفصل الأول",
-                                type: "exercise",
-                                file: "data_structures_ch1.pdf"
-                            },
-                            {
-                                name: "مشروع تطبيقي",
-                                type: "project",
-                                file: "data_structures_project.pdf"
-                            }
-                        ]
-                    },
-                    {
-                        title: "محاضرة",
-                        subtitle: "الخوارزميات",
-                        professor: "د. نادر فهمي",
-                        room: "قاعة 102",
-                        files: [
-                            {
-                                name: "أساسيات الخوارزميات",
-                                type: "lecture",
-                                file: "algorithms_basics.pdf"
-                            },
-                            {
-                                name: "حل المسائل",
-                                type: "exercise",
-                                file: "algorithms_problems.pdf"
-                            }
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
                         ]
                     }
                 ],
                 schedule: [
-                    {
-                        name: "هياكل البيانات",
-                        place: "قاعة 101",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. خالد حسني"
-                    },
-                    {
-                        name: "الخوارزميات",
-                        place: "معمل 205",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. نادر فهمي"
-                    }
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
                 ],
                 attendanceSummary: [
-                    {
-                        name: "هياكل البيانات",
-                        pct: 80,
-                        abs: 3,
-                        pres: 12
-                    },
-                    {
-                        name: "الخوارزميات",
-                        pct: 83,
-                        abs: 2,
-                        pres: 10
-                    }
-                ]
-            },
-            {
-                name: "Faculty of Artificial Intelligence",
-                courses: [
-                    {
-                        title: "محاضرة",
-                        subtitle: "مقدمة في الذكاء الاصطناعي",
-                        professor: "د. هاني عبد العزيز",
-                        room: "قاعة 401",
-                        file: "ai_intro.pdf"
-                    },
-                    {
-                        title: "محاضرة",
-                        subtitle: "تعلم الآلة",
-                        professor: "د. سارة مصطفى",
-                        room: "قاعة 402",
-                        file: "machine_learning.pdf"
-                    }
-                ],
-                schedule: [
-                    {
-                        name: "مقدمة في الذكاء الاصطناعي",
-                        place: "قاعة 401",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. هاني عبد العزيز"
-                    },
-                    {
-                        name: "تعلم الآلة",
-                        place: "معمل 403",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. سارة مصطفى"
-                    }
-                ],
-                attendanceSummary: [
-                    {
-                        name: "مقدمة في الذكاء الاصطناعي",
-                        pct: 88,
-                        abs: 1,
-                        pres: 14
-                    },
-                    {
-                        name: "تعلم الآلة",
-                        pct: 84,
-                        abs: 2,
-                        pres: 12
-                    }
-                ]
-            },
-            {
-                name: "Faculty of Information Systems",
-                courses: [
-                    {
-                        title: "محاضرة",
-                        subtitle: "قواعد البيانات",
-                        professor: "د. أحمد عبد الله",
-                        room: "قاعة 501",
-                        file: "databases.pdf"
-                    },
-                    {
-                        title: "محاضرة",
-                        subtitle: "نظم المعلومات الإدارية",
-                        professor: "د. ليلى محمود",
-                        room: "قاعة 502",
-                        file: "mis.pdf"
-                    }
-                ],
-                schedule: [
-                    {
-                        name: "قواعد البيانات",
-                        place: "قاعة 501",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. أحمد عبد الله"
-                    },
-                    {
-                        name: "نظم المعلومات الإدارية",
-                        place: "معمل 503",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. ليلى محمود"
-                    }
-                ],
-                attendanceSummary: [
-                    {
-                        name: "قواعد البيانات",
-                        pct: 90,
-                        abs: 1,
-                        pres: 14
-                    },
-                    {
-                        name: "نظم المعلومات الإدارية",
-                        pct: 87,
-                        abs: 2,
-                        pres: 13
-                    }
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
                 ]
             },
             {
@@ -360,97 +55,34 @@ export const courses = [
                 courses: [
                     {
                         title: "محاضرة",
-                        subtitle: "هندسة البرمجيات",
-                        professor: "د. أحمد سامي",
-                        room: "قاعة 401",
-                        file: "software_eng.pdf"
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
                     },
                     {
                         title: "محاضرة",
-                        subtitle: "الدوائر الكهربائية",
-                        professor: "د. فاطمة علي",
-                        room: "قاعة 402",
-                        file: "electrical_circuits.pdf"
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
                     }
                 ],
                 schedule: [
-                    {
-                        name: "هندسة البرمجيات",
-                        place: "قاعة 401",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. أحمد سامي"
-                    },
-                    {
-                        name: "الدوائر الكهربائية",
-                        place: "معمل 502",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. فاطمة علي"
-                    }
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
                 ],
                 attendanceSummary: [
-                    {
-                        name: "هندسة البرمجيات",
-                        pct: 82,
-                        abs: 3,
-                        pres: 11
-                    },
-                    {
-                        name: "الدوائر الكهربائية",
-                        pct: 79,
-                        abs: 4,
-                        pres: 10
-                    }
-                ]
-            },
-            {
-                name: "Faculty of Medicine",
-                courses: [
-                    {
-                        title: "محاضرة",
-                        subtitle: "تشريح",
-                        professor: "د. يوسف مصطفى",
-                        room: "قاعة 501",
-                        file: "anatomy.pdf"
-                    },
-                    {
-                        title: "محاضرة",
-                        subtitle: "فسيولوجيا",
-                        professor: "د. ليلى حسن",
-                        room: "قاعة 502",
-                        file: "physiology.pdf"
-                    }
-                ],
-                schedule: [
-                    {
-                        name: "تشريح",
-                        place: "قاعة 501",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. يوسف مصطفى"
-                    },
-                    {
-                        name: "فسيولوجيا",
-                        place: "معمل 601",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. ليلى حسن"
-                    }
-                ],
-                attendanceSummary: [
-                    {
-                        name: "تشريح",
-                        pct: 87,
-                        abs: 2,
-                        pres: 14
-                    },
-                    {
-                        name: "فسيولوجيا",
-                        pct: 80,
-                        abs: 3,
-                        pres: 12
-                    }
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
                 ]
             },
             {
@@ -458,48 +90,910 @@ export const courses = [
                 courses: [
                     {
                         title: "محاضرة",
-                        subtitle: "مبادئ المحاسبة",
-                        professor: "د. مصطفى محمود",
-                        room: "قاعة 601",
-                        file: "accounting.pdf"
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
                     },
                     {
                         title: "محاضرة",
-                        subtitle: "إدارة الموارد البشرية",
-                        professor: "د. سعاد حسين",
-                        room: "قاعة 602",
-                        file: "hr.pdf"
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
                     }
                 ],
                 schedule: [
-                    {
-                        name: "مبادئ المحاسبة",
-                        place: "قاعة 601",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. مصطفى محمود"
-                    },
-                    {
-                        name: "إدارة الموارد البشرية",
-                        place: "معمل 701",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. سعاد حسين"
-                    }
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
                 ],
                 attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
                     {
-                        name: "مبادئ المحاسبة",
-                        pct: 85,
-                        abs: 2,
-                        pres: 13
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
                     },
                     {
-                        name: "إدارة الموارد البشرية",
-                        pct: 82,
-                        abs: 3,
-                        pres: 11
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
                     }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Cairo National University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Ain Shams University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
                 ]
             }
         ]
@@ -508,101 +1002,86 @@ export const courses = [
         university: "Alexandria University",
         faculties: [
             {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
                 name: "Faculty of Engineering",
                 courses: [
                     {
                         title: "محاضرة",
-                        subtitle: "هندسة البرمجيات",
-                        professor: "د. محمد عبد الله",
-                        room: "قاعة 701",
-                        file: "software_eng.pdf"
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
                     },
                     {
                         title: "محاضرة",
-                        subtitle: "الدوائر الكهربائية",
-                        professor: "د. نجلاء سامي",
-                        room: "قاعة 702",
-                        file: "electrical_circuits.pdf"
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
                     }
                 ],
                 schedule: [
-                    {
-                        name: "هندسة البرمجيات",
-                        place: "قاعة 701",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. محمد عبد الله"
-                    },
-                    {
-                        name: "الدوائر الكهربائية",
-                        place: "معمل 802",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. نجلاء سامي"
-                    }
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
                 ],
                 attendanceSummary: [
-                    {
-                        name: "هندسة البرمجيات",
-                        pct: 88,
-                        abs: 2,
-                        pres: 13
-                    },
-                    {
-                        name: "الدوائر الكهربائية",
-                        pct: 84,
-                        abs: 3,
-                        pres: 11
-                    }
-                ]
-            },
-            {
-                name: "Faculty of Medicine",
-                courses: [
-                    {
-                        title: "محاضرة",
-                        subtitle: "تشريح",
-                        professor: "د. أحمد سعيد",
-                        room: "قاعة 801",
-                        file: "anatomy.pdf"
-                    },
-                    {
-                        title: "محاضرة",
-                        subtitle: "فسيولوجيا",
-                        professor: "د. فاطمة عبد العزيز",
-                        room: "قاعة 802",
-                        file: "physiology.pdf"
-                    }
-                ],
-                schedule: [
-                    {
-                        name: "تشريح",
-                        place: "قاعة 801",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. أحمد سعيد"
-                    },
-                    {
-                        name: "فسيولوجيا",
-                        place: "معمل 901",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. فاطمة عبد العزيز"
-                    }
-                ],
-                attendanceSummary: [
-                    {
-                        name: "تشريح",
-                        pct: 86,
-                        abs: 2,
-                        pres: 14
-                    },
-                    {
-                        name: "فسيولوجيا",
-                        pct: 81,
-                        abs: 3,
-                        pres: 12
-                    }
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
                 ]
             },
             {
@@ -610,48 +1089,577 @@ export const courses = [
                 courses: [
                     {
                         title: "محاضرة",
-                        subtitle: "مبادئ المحاسبة",
-                        professor: "د. إبراهيم علي",
-                        room: "قاعة 901",
-                        file: "accounting.pdf"
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
                     },
                     {
                         title: "محاضرة",
-                        subtitle: "إدارة الموارد البشرية",
-                        professor: "د. هالة محمود",
-                        room: "قاعة 902",
-                        file: "hr.pdf"
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
                     }
                 ],
                 schedule: [
-                    {
-                        name: "مبادئ المحاسبة",
-                        place: "قاعة 901",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. إبراهيم علي"
-                    },
-                    {
-                        name: "إدارة الموارد البشرية",
-                        place: "معمل 1001",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. هالة محمود"
-                    }
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
                 ],
                 attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
                     {
-                        name: "مبادئ المحاسبة",
-                        pct: 89,
-                        abs: 1,
-                        pres: 14
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
                     },
                     {
-                        name: "إدارة الموارد البشرية",
-                        pct: 84,
-                        abs: 3,
-                        pres: 11
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
                     }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Alexandria National University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
                 ]
             }
         ]
@@ -660,101 +1668,86 @@ export const courses = [
         university: "Mansoura University",
         faculties: [
             {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
                 name: "Faculty of Engineering",
                 courses: [
                     {
                         title: "محاضرة",
-                        subtitle: "هندسة البرمجيات",
-                        professor: "د. سامي حسن",
-                        room: "قاعة 1001",
-                        file: "software_eng.pdf"
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
                     },
                     {
                         title: "محاضرة",
-                        subtitle: "الدوائر الكهربائية",
-                        professor: "د. عادل فؤاد",
-                        room: "قاعة 1002",
-                        file: "electrical_circuits.pdf"
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
                     }
                 ],
                 schedule: [
-                    {
-                        name: "هندسة البرمجيات",
-                        place: "قاعة 1001",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. سامي حسن"
-                    },
-                    {
-                        name: "الدوائر الكهربائية",
-                        place: "معمل 1102",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. عادل فؤاد"
-                    }
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
                 ],
                 attendanceSummary: [
-                    {
-                        name: "هندسة البرمجيات",
-                        pct: 81,
-                        abs: 3,
-                        pres: 12
-                    },
-                    {
-                        name: "الدوائر الكهربائية",
-                        pct: 85,
-                        abs: 2,
-                        pres: 10
-                    }
-                ]
-            },
-            {
-                name: "Faculty of Medicine",
-                courses: [
-                    {
-                        title: "محاضرة",
-                        subtitle: "تشريح",
-                        professor: "د. نادر مصطفى",
-                        room: "قاعة 1101",
-                        file: "anatomy.pdf"
-                    },
-                    {
-                        title: "محاضرة",
-                        subtitle: "فسيولوجيا",
-                        professor: "د. سلوى عبد الله",
-                        room: "قاعة 1102",
-                        file: "physiology.pdf"
-                    }
-                ],
-                schedule: [
-                    {
-                        name: "تشريح",
-                        place: "قاعة 1101",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. نادر مصطفى"
-                    },
-                    {
-                        name: "فسيولوجيا",
-                        place: "معمل 1201",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. سلوى عبد الله"
-                    }
-                ],
-                attendanceSummary: [
-                    {
-                        name: "تشريح",
-                        pct: 84,
-                        abs: 3,
-                        pres: 11
-                    },
-                    {
-                        name: "فسيولوجيا",
-                        pct: 79,
-                        abs: 4,
-                        pres: 10
-                    }
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
                 ]
             },
             {
@@ -762,151 +1755,332 @@ export const courses = [
                 courses: [
                     {
                         title: "محاضرة",
-                        subtitle: "مبادئ المحاسبة",
-                        professor: "د. عادل محمود",
-                        room: "قاعة 1201",
-                        file: "accounting.pdf"
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
                     },
                     {
                         title: "محاضرة",
-                        subtitle: "إدارة الموارد البشرية",
-                        professor: "د. سعاد علي",
-                        room: "قاعة 1202",
-                        file: "hr.pdf"
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
                     }
                 ],
                 schedule: [
-                    {
-                        name: "مبادئ المحاسبة",
-                        place: "قاعة 1201",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. عادل محمود"
-                    },
-                    {
-                        name: "إدارة الموارد البشرية",
-                        place: "معمل 1301",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. سعاد علي"
-                    }
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
                 ],
                 attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
                     {
-                        name: "مبادئ المحاسبة",
-                        pct: 90,
-                        abs: 1,
-                        pres: 14
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
                     },
                     {
-                        name: "إدارة الموارد البشرية",
-                        pct: 87,
-                        abs: 2,
-                        pres: 13
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
                     }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
                 ]
             }
         ]
     },
     {
-        university: "Assiut University",
+        university: "Suez Canal University",
         faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
             {
                 name: "Faculty of Engineering",
                 courses: [
                     {
                         title: "محاضرة",
-                        subtitle: "هندسة البرمجيات",
-                        professor: "د. فاطمة علي",
-                        room: "قاعة 1301",
-                        file: "software_eng.pdf"
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
                     },
                     {
                         title: "محاضرة",
-                        subtitle: "الدوائر الكهربائية",
-                        professor: "د. مصطفى حسن",
-                        room: "قاعة 1302",
-                        file: "electrical_circuits.pdf"
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
                     }
                 ],
                 schedule: [
-                    {
-                        name: "هندسة البرمجيات",
-                        place: "قاعة 1301",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. فاطمة علي"
-                    },
-                    {
-                        name: "الدوائر الكهربائية",
-                        place: "معمل 1402",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. مصطفى حسن"
-                    }
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
                 ],
                 attendanceSummary: [
-                    {
-                        name: "هندسة البرمجيات",
-                        pct: 83,
-                        abs: 2,
-                        pres: 13
-                    },
-                    {
-                        name: "الدوائر الكهربائية",
-                        pct: 81,
-                        abs: 3,
-                        pres: 12
-                    }
-                ]
-            },
-            {
-                name: "Faculty of Medicine",
-                courses: [
-                    {
-                        title: "محاضرة",
-                        subtitle: "تشريح",
-                        professor: "د. يوسف عبد الله",
-                        room: "قاعة 1401",
-                        file: "anatomy.pdf"
-                    },
-                    {
-                        title: "محاضرة",
-                        subtitle: "فسيولوجيا",
-                        professor: "د. هالة مصطفى",
-                        room: "قاعة 1402",
-                        file: "physiology.pdf"
-                    }
-                ],
-                schedule: [
-                    {
-                        name: "تشريح",
-                        place: "قاعة 1401",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. يوسف عبد الله"
-                    },
-                    {
-                        name: "فسيولوجيا",
-                        place: "معمل 1501",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. هالة مصطفى"
-                    }
-                ],
-                attendanceSummary: [
-                    {
-                        name: "تشريح",
-                        pct: 85,
-                        abs: 2,
-                        pres: 13
-                    },
-                    {
-                        name: "فسيولوجيا",
-                        pct: 82,
-                        abs: 3,
-                        pres: 11
-                    }
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
                 ]
             },
             {
@@ -914,48 +2088,3241 @@ export const courses = [
                 courses: [
                     {
                         title: "محاضرة",
-                        subtitle: "مبادئ المحاسبة",
-                        professor: "د. أحمد علي",
-                        room: "قاعة 1501",
-                        file: "accounting.pdf"
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
                     },
                     {
                         title: "محاضرة",
-                        subtitle: "إدارة الموارد البشرية",
-                        professor: "د. سعاد محمود",
-                        room: "قاعة 1502",
-                        file: "hr.pdf"
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
                     }
                 ],
                 schedule: [
-                    {
-                        name: "مبادئ المحاسبة",
-                        place: "قاعة 1501",
-                        time: "9:00 AM",
-                        type: "محاضرة",
-                        instructor: "د. أحمد علي"
-                    },
-                    {
-                        name: "إدارة الموارد البشرية",
-                        place: "معمل 1601",
-                        time: "11:00 AM",
-                        type: "عملي",
-                        instructor: "د. سعاد محمود"
-                    }
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
                 ],
                 attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
                     {
-                        name: "مبادئ المحاسبة",
-                        pct: 88,
-                        abs: 2,
-                        pres: 13
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
                     },
                     {
-                        name: "إدارة الموارد البشرية",
-                        pct: 85,
-                        abs: 3,
-                        pres: 12
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
                     }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Tanta University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Helwan University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Aswan University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Luxor University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "South Valley University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Fayoum University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Beni Suef University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Minia University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
+                ]
+            }
+        ]
+    },
+    {
+        university: "Zagazig University",
+        faculties: [
+            {
+                name: "Faculty of Computers and Artificial Intelligence",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هياكل البيانات",
+                        professor: "د. خالد حسني",
+                        room: "قاعة 101",
+                        files: [
+                            { name: "مقدمة عن هياكل البيانات", type: "lecture", file: "data_structures_intro.pdf" },
+                            { name: "تمارين الفصل الأول", type: "exercise", file: "data_structures_ch1.pdf" },
+                            { name: "مشروع تطبيقي", type: "project", file: "data_structures_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الخوارزميات",
+                        professor: "د. نادر فهمي",
+                        room: "قاعة 102",
+                        files: [
+                            { name: "أساسيات الخوارزميات", type: "lecture", file: "algorithms_basics.pdf" },
+                            { name: "حل المسائل", type: "exercise", file: "algorithms_problems.pdf" },
+                            { name: "مشروع برمجي", type: "project", file: "algorithms_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "شبكات الحاسب",
+                        professor: "د. أحمد مراد",
+                        room: "قاعة 201",
+                        files: [
+                            { name: "مقدمة في الشبكات", type: "lecture", file: "networks_intro.pdf" },
+                            { name: "تمارين على IP", type: "exercise", file: "networks_ip_exercises.pdf" },
+                            { name: "مشروع مصغر", type: "project", file: "networks_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هياكل البيانات", place: "قاعة 101", time: "9:00 AM", type: "محاضرة", instructor: "د. خالد حسني" },
+                    { name: "الخوارزميات", place: "قاعة 102", time: "11:00 AM", type: "محاضرة", instructor: "د. نادر فهمي" },
+                    { name: "شبكات الحاسب", place: "معمل 205", time: "1:00 PM", type: "عملي", instructor: "د. أحمد مراد" }
+                ],
+                attendanceSummary: [
+                    { name: "هياكل البيانات", pct: 80, abs: 3, pres: 12 },
+                    { name: "الخوارزميات", pct: 83, abs: 2, pres: 10 },
+                    { name: "شبكات الحاسب", pct: 75, abs: 4, pres: 9 }
+                ]
+            },
+            {
+                name: "Faculty of Engineering",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "هندسة الإلكترونيات",
+                        professor: "د. منى عبد العزيز",
+                        room: "قاعة A12",
+                        files: [
+                            { name: "أساسيات الدوائر الإلكترونية", type: "lecture", file: "electronics_basics.pdf" },
+                            { name: "تجارب عملية", type: "exercise", file: "electronics_experiments.pdf" },
+                            { name: "مشروع تصميم دائرة", type: "project", file: "electronics_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الهندسة المدنية - ميكانيكا التربة",
+                        professor: "د. محمد الطيب",
+                        room: "قاعة B07",
+                        files: [
+                            { name: "خواص التربة", type: "lecture", file: "soil_properties.pdf" },
+                            { name: "تمارين تحليل تربة", type: "exercise", file: "soil_exercises.pdf" },
+                            { name: "مشروع أساسات", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "هندسة الإلكترونيات", place: "قاعة A12", time: "10:00 AM", type: "محاضرة", instructor: "د. منى عبد العزيز" },
+                    { name: "ميكانيكا التربة", place: "قاعة B07", time: "12:00 PM", type: "محاضرة", instructor: "د. محمد الطيب" }
+                ],
+                attendanceSummary: [
+                    { name: "هندسة الإلكترونيات", pct: 90, abs: 1, pres: 15 },
+                    { name: "ميكانيكا التربة", pct: 78, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Commerce",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "المحاسبة المالية",
+                        professor: "د. سعاد مصطفى",
+                        room: "قاعة 301",
+                        files: [
+                            { name: "مقدمة في المحاسبة", type: "lecture", file: "accounting_intro.pdf" },
+                            { name: "تمارين دفتر الأستاذ", type: "exercise", file: "accounting_exercises.pdf" },
+                            { name: "مشروع ميزانية", type: "project", file: "accounting_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "إدارة الأعمال",
+                        professor: "د. ياسر حسن",
+                        room: "قاعة 305",
+                        files: [
+                            { name: "مبادئ الإدارة", type: "lecture", file: "management_basics.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "management_cases.pdf" },
+                            { name: "مشروع خطة عمل", type: "project", file: "management_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "المحاسبة المالية", place: "قاعة 301", time: "9:00 AM", type: "محاضرة", instructor: "د. سعاد مصطفى" },
+                    { name: "إدارة الأعمال", place: "قاعة 305", time: "11:00 AM", type: "محاضرة", instructor: "د. ياسر حسن" }
+                ],
+                attendanceSummary: [
+                    { name: "المحاسبة المالية", pct: 85, abs: 2, pres: 13 },
+                    { name: "إدارة الأعمال", pct: 88, abs: 1, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Medicine",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم التشريح",
+                        professor: "د. محمود عادل",
+                        room: "قاعة M01",
+                        files: [
+                            { name: "مقدمة في التشريح", type: "lecture", file: "anatomy_intro.pdf" },
+                            { name: "تمارين تشريح عملي", type: "exercise", file: "anatomy_exercises.pdf" },
+                            { name: "مشروع حالة سريرية", type: "project", file: "anatomy_case_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم الأدوية",
+                        professor: "د. منى حسين",
+                        room: "قاعة M05",
+                        files: [
+                            { name: "أساسيات علم الأدوية", type: "lecture", file: "pharmacology_basics.pdf" },
+                            { name: "جداول أدوية", type: "exercise", file: "pharmacology_tables.pdf" },
+                            { name: "مشروع دوائي", type: "project", file: "pharmacology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علم التشريح", place: "قاعة M01", time: "8:00 AM", type: "محاضرة", instructor: "د. محمود عادل" },
+                    { name: "علم الأدوية", place: "قاعة M05", time: "10:00 AM", type: "محاضرة", instructor: "د. منى حسين" }
+                ],
+                attendanceSummary: [
+                    { name: "علم التشريح", pct: 82, abs: 3, pres: 14 },
+                    { name: "علم الأدوية", pct: 76, abs: 4, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Science",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الكيمياء العضوية",
+                        professor: "د. حسن إبراهيم",
+                        room: "قاعة S10",
+                        files: [
+                            { name: "مقدمة في الكيمياء العضوية", type: "lecture", file: "organic_intro.pdf" },
+                            { name: "تمارين تفاعلات", type: "exercise", file: "organic_exercises.pdf" },
+                            { name: "مشروع بحث كيميائي", type: "project", file: "organic_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "الفيزياء النووية",
+                        professor: "د. صفاء نجيب",
+                        room: "قاعة S15",
+                        files: [
+                            { name: "مقدمة في الفيزياء النووية", type: "lecture", file: "nuclear_intro.pdf" },
+                            { name: "تمارين حسابية", type: "exercise", file: "nuclear_exercises.pdf" },
+                            { name: "مشروع طاقة نووية", type: "project", file: "nuclear_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الكيمياء العضوية", place: "قاعة S10", time: "9:00 AM", type: "محاضرة", instructor: "د. حسن إبراهيم" },
+                    { name: "الفيزياء النووية", place: "قاعة S15", time: "11:00 AM", type: "محاضرة", instructor: "د. صفاء نجيب" }
+                ],
+                attendanceSummary: [
+                    { name: "الكيمياء العضوية", pct: 88, abs: 2, pres: 15 },
+                    { name: "الفيزياء النووية", pct: 79, abs: 3, pres: 11 }
+                ]
+            },
+            {
+                name: "Faculty of Arts",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الأدب العربي",
+                        professor: "د. عادل مصطفى",
+                        room: "قاعة L20",
+                        files: [
+                            { name: "مقدمة في الأدب العربي", type: "lecture", file: "arabic_lit_intro.pdf" },
+                            { name: "نصوص تحليلية", type: "exercise", file: "arabic_lit_exercises.pdf" },
+                            { name: "مشروع بحث أدبي", type: "project", file: "arabic_lit_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علم النفس",
+                        professor: "د. هالة فكري",
+                        room: "قاعة L25",
+                        files: [
+                            { name: "مدخل إلى علم النفس", type: "lecture", file: "psychology_intro.pdf" },
+                            { name: "اختبارات سيكولوجية", type: "exercise", file: "psychology_tests.pdf" },
+                            { name: "مشروع حالة", type: "project", file: "psychology_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الأدب العربي", place: "قاعة L20", time: "10:00 AM", type: "محاضرة", instructor: "د. عادل مصطفى" },
+                    { name: "علم النفس", place: "قاعة L25", time: "12:00 PM", type: "محاضرة", instructor: "د. هالة فكري" }
+                ],
+                attendanceSummary: [
+                    { name: "الأدب العربي", pct: 92, abs: 1, pres: 16 },
+                    { name: "علم النفس", pct: 85, abs: 2, pres: 14 }
+                ]
+            },
+            {
+                name: "Faculty of Law",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الدستوري",
+                        professor: "د. عمرو سالم",
+                        room: "قاعة H01",
+                        files: [
+                            { name: "مبادئ القانون الدستوري", type: "lecture", file: "constitutional_intro.pdf" },
+                            { name: "تمارين قوانين", type: "exercise", file: "constitutional_exercises.pdf" },
+                            { name: "مشروع بحث قانوني", type: "project", file: "constitutional_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "القانون الجنائي",
+                        professor: "د. أحمد عبد الله",
+                        room: "قاعة H05",
+                        files: [
+                            { name: "مدخل القانون الجنائي", type: "lecture", file: "criminal_intro.pdf" },
+                            { name: "قضايا تطبيقية", type: "exercise", file: "criminal_cases.pdf" },
+                            { name: "مشروع قانوني", type: "project", file: "criminal_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "القانون الدستوري", place: "قاعة H01", time: "9:00 AM", type: "محاضرة", instructor: "د. عمرو سالم" },
+                    { name: "القانون الجنائي", place: "قاعة H05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عبد الله" }
+                ],
+                attendanceSummary: [
+                    { name: "القانون الدستوري", pct: 87, abs: 2, pres: 13 },
+                    { name: "القانون الجنائي", pct: 81, abs: 3, pres: 12 }
+                ]
+            },
+            {
+                name: "Faculty of Mass Communication",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "الإعلام الرقمي",
+                        professor: "د. ليلى فوزي",
+                        room: "قاعة J12",
+                        files: [
+                            { name: "مقدمة في الإعلام الرقمي", type: "lecture", file: "digital_media_intro.pdf" },
+                            { name: "دراسات حالة", type: "exercise", file: "digital_media_cases.pdf" },
+                            { name: "مشروع حملة إعلامية", type: "project", file: "digital_media_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "العلاقات العامة",
+                        professor: "د. حسين كامل",
+                        room: "قاعة J18",
+                        files: [
+                            { name: "مقدمة العلاقات العامة", type: "lecture", file: "pr_intro.pdf" },
+                            { name: "خطط حملات", type: "exercise", file: "pr_exercises.pdf" },
+                            { name: "مشروع خطة علاقات", type: "project", file: "pr_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "الإعلام الرقمي", place: "قاعة J12", time: "10:00 AM", type: "محاضرة", instructor: "د. ليلى فوزي" },
+                    { name: "العلاقات العامة", place: "قاعة J18", time: "12:00 PM", type: "محاضرة", instructor: "د. حسين كامل" }
+                ],
+                attendanceSummary: [
+                    { name: "الإعلام الرقمي", pct: 90, abs: 1, pres: 15 },
+                    { name: "العلاقات العامة", pct: 86, abs: 2, pres: 13 }
+                ]
+            },
+            {
+                name: "Faculty of Agriculture",
+                courses: [
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم النبات",
+                        professor: "د. سامي حسن",
+                        room: "قاعة Z01",
+                        files: [
+                            { name: "مقدمة علوم النبات", type: "lecture", file: "plant_intro.pdf" },
+                            { name: "تجارب زراعية", type: "exercise", file: "plant_exercises.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "plant_project.pdf" }
+                        ]
+                    },
+                    {
+                        title: "محاضرة",
+                        subtitle: "علوم التربة",
+                        professor: "د. أحمد عوض",
+                        room: "قاعة Z05",
+                        files: [
+                            { name: "مقدمة علوم التربة", type: "lecture", file: "soil_intro.pdf" },
+                            { name: "تجارب تحليل تربة", type: "exercise", file: "soil_experiments.pdf" },
+                            { name: "مشروع زراعي", type: "project", file: "soil_project.pdf" }
+                        ]
+                    }
+                ],
+                schedule: [
+                    { name: "علوم النبات", place: "قاعة Z01", time: "8:30 AM", type: "محاضرة", instructor: "د. سامي حسن" },
+                    { name: "علوم التربة", place: "قاعة Z05", time: "11:00 AM", type: "محاضرة", instructor: "د. أحمد عوض" }
+                ],
+                attendanceSummary: [
+                    { name: "علوم النبات", pct: 84, abs: 2, pres: 12 },
+                    { name: "علوم التربة", pct: 80, abs: 3, pres: 11 }
                 ]
             }
         ]
