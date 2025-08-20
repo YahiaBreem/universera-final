@@ -27,9 +27,7 @@ import {
 
 // IMPORTANT: your data files should be placed in src/data/
 // Example imports (change if your filenames differ):
-// - If your file is src/data/students.js -> default export an object or array
 // - If your file is src/data/courses.js -> default export an object or array
-import { students as studentsRaw } from "./data/students";
 import { courses as coursesRaw } from "./data/courses";
 import banner from './banner.svg';
 
@@ -40,6 +38,7 @@ import banner from './banner.svg';
 export default function StudentApp() {
   // ---------- auth & core state ----------
   const [currentUser, setCurrentUser] = useState(null);
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
   const [activeTab, setActiveTab] = useState('home');
   const [currentScreen, setCurrentScreen] = useState('main');
   const [openChat, setOpenChat] = useState(null);
@@ -50,12 +49,7 @@ export default function StudentApp() {
 
   // ---------- dark mode state ----------
   const [darkMode, setDarkMode] = useState(() => {
-    // Check localStorage first, then system preference
-    const saved = localStorage.getItem('darkMode');
-    if (saved !== null) {
-      return JSON.parse(saved);
-    }
-    // Check system preference
+    // Check system preference since we can't use localStorage
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
@@ -66,8 +60,6 @@ export default function StudentApp() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-    // Save preference
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
   // Toggle dark mode function
@@ -76,8 +68,17 @@ export default function StudentApp() {
   };
 
   // Data normalization
-  const students = Array.isArray(studentsRaw) ? studentsRaw : (studentsRaw ? Object.values(studentsRaw) : []);
   const courses = coursesRaw || [];
+
+  // Generate random stats for user
+  const generateRandomStats = () => ({
+    attendance: Math.floor(Math.random() * (100 - 75 + 1)) + 75, // 75-100%
+    gpa: (Math.random() * (4.0 - 2.7) + 2.7).toFixed(2), // 2.7-4.0
+    credits: Math.floor(Math.random() * (150 - 100 + 1)) + 100, // 100-150 credits
+    projectsCompleted: Math.floor(Math.random() * (25 - 10 + 1)) + 10, // 10-25 projects
+    absences: Math.floor(Math.random() * (10 - 3 + 1)) + 3, // 3-10 absences
+    attended: Math.floor(Math.random() * (40 - 25 + 1)) + 25, // 25-40 attended
+  });
 
   // Memoized helpers
   const getFacultyData = React.useCallback((student) => {
@@ -91,11 +92,16 @@ export default function StudentApp() {
   }, [courses]);
 
   // Helper functions - must be defined before use
-  function getFacultyStudents(student) {
-    if (!student) return [];
-    return students.filter(
-      s => s.university === student.university && s.faculty === student.faculty
-    );
+  function getFacultyStudents() {
+    // Generate mock students for the selected faculty
+    const mockNames = ['أحمد محمد', 'فاطمة علي', 'محمد حسن', 'نور الدين', 'سارة أحمد', 'عمر يوسف', 'مريم محمود', 'خالد سعد'];
+    return mockNames.map((name, idx) => ({
+      id: idx + 1,
+      name: name,
+      username: name,
+      university: currentUser?.university,
+      faculty: currentUser?.faculty
+    }));
   }
 
   function getFacultyProfessors(faculty) {
@@ -152,43 +158,12 @@ export default function StudentApp() {
   const facultyData = React.useMemo(() => getFacultyData(currentUser) || {}, [currentUser, getFacultyData]);
   const facultyCourses = facultyData.courses || [];
   const facultyProfessors = getFacultyProfessors(facultyData);
-  const facultyStudents = getFacultyStudents(currentUser);
+  const facultyStudents = getFacultyStudents();
 
-  // -------------------- AUTH / LOGIN SCREEN --------------------
-  const LoginScreen = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-
-    const tryLogin = () => {
-      setError('');
-      // match by username / id / email - be permissive
-      const match = students.find(s =>
-        (s.username && s.username === username) ||
-        (s.id && String(s.id) === username) ||
-        (s.email && s.email === username)
-      );
-
-      if (!match) {
-        setError('اسم مستخدم غير موجود');
-        return;
-      }
-
-      // If your student objects include passwords:
-      if (match.password) {
-        if (match.password !== password) {
-          setError('كلمة المرور غير صحيحة');
-          return;
-        }
-      } else {
-        // if no password in data, accept any non-empty password (dev mode)
-        if (!password) {
-          setError('أدخل كلمة المرور (اختبارية)');
-          return;
-        }
-      }
-
-      setCurrentUser(match);
+  // -------------------- DISCLAIMER SCREEN --------------------
+  const DisclaimerScreen = () => {
+    const handleAccept = () => {
+      setShowDisclaimer(false);
     };
 
     return (
@@ -218,61 +193,269 @@ export default function StudentApp() {
             />
           </div>
 
-          {/* Arabic title */}
-          <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
-            بوابة الطالب
-          </h1>
-
-          {/* Arabic subtitle */}
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
-            ادخل بياناتك للوصول للمنصة
-          </p>
-
-          {/* Username input */}
-          <input
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            className="w-full border border-gray-200 dark:border-gray-600 px-4 py-3 rounded-xl mb-4 text-right bg-gray-50 dark:bg-gray-700 dark:text-white focus:bg-white dark:focus:bg-gray-600 focus:border-blue-500 focus:outline-none transition-colors"
-            placeholder="اسم المستخدم أو البريد الإلكتروني"
-            autoComplete="username"
-            dir="rtl"
-          />
-
-          {/* Password input */}
-          <input
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            className="w-full border border-gray-200 dark:border-gray-600 px-4 py-3 rounded-xl mb-6 text-right bg-gray-50 dark:bg-gray-700 dark:text-white focus:bg-white dark:focus:bg-gray-600 focus:border-blue-500 focus:outline-none transition-colors"
-            placeholder="كلمة المرور"
-            autoComplete="current-password"
-            dir="rtl"
-          />
-
-          {/* Error message */}
-          {error && (
-            <div className="text-red-600 dark:text-red-400 mb-4 text-center text-sm" dir="rtl">
-              {error}
+          {/* Disclaimer content */}
+          <div className="text-center mb-6">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4" dir="rtl">
+              إخلاء المسؤولية
+            </h1>
+            <div className="text-sm text-gray-600 dark:text-gray-300 text-right leading-relaxed space-y-4" dir="rtl">
+              <p>
+                هذا التطبيق مجرد مفهوم تجريبي و ليس تطبيقاً رسمياً ولا يرتبط بأي جهة حكومية رسمية، خاصة وزارة التعليم العالي و البحث العلمي. فهو مجرد مفهوم و تصوير لفكرة.
+              </p>
+              <p>
+                الجامعات الواردة هنا تم جمعها من نموذج Google Forms {' '}
+                <a
+                  href="https://forms.gle/32pKMeAUP5KpSnSr9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 dark:text-blue-400 underline hover:text-blue-600 dark:hover:text-blue-300"
+                >
+                  https://forms.gle/32pKMeAUP5KpSnSr9
+                </a>
+              </p>
+              <p>
+                جميع الأسماء او المقررات الواردة هنا غير حقيقية ولا تشير إلى الواقع على الإطلاق. أي تشابه هو مصادفة بحتة و غير مقصودة.              </p>
             </div>
-          )}
+          </div>
 
-          {/* Login button */}
           <button
-            onClick={tryLogin}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-medium transition-colors mb-6"
+            onClick={handleAccept}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-medium transition-colors"
           >
-            دخول
+            فهمت، المتابعة
           </button>
-
-          {/* Test credentials */}
-          <p className="text-center text-gray-400 dark:text-gray-500 text-xs" dir="rtl">
-            للتجربة: test / 1
-          </p>
         </div>
       </div>
     );
   };
+
+  // -------------------- AUTH / LOGIN SCREEN --------------------
+  const LoginScreen = () => {
+    const [step, setStep] = useState(1); // 1: name, 2: university, 3: faculty
+    const [name, setName] = useState('');
+    const [selectedUniversity, setSelectedUniversity] = useState('');
+    const [selectedFaculty, setSelectedFaculty] = useState('');
+    const [error, setError] = useState('');
+
+    // Get available universities from courses data
+    const universities = React.useMemo(() => {
+      return [...new Set(courses.map(course => course.university))].filter(Boolean);
+    }, [courses]);
+
+    // Get available faculties for selected university
+    const faculties = React.useMemo(() => {
+      if (!selectedUniversity) return [];
+      const uni = courses.find(u => u.university === selectedUniversity);
+      return uni?.faculties || [];
+    }, [selectedUniversity, courses]);
+
+    const handleNameNext = () => {
+      if (!name.trim()) {
+        setError('يرجى إدخال الاسم');
+        return;
+      }
+      setError('');
+      setStep(2);
+    };
+
+    const handleUniversityNext = () => {
+      if (!selectedUniversity) {
+        setError('يرجى اختيار الجامعة');
+        return;
+      }
+      setError('');
+      setStep(3);
+    };
+
+    const handleLogin = () => {
+      if (!selectedFaculty) {
+        setError('يرجى اختيار الكلية');
+        return;
+      }
+
+      const userData = {
+        id: Date.now(),
+        firstName: name.trim(),
+        displayName: name.trim(),
+        name: name.trim(),
+        university: selectedUniversity,
+        faculty: selectedFaculty,
+        year: 'السنة الثالثة', // Default year
+        enrolledCourses: [], // Will be populated from faculty data
+        ...generateRandomStats()
+      };
+
+      // Add enrolled courses from faculty data
+      const uni = courses.find(u => u.university === selectedUniversity);
+      const faculty = uni?.faculties?.find(f => f.name === selectedFaculty || f.faculty === selectedFaculty);
+      if (faculty && faculty.courses) {
+        userData.enrolledCourses = faculty.courses.map(c => c.subtitle).slice(0, 5); // Take first 5 courses
+      }
+
+      setCurrentUser(userData);
+    };
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+        <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl">
+          {/* Dark mode toggle button */}
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              title="تبديل المظهر"
+            >
+              {darkMode ? (
+                <Sun className="w-5 h-5 text-yellow-500" />
+              ) : (
+                <Moon className="w-5 h-5 text-gray-600" />
+              )}
+            </button>
+          </div>
+
+          {/* App banner logo */}
+          <div className="flex justify-center mb-6">
+            <img
+              src={banner}
+              alt="App Logo"
+              className="w-42 h-30 object-contain"
+            />
+          </div>
+
+          {/* Progress indicator */}
+          <div className="flex justify-center mb-6">
+            <div className="flex gap-2">
+              {[1, 2, 3].map((s) => (
+                <div
+                  key={s}
+                  className={`w-3 h-3 rounded-full transition-colors ${s <= step ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'
+                    }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {step === 1 && (
+            <>
+              <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
+                مرحباً بك
+              </h1>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
+                ما اسمك؟
+              </p>
+              <input
+                type="text"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                className="w-full border border-gray-200 dark:border-gray-600 px-4 py-3 rounded-xl mb-6 text-right bg-gray-50 dark:bg-gray-700 dark:text-white focus:bg-white dark:focus:bg-gray-600 focus:border-blue-500 focus:outline-none transition-colors"
+                placeholder="اكتب اسمك الكامل"
+                dir="rtl"
+                autoFocus
+              />
+              <button
+                onClick={handleNameNext}
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-medium transition-colors"
+              >
+                التالي
+              </button>
+            </>
+          )}
+
+          {step === 2 && (
+            <>
+              <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
+                اختر جامعتك
+              </h1>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
+                مرحباً {name}، اختر الجامعة التي تدرس بها
+              </p>
+              <div className="space-y-3 mb-6 max-h-64 overflow-y-auto">
+                {universities.map((uni) => (
+                  <button
+                    key={uni}
+                    onClick={() => setSelectedUniversity(uni)}
+                    className={`w-full p-4 text-right rounded-xl border-2 transition-colors ${selectedUniversity === uni
+                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
+                      : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500'
+                      }`}
+                    dir="rtl"
+                  >
+                    <span className="text-gray-900 dark:text-white">{uni}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setStep(1)}
+                  className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-xl font-medium transition-colors"
+                >
+                  رجوع
+                </button>
+                <button
+                  onClick={handleUniversityNext}
+                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-medium transition-colors"
+                >
+                  التالي
+                </button>
+              </div>
+            </>
+          )}
+
+          {step === 3 && (
+            <>
+              <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
+                اختر كليتك
+              </h1>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
+                اختر الكلية في {selectedUniversity}
+              </p>
+              <div className="space-y-3 mb-6 max-h-64 overflow-y-auto">
+                {faculties.map((faculty) => (
+                  <button
+                    key={faculty.name || faculty.faculty}
+                    onClick={() => setSelectedFaculty(faculty.name || faculty.faculty)}
+                    className={`w-full p-4 text-right rounded-xl border-2 transition-colors ${selectedFaculty === (faculty.name || faculty.faculty)
+                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
+                      : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500'
+                      }`}
+                    dir="rtl"
+                  >
+                    <span className="text-gray-900 dark:text-white">{faculty.name || faculty.faculty}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setStep(2)}
+                  className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-xl font-medium transition-colors"
+                >
+                  رجوع
+                </button>
+                <button
+                  onClick={handleLogin}
+                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-medium transition-colors"
+                >
+                  دخول
+                </button>
+              </div>
+            </>
+          )}
+
+          {/* Error message */}
+          {error && (
+            <div className="text-red-600 dark:text-red-400 mt-4 text-center text-sm" dir="rtl">
+              {error}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // If showing disclaimer, show disclaimer screen first
+  if (showDisclaimer) {
+    return <DisclaimerScreen />;
+  }
 
   // If not logged in show login screen and stop (keeps all pages intact)
   if (!currentUser) {
@@ -285,8 +468,8 @@ export default function StudentApp() {
   // -------------------- UTIL --------------------
   // Make PageWrapper a flex column and scrollable
   const PageWrapper = ({ children, paddedBottom = true }) => (
-    <div className={`flex flex-col h-screen bg-gray-50 dark:bg-gray-900 pt-4 ${paddedBottom ? 'pb-20' : ''} px-4`}>
-      <div className="flex-1 overflow-y-auto">{children}</div>
+    <div className={`flex flex-col h-screen bg-gray-50 dark:bg-gray-900 pt-4 px-4`}>
+      <div className="flex-1 overflow-y-auto scrollbar-hide">{children}</div>
     </div>
   );
 
@@ -393,6 +576,7 @@ export default function StudentApp() {
           عرض جميع التكليفات
         </button>
       </SectionCard>
+
       <SectionCard title="إعلانات حديثة" className="mt-4">
         <div className="space-y-3">
           <div className="flex gap-3 p-3 bg-red-50 dark:bg-red-900/30 rounded-lg border-r-4 border-red-400 dark:border-red-500">
@@ -596,18 +780,7 @@ export default function StudentApp() {
 
     // Get chat participant data
     const getChatParticipantData = () => {
-      if (chat.type === 'students' && chat.studentId) {
-        const student = students.find(s => s.id === chat.studentId);
-        if (student) {
-          return {
-            name: student.displayName || `${student.firstName} ${student.lastName}`,
-            university: student.university,
-            faculty: student.faculty
-          };
-        }
-      }
-
-      // For non-student chats, use the chat's stored data or current user's data as fallback
+      // For all chats, use the chat's stored data
       return {
         name: chat.name,
         university: chat.university || currentUser.university || 'جامعة غير محددة',
@@ -752,8 +925,7 @@ export default function StudentApp() {
 
     // Load and persist chats
     React.useEffect(() => {
-      const savedChats = localStorage.getItem(`chats-${currentUser.id}`);
-      const studentChats = savedChats ? JSON.parse(savedChats) : [];
+      const savedChats = currentUser ? JSON.parse(sessionStorage.getItem(`chats-${currentUser.id}`) || '[]') : [];
 
       // Standard chats that are always present
       const baseChats = [
@@ -774,11 +946,16 @@ export default function StudentApp() {
           type: 'faculty'
         })),
         // Saved student chats
-        ...studentChats
+        ...savedChats
       ];
 
       setActiveChats(baseChats);
-    }, [currentUser.id, facultyProfessors]);
+    }, [currentUser, facultyProfessors]);
+
+    // Get available universities from courses data (for random assignment)
+    const universities = React.useMemo(() => {
+      return [...new Set(courses.map(course => course.university))].filter(Boolean);
+    }, [courses]);
 
     // Filter chats - simplified to show all types
     const filteredChats = React.useMemo(() => {
@@ -788,16 +965,23 @@ export default function StudentApp() {
       return activeChats.filter(chat => chat.type === activeFilter);
     }, [activeChats, activeFilter]);
 
-    const startNewChat = (student) => {
+    const startNewChat = (studentName) => {
+      // Generate random university and faculty for the chat recipient
+      const randomUni = universities[Math.floor(Math.random() * universities.length)];
+      const randomUniFaculties = courses.find(u => u.university === randomUni)?.faculties || [];
+      const randomFaculty = randomUniFaculties.length > 0
+        ? randomUniFaculties[Math.floor(Math.random() * randomUniFaculties.length)]
+        : { name: 'كلية عامة' };
+
       const newChat = {
         id: `stu-${Date.now()}`,
-        name: student.displayName || student.username || student.name,
+        name: studentName,
         message: 'تم بدء المحادثة',
         time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
         type: 'students',
-        university: student.university,
-        faculty: student.faculty,
-        studentId: student.id,
+        university: randomUni,
+        faculty: randomFaculty.name || randomFaculty.faculty,
+        studentId: Date.now(),
       };
 
       // Update chats
@@ -806,7 +990,7 @@ export default function StudentApp() {
 
       // Save student chats
       const studentChats = updatedChats.filter(c => c.type === 'students');
-      localStorage.setItem(`chats-${currentUser.id}`, JSON.stringify(studentChats));
+      sessionStorage.setItem(`chats-${currentUser.id}`, JSON.stringify(studentChats));
 
       // Open the chat
       setOpenChat(newChat);
@@ -815,41 +999,38 @@ export default function StudentApp() {
       setSelectedStudent(null);
     };
 
-    // Modified search function to include full name search
-    const searchResults = showSearch && searchQuery ? students.filter(s => {
-      // Don't show current user
-      if ((s.username || s.id || s.name) === (currentUser.username || currentUser.id || currentUser.name)) {
-        return false;
-      }
-
-      // Normalize the search query and student names
-      const query = searchQuery.toLowerCase().trim();
-      const studentId = String(s.id);
-      const username = (s.username || '').toLowerCase();
-      const fullName = `${s.firstName || ''} ${s.lastName || ''}`.toLowerCase().trim();
-      const displayName = (s.displayName || '').toLowerCase();
-      const name = (s.name || '').toLowerCase();
-
-      // Match by exact ID, username, or full name
-      return studentId === query ||
-        username === query ||
-        fullName === query ||
-        displayName === query ||
-        name === query;
-    }) : [];
+    // Modified search function - now just accepts any typed name
+    const searchResults = showSearch && searchQuery.trim() ? [searchQuery.trim()] : [];
 
     const handleSearch = (query) => {
       setSearchQuery(query);
       setSelectedStudent(null); // Clear selected student when search changes
     };
 
-    const viewStudentProfile = (student) => {
-      setSelectedStudent(student);
+    const viewStudentProfile = (studentName) => {
+      // Generate random university and faculty for display
+      const randomUni = universities[Math.floor(Math.random() * universities.length)];
+      const randomUniFaculties = courses.find(u => u.university === randomUni)?.faculties || [];
+      const randomFaculty = randomUniFaculties.length > 0
+        ? randomUniFaculties[Math.floor(Math.random() * randomUniFaculties.length)]
+        : { name: 'كلية عامة' };
+
+      const mockStudent = {
+        id: Date.now(),
+        name: studentName,
+        displayName: studentName,
+        university: randomUni,
+        faculty: randomFaculty.name || randomFaculty.faculty,
+        year: `السنة ${Math.floor(Math.random() * 4) + 1}` // Random year 1-4
+      };
+
+      setSelectedStudent(mockStudent);
+
       // Add to search history if not already there
       setSearchHistory(prev => {
-        const exists = prev.find(s => s.id === student.id);
+        const exists = prev.find(s => s.name === studentName);
         if (!exists) {
-          return [...prev, student];
+          return [...prev, mockStudent];
         }
         return prev;
       });
@@ -892,7 +1073,7 @@ export default function StudentApp() {
               type="text"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
-              placeholder="ابحث بالرقم التعريفي او الاسم الكامل..."
+              placeholder="اكتب اسم الطالب للبحث عنه..."
               className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 mb-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               autoFocus
             />
@@ -902,14 +1083,14 @@ export default function StudentApp() {
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
                 <div className="flex justify-between items-start mb-4">
                   <button
-                    onClick={() => startNewChat(selectedStudent)}
+                    onClick={() => startNewChat(selectedStudent.name)}
                     className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm"
                   >
                     إرسال طلب محادثة
                   </button>
                   <div className="text-right">
                     <h4 className="font-bold text-lg text-gray-900 dark:text-white">
-                      {selectedStudent.displayName || selectedStudent.name}
+                      {selectedStudent.name}
                     </h4>
                     <p className="text-gray-600 dark:text-gray-400">#{selectedStudent.id}</p>
                   </div>
@@ -922,41 +1103,46 @@ export default function StudentApp() {
               </div>
             ) : (
               <div className="space-y-2">
-                {searchQuery && !searchResults.length && (
-                  <div className="text-center text-gray-500 dark:text-gray-400 py-4">
-                    لا توجد نتائج للبحث
+                {searchQuery && searchResults.length > 0 && (
+                  <div className="space-y-2">
+                    {searchResults.map((studentName, idx) => (
+                      <div
+                        key={idx}
+                        onClick={() => viewStudentProfile(studentName)}
+                        className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
+                      >
+                        <div className="text-blue-500 text-sm">عرض الملف</div>
+                        <div className="text-right">
+                          <div className="font-medium text-gray-900 dark:text-white">
+                            {studentName}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">طالب جديد</div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )}
-                {searchResults.map(student => (
-                  <div
-                    key={student.id}
-                    onClick={() => viewStudentProfile(student)}
-                    className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
-                  >
-                    <div className="text-blue-500 text-sm">عرض الملف</div>
-                    <div className="text-right">
-                      <div className="font-medium text-gray-900 dark:text-white">
-                        {student.displayName || student.name}
-                      </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">#{student.id}</div>
-                    </div>
+
+                {searchQuery && !searchResults.length && (
+                  <div className="text-center text-gray-500 dark:text-gray-400 py-4">
+                    اكتب اسم الطالب للبحث عنه
                   </div>
-                ))}
+                )}
 
                 {/* Search History */}
                 {!searchQuery && searchHistory.length > 0 && (
                   <div className="mt-4">
                     <h4 className="text-sm text-gray-500 dark:text-gray-400 mb-2 text-right">سجل البحث</h4>
-                    {searchHistory.map(student => (
+                    {searchHistory.map((student, idx) => (
                       <div
-                        key={student.id}
-                        onClick={() => viewStudentProfile(student)}
+                        key={idx}
+                        onClick={() => viewStudentProfile(student.name)}
                         className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 mb-2"
                       >
                         <div className="text-blue-500 text-sm">عرض الملف</div>
                         <div className="text-right">
                           <div className="font-medium text-gray-900 dark:text-white">
-                            {student.displayName || student.name}
+                            {student.name}
                           </div>
                           <div className="text-sm text-gray-500 dark:text-gray-400">#{student.id}</div>
                         </div>
@@ -1022,11 +1208,11 @@ export default function StudentApp() {
     <PageWrapper>
       <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm text-center mb-6">
         <div className="w-20 h-20 bg-purple-200 dark:bg-purple-700 rounded-full mx-auto mb-4 flex items-center justify-center"><User className="text-purple-600 dark:text-purple-300" size={32} /></div>
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">{currentUser.displayName || currentUser.username || currentUser.name} {currentUser.studentId ? `#${currentUser.studentId}` : ''}</h2>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">{currentUser.displayName || currentUser.name}</h2>
         <div className="text-gray-600 dark:text-gray-400 text-sm mt-2">
           <div>{currentUser.university || '—'}</div>
           <div>{currentUser.faculty || '—'}</div>
-          <div>{currentUser.year ? `السنة ${currentUser.year}` : ''}</div>
+          <div>{currentUser.year || ''}</div>
         </div>
       </div>
 
@@ -1290,7 +1476,7 @@ export default function StudentApp() {
 
       {/* Bottom Nav */}
       {currentScreen === 'main' && !openChat && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t dark:border-gray-700 flex justify-around py-2 shadow-sm">
+        <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t dark:border-gray-700 flex justify-around py-2 shadow-lg backdrop-blur-sm bg-white/95 dark:bg-gray-800/95">
           <TabButton id="calendar" icon={Calendar} />
           <TabButton id="assignments" icon={FileText} />
           <TabButton id="home" icon={Home} />
