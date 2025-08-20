@@ -1,25 +1,50 @@
-# Enhance Scrollability and Add Dark Mode
+# Student App Enhancement - Phase 1 TODO
 
-## Progress:
-- [ ] Fix scrollability issues
-  - [ ] Update PageWrapper component to remove height restrictions
-  - [ ] Ensure proper overflow handling for all content areas
-  - [ ] Add proper padding/margins to prevent content clipping
-- [ ] Enable dark mode in Tailwind config
-- [ ] Implement dark mode state management
-- [ ] Create Settings screen with dark mode toggle
-- [ ] Add dark mode variants to all components
-- [ ] Test scrollability on all screens
-- [ ] Test dark mode functionality
-- [ ] Verify dark mode persistence
+## Core Features Enhancement
 
-## Changes to be made:
-1. Update `tailwind.config.js` to enable dark mode
-2. Fix scrollability in `src/App.js` PageWrapper component
-3. Add dark mode state management and toggle functionality
-4. Create proper Settings screen
-5. Apply dark mode classes throughout the app
-6. Test and verify all functionality
+### 1. Notification System
+- [ ] Create NotificationCenter component
+- [ ] Add notification data structure
+- [ ] Implement real-time notification handling
+- [ ] Add notification preferences/settings
 
-## Summary:
-Enhancing the app's scrollability by fixing container height restrictions and implementing a complete dark mode system with toggle functionality in settings.
+### 2. Chat & Messaging
+- [ ] Create ChatInterface component
+- [ ] Add messaging data structure
+- [ ] Implement real-time messaging
+- [ ] Add file sharing in chat
+
+### 3. Grade Tracking
+- [ ] Create GradeTracker component
+- [ ] Add grades data structure
+- [ ] Implement GPA calculator
+- [ ] Add progress visualization
+
+### 4. File Management System
+- [ ] Create FileUploader component
+- [ ] Add file management data structure
+- [ ] Implement upload/download functionality
+- [ ] Add assignment submission portal
+
+### 5. Enhanced Screens
+- [ ] Update DashboardScreen with new features
+- [ ] Create ChatScreen
+- [ ] Create GradesScreen
+- [ ] Create FilesScreen
+
+### 6. Data Enhancements
+- [ ] Create notifications.js data file
+- [ ] Create messages.js data file
+- [ ] Create grades.js data file
+- [ ] Update existing data structures
+
+### 7. Utilities
+- [ ] Create notifications.js utility
+- [ ] Create storage.js utility
+- [ ] Create api.js utility
+
+### 8. Testing & Integration
+- [ ] Test all new components
+- [ ] Integrate with existing app
+- [ ] Update navigation
+- [ ] Final testing

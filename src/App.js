@@ -19,7 +19,10 @@ import {
   Settings,
   Filter,
   Upload,
-  Send
+  Send,
+  Moon,
+  Sun,
+  Monitor
 } from 'lucide-react';
 
 // IMPORTANT: your data files should be placed in src/data/
@@ -44,6 +47,33 @@ export default function StudentApp() {
   const [fileFilter, setFileFilter] = useState('all');
   const [showFileFilterMenu, setShowFileFilterMenu] = useState(false);
   const [assignments, setAssignments] = useState([]);
+
+  // ---------- dark mode state ----------
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check localStorage first, then system preference
+    const saved = localStorage.getItem('darkMode');
+    if (saved !== null) {
+      return JSON.parse(saved);
+    }
+    // Check system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  // Apply dark mode class to document
+  React.useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    // Save preference
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  // Toggle dark mode function
+  const toggleDarkMode = () => {
+    setDarkMode(prev => !prev);
+  };
 
   // Data normalization
   const students = Array.isArray(studentsRaw) ? studentsRaw : (studentsRaw ? Object.values(studentsRaw) : []);
@@ -162,8 +192,23 @@ export default function StudentApp() {
     };
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
-        <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-xl">
+      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+        <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl">
+          {/* Dark mode toggle button */}
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              title="تبديل المظهر"
+            >
+              {darkMode ? (
+                <Sun className="w-5 h-5 text-yellow-500" />
+              ) : (
+                <Moon className="w-5 h-5 text-gray-600" />
+              )}
+            </button>
+          </div>
+
           {/* App banner logo */}
           <div className="flex justify-center mb-6">
             <img
@@ -174,12 +219,12 @@ export default function StudentApp() {
           </div>
 
           {/* Arabic title */}
-          <h1 className="text-2xl font-bold text-center text-gray-800 mb-2" dir="rtl">
+          <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
             بوابة الطالب
           </h1>
 
           {/* Arabic subtitle */}
-          <p className="text-center text-gray-600 mb-8 text-sm" dir="rtl">
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
             ادخل بياناتك للوصول للمنصة
           </p>
 
@@ -188,7 +233,7 @@ export default function StudentApp() {
             type="text"
             value={username}
             onChange={e => setUsername(e.target.value)}
-            className="w-full border border-gray-200 px-4 py-3 rounded-xl mb-4 text-right bg-gray-50 focus:bg-white focus:border-blue-500 focus:outline-none transition-colors"
+            className="w-full border border-gray-200 dark:border-gray-600 px-4 py-3 rounded-xl mb-4 text-right bg-gray-50 dark:bg-gray-700 dark:text-white focus:bg-white dark:focus:bg-gray-600 focus:border-blue-500 focus:outline-none transition-colors"
             placeholder="اسم المستخدم أو البريد الإلكتروني"
             autoComplete="username"
             dir="rtl"
@@ -199,7 +244,7 @@ export default function StudentApp() {
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            className="w-full border border-gray-200 px-4 py-3 rounded-xl mb-6 text-right bg-gray-50 focus:bg-white focus:border-blue-500 focus:outline-none transition-colors"
+            className="w-full border border-gray-200 dark:border-gray-600 px-4 py-3 rounded-xl mb-6 text-right bg-gray-50 dark:bg-gray-700 dark:text-white focus:bg-white dark:focus:bg-gray-600 focus:border-blue-500 focus:outline-none transition-colors"
             placeholder="كلمة المرور"
             autoComplete="current-password"
             dir="rtl"
@@ -207,7 +252,7 @@ export default function StudentApp() {
 
           {/* Error message */}
           {error && (
-            <div className="text-red-600 mb-4 text-center text-sm" dir="rtl">
+            <div className="text-red-600 dark:text-red-400 mb-4 text-center text-sm" dir="rtl">
               {error}
             </div>
           )}
@@ -221,8 +266,8 @@ export default function StudentApp() {
           </button>
 
           {/* Test credentials */}
-          <p className="text-center text-gray-400 text-xs" dir="rtl">
-            للتجربة: 1 / test
+          <p className="text-center text-gray-400 dark:text-gray-500 text-xs" dir="rtl">
+            للتجربة: test / 1
           </p>
         </div>
       </div>
@@ -240,24 +285,24 @@ export default function StudentApp() {
   // -------------------- UTIL --------------------
   // Make PageWrapper a flex column and scrollable
   const PageWrapper = ({ children, paddedBottom = true }) => (
-    <div className={`flex flex-col h-screen bg-gray-50 pt-4 ${paddedBottom ? 'pb-20' : ''} px-4`}>
+    <div className={`flex flex-col h-screen bg-gray-50 dark:bg-gray-900 pt-4 ${paddedBottom ? 'pb-20' : ''} px-4`}>
       <div className="flex-1 overflow-y-auto">{children}</div>
     </div>
   );
 
   const SectionCard = ({ title, children, className }) => (
-    <div className={`bg-white p-4 rounded-xl shadow-sm ${className || ''}`}>
-      {title && <h2 className="text-lg font-semibold mb-3 text-right">{title}</h2>}
+    <div className={`bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm ${className || ''}`}>
+      {title && <h2 className="text-lg font-semibold mb-3 text-right text-gray-900 dark:text-white">{title}</h2>}
       {children}
     </div>
   );
 
   const StatPill = ({ color, label, value }) => (
     <div className={{
-      blue: 'bg-blue-100 text-blue-700',
-      green: 'bg-green-100 text-green-700',
-      red: 'bg-red-100 text-red-700',
-      yellow: 'bg-yellow-100 text-yellow-700',
+      blue: 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300',
+      green: 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300',
+      red: 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300',
+      yellow: 'bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300',
     }[color] + ' p-4 rounded-xl'}>
       <div className="text-sm mb-1">{label}</div>
       <div className="text-2xl font-bold">{value}</div>
@@ -268,17 +313,17 @@ export default function StudentApp() {
     <div className="px-4 pb-2">
       <div className="flex items-center justify-between">
         <div className="text-right">
-          <div className="font-bold text-lg"> مرحباََ {currentUser && (currentUser.firstName)} 👋</div>
-          <div className="text-sm text-gray-600"> {currentUser.university || '—'}</div>
-          <div className="text-sm text-gray-600"> {currentUser.faculty || '—'}</div>
+          <div className="font-bold text-lg text-gray-900 dark:text-white"> مرحباََ {currentUser && (currentUser.firstName)} 👋</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400"> {currentUser.university || '—'}</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400"> {currentUser.faculty || '—'}</div>
         </div>
         <div className="flex items-center gap-2">
-          <button className="p-2 rounded-lg bg-white shadow-sm"><Search size={18} /></button>
-          <button className="p-2 rounded-lg bg-white shadow-sm relative">
+          <button className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm text-gray-900 dark:text-white"><Search size={18} /></button>
+          <button className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm relative text-gray-900 dark:text-white">
             <Bell size={18} />
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full" />
           </button>
-          <button onClick={() => { setCurrentUser(null); }} title="Logout" className="p-2 rounded-lg bg-white shadow-sm text-sm">خروج</button>
+          <button onClick={() => { setCurrentUser(null); }} title="Logout" className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm text-sm text-gray-900 dark:text-white">خروج</button>
         </div>
       </div>
     </div>
@@ -301,57 +346,89 @@ export default function StudentApp() {
             { name: 'هندسة البرمجيات', place: 'قاعة 101', time: '9:00 AM', type: 'محاضرة' },
             { name: 'قواعد البيانات', place: 'معمل 205', time: '11:00 AM', type: 'عملي' },
           ]).map((s, idx) => (
-            <div key={idx} className={`flex items-center justify-between p-3 ${idx === 0 ? 'bg-blue-50' : 'bg-gray-50'} rounded-lg`}>
+            <div key={idx} className={`flex items-center justify-between p-3 ${idx === 0 ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-gray-50 dark:bg-gray-700'} rounded-lg`}>
               <div className="text-right">
-                <div className="font-medium">{s.name}</div>
-                <div className="text-sm text-gray-600">{s.instructor || s.teacher || 'د. غير محدد'} - {s.place}</div>
+                <div className="font-medium text-gray-900 dark:text-white">{s.name}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">{s.instructor || s.teacher || 'د. غير محدد'} - {s.place}</div>
               </div>
               <div className="text-left">
-                <div className={`${idx === 0 ? 'text-blue-600' : 'text-gray-600'} font-medium`}>{s.time}</div>
-                <div className={`text-xs ${idx === 0 ? 'text-blue-500 bg-blue-100' : 'text-gray-500 bg-gray-100'} px-2 py-1 rounded`}>{s.type}</div>
+                <div className={`${idx === 0 ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'} font-medium`}>{s.time}</div>
+                <div className={`text-xs ${idx === 0 ? 'text-blue-500 bg-blue-100 dark:text-blue-300 dark:bg-blue-900' : 'text-gray-500 bg-gray-100 dark:text-gray-400 dark:bg-gray-600'} px-2 py-1 rounded`}>{s.type}</div>
               </div>
             </div>
           ))}
         </div>
-        <button className="text-blue-500 text-sm mt-3 text-center w-full">عرض الجدول كاملاً</button>
+        <button
+          onClick={() => setActiveTab('calendar')}
+          className="text-blue-500 dark:text-blue-400 text-sm mt-3 text-center w-full hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+        >
+          عرض الجدول كاملاً
+        </button>
       </SectionCard>
 
+      <SectionCard title="التكليفات الحالية" className="mt-4">
+        <div className="space-y-3">
+          {assignments.slice(0, 2).map(assignment => (
+            <div key={assignment.id} className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <div className="flex justify-between items-start mb-1">
+                <div className={`text-xs px-2 py-1 rounded ${assignment.status === 'لم يتم التسليم' ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400' :
+                  assignment.status === 'تم التسليم' ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' :
+                    'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400'
+                  }`}>
+                  {assignment.grade || assignment.status}
+                </div>
+                <div className="text-right">
+                  <div className="font-medium text-gray-900 dark:text-white text-sm">{assignment.title}</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">{assignment.subject}</div>
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">موعد التسليم: {assignment.dueDate}</div>
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={() => setActiveTab('assignments')}
+          className="text-blue-500 dark:text-blue-400 text-sm mt-3 text-center w-full hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+        >
+          عرض جميع التكليفات
+        </button>
+      </SectionCard>
       <SectionCard title="إعلانات حديثة" className="mt-4">
         <div className="space-y-3">
-          <div className="flex gap-3 p-3 bg-red-50 rounded-lg border-r-4 border-red-400">
-            <AlertCircle className="text-red-500 mt-1" size={20} />
+          <div className="flex gap-3 p-3 bg-red-50 dark:bg-red-900/30 rounded-lg border-r-4 border-red-400 dark:border-red-500">
+            <AlertCircle className="text-red-500 dark:text-red-400 mt-1" size={20} />
             <div className="text-right flex-1">
-              <div className="font-medium text-red-800">إعلان مهم: تغيير موعد امتحان البرمجة</div>
-              <div className="text-sm text-red-600 mt-1">تم تأجيل امتحان مادة البرمجة المتقدمة من يوم الأحد إلى يوم الإثنين</div>
-              <div className="text-xs text-red-500 mt-2">منذ ساعتين</div>
+              <div className="font-medium text-red-800 dark:text-red-300">إعلان مهم: تغيير موعد امتحان البرمجة</div>
+              <div className="text-sm text-red-600 dark:text-red-400 mt-1">تم تأجيل امتحان مادة البرمجة المتقدمة من يوم الأحد إلى يوم الإثنين</div>
+              <div className="text-xs text-red-500 dark:text-red-400 mt-2">منذ ساعتين</div>
             </div>
           </div>
 
-          <div className="flex gap-3 p-3 bg-yellow-50 rounded-lg border-r-4 border-yellow-400">
-            <FileText className="text-yellow-600 mt-1" size={20} />
+          <div className="flex gap-3 p-3 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg border-r-4 border-yellow-400 dark:border-yellow-500">
+            <FileText className="text-yellow-600 dark:text-yellow-400 mt-1" size={20} />
             <div className="text-right flex-1">
-              <div className="font-medium text-yellow-800">ورشة عمل جديدة</div>
-              <div className="text-sm text-yellow-600 mt-1">ورشة عمل حول الذكاء الاصطناعي يوم الخميس الساعة 3 مساءً</div>
-              <div className="text-xs text-yellow-500 mt-2">منذ 3 ساعات</div>
+              <div className="font-medium text-yellow-800 dark:text-yellow-300">ورشة عمل جديدة</div>
+              <div className="text-sm text-yellow-600 dark:text-yellow-400 mt-1">ورشة عمل حول الذكاء الاصطناعي يوم الخميس الساعة 3 مساءً</div>
+              <div className="text-xs text-yellow-500 dark:text-yellow-400 mt-2">منذ 3 ساعات</div>
             </div>
           </div>
 
           {/* extra announcements */}
-          <div className="flex gap-3 p-3 bg-green-50 rounded-lg border-r-4 border-green-400">
-            <CheckCircle className="text-green-600 mt-1" size={20} />
+          <div className="flex gap-3 p-3 bg-green-50 dark:bg-green-900/30 rounded-lg border-r-4 border-green-400 dark:border-green-500">
+            <CheckCircle className="text-green-600 dark:text-green-400 mt-1" size={20} />
             <div className="text-right flex-1">
-              <div className="font-medium text-green-800">تذكير: موعد تسليم المشروع</div>
-              <div className="text-sm text-green-600 mt-1">آخر موعد لتسليم مشروع الفصل النهائي 22-08-2025</div>
-              <div className="text-xs text-green-500 mt-2">منذ 5 ساعات</div>
+              <div className="font-medium text-green-800 dark:text-green-300">تذكير: موعد تسليم المشروع</div>
+              <div className="text-sm text-green-600 dark:text-green-400 mt-1">آخر موعد لتسليم مشروع الفصل النهائي 22-08-2025</div>
+              <div className="text-xs text-green-500 dark:text-green-400 mt-2">منذ 5 ساعات</div>
             </div>
           </div>
 
-          <div className="flex gap-3 p-3 bg-blue-50 rounded-lg border-r-4 border-blue-400">
-            <Bell className="text-blue-600 mt-1" size={20} />
+          <div className="flex gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg border-r-4 border-blue-400 dark:border-blue-500">
+            <Bell className="text-blue-600 dark:text-blue-400 mt-1" size={20} />
             <div className="text-right flex-1">
-              <div className="font-medium text-blue-800">فتح باب تسجيل المقررات</div>
-              <div className="text-sm text-blue-600 mt-1">التسجيل للفصل القادم يفتح يوم الأحد المقبل</div>
-              <div className="text-xs text-blue-500 mt-2">منذ اليوم</div>
+              <div className="font-medium text-blue-800 dark:text-blue-300">فتح باب تسجيل المقررات</div>
+              <div className="text-sm text-blue-600 dark:text-blue-400 mt-1">التسجيل للفصل القادم يفتح يوم الأحد المقبل</div>
+              <div className="text-xs text-blue-500 dark:text-blue-400 mt-2">منذ اليوم</div>
             </div>
           </div>
         </div>
@@ -411,26 +488,26 @@ export default function StudentApp() {
 
     return (
       <PageWrapper>
-        <h2 className="text-lg font-semibold mb-4 text-right">التكليفات الحالية</h2>
+        <h2 className="text-lg font-semibold mb-4 text-right text-gray-900 dark:text-white">التكليفات الحالية</h2>
 
         <div className="space-y-3">
           {assignments.map(assignment => (
-            <div key={assignment.id} className="bg-white p-4 rounded-xl shadow-sm">
+            <div key={assignment.id} className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
               <div className="flex justify-between items-start mb-2">
-                <div className={`text-sm px-2 py-1 rounded ${assignment.status === 'لم يتم التسليم' ? 'bg-red-100 text-red-600' :
-                  assignment.status === 'تم التسليم' ? 'bg-green-100 text-green-600' :
-                    'bg-yellow-100 text-yellow-600'
+                <div className={`text-sm px-2 py-1 rounded ${assignment.status === 'لم يتم التسليم' ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400' :
+                  assignment.status === 'تم التسليم' ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' :
+                    'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400'
                   }`}>
                   {assignment.grade || assignment.status}
                 </div>
                 <div className="text-right">
-                  <div className="font-medium">{assignment.title}</div>
-                  <div className="text-sm text-gray-600">{assignment.subject} - موعد التسليم: {assignment.dueDate}</div>
+                  <div className="font-medium text-gray-900 dark:text-white">{assignment.title}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">{assignment.subject} - موعد التسليم: {assignment.dueDate}</div>
                 </div>
               </div>
 
               {assignment.status === 'لم يتم التسليم' && (
-                <label className="flex items-center gap-2 cursor-pointer text-blue-600 text-sm mt-2">
+                <label className="flex items-center gap-2 cursor-pointer text-blue-600 dark:text-blue-400 text-sm mt-2">
                   <Upload size={16} />
                   <span>رفع ملف</span>
                   <input type="file" className="hidden" onChange={(e) => handleFileChange(e, assignment.id)} />
@@ -441,7 +518,7 @@ export default function StudentApp() {
         </div>
 
         {selectedFile && (
-          <div className="bg-green-100 text-green-700 p-3 rounded-xl mt-4">
+          <div className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 p-3 rounded-xl mt-4">
             ✅ تم رفع الملف: {selectedFile}
           </div>
         )}
@@ -452,19 +529,19 @@ export default function StudentApp() {
             <div className="relative">
               <button
                 onClick={() => setShowFileFilterMenu(prev => !prev)}
-                className="flex items-center gap-2 bg-white px-3 py-1 rounded text-sm shadow-sm"
+                className="flex items-center gap-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-1 rounded text-sm shadow-sm"
               >
                 <Filter size={16} />
                 <span className="text-xs">تصفية</span>
               </button>
 
               {showFileFilterMenu && (
-                <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg p-2 z-50">
+                <div className="absolute right-0 mt-2 w-44 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-2 z-50 border dark:border-gray-700">
                   {fileTypes.map(opt => (
                     <button
                       key={opt}
                       onClick={() => { setFileFilter(opt); setShowFileFilterMenu(false); }}
-                      className={`w-full text-right px-3 py-2 rounded text-sm ${fileFilter === opt ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'}`}
+                      className={`w-full text-right px-3 py-2 rounded text-sm ${fileFilter === opt ? 'bg-blue-600 text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white'}`}
                     >
                       {fileTypeLabels[opt]}
                     </button>
@@ -473,20 +550,20 @@ export default function StudentApp() {
               )}
             </div>
 
-            <h2 className="text-lg font-semibold">المحاضرات والملفات</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">المحاضرات والملفات</h2>
           </div>
 
           <div className="space-y-3">
             {filteredFiles.map((file, idx) => (
-              <div key={file.id ?? idx} className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+              <div key={file.id ?? idx} className="flex items-center justify-between p-3 border dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
                 <div className="flex items-center gap-3">
-                  <Download className="text-blue-500" size={20} />
-                  <span className={`text-xs px-2 py-1 rounded text-blue-600 bg-blue-100`}>
+                  <Download className="text-blue-500 dark:text-blue-400" size={20} />
+                  <span className={`text-xs px-2 py-1 rounded text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30`}>
                     {fileTypeLabels[file.type] || file.type}
                   </span>
                 </div>
                 <div className="text-right flex-1 mx-4">
-                  <div className="text-sm font-medium truncate">{file.name || file.title || (file.course && `${file.course} - ملف`)}</div>
+                  <div className="text-sm font-medium truncate text-gray-900 dark:text-white">{file.name || file.title || (file.course && `${file.course} - ملف`)}</div>
                 </div>
               </div>
             ))}
@@ -541,37 +618,37 @@ export default function StudentApp() {
     const participantData = getChatParticipantData();
 
     return (
-      <div className="bg-gray-50 min-h-screen h-screen">
+      <div className="bg-gray-50 dark:bg-gray-900 min-h-screen h-screen">
         {showChatDetails ? (
           /* Chat Details - Full Screen */
-          <div className="w-full bg-white flex flex-col h-full">
+          <div className="w-full bg-white dark:bg-gray-800 flex flex-col h-full">
             {/* Header */}
-            <div className="p-4 border-b border-gray-200 flex items-center gap-3">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center gap-3">
               <button onClick={() => setShowChatDetails(false)}>
-                <ChevronLeft className="text-gray-600" size={20} />
+                <ChevronLeft className="text-gray-600 dark:text-gray-300" size={20} />
               </button>
-              <h2 className="text-lg font-semibold text-gray-800">chat details</h2>
+              <h2 className="text-lg font-semibold text-gray-800 dark:text-white">chat details</h2>
             </div>
 
             {/* Profile Section */}
-            <div className="p-6 text-center border-b border-gray-200">
-              <div className="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <User className="text-gray-600" size={40} />
+            <div className="p-6 text-center border-b border-gray-200 dark:border-gray-700">
+              <div className="w-24 h-24 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <User className="text-gray-600 dark:text-gray-300" size={40} />
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-1">{participantData.name}</h3>
-              <p className="text-sm text-gray-500 mb-1">{participantData.university}</p>
-              <p className="text-sm text-gray-500">{participantData.faculty}</p>
+              <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-1">{participantData.name}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">{participantData.university}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{participantData.faculty}</p>
             </div>
 
             {/* Photos Section */}
-            <div className="p-4 border-b border-gray-200">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm text-gray-600">صور</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">صور</span>
               </div>
               <div className="grid grid-cols-4 gap-2">
                 {mockPhotos.map((photo) => (
-                  <div key={photo.id} className="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
-                    <div className="w-8 h-8 bg-gray-300 rounded"></div>
+                  <div key={photo.id} className="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded"></div>
                   </div>
                 ))}
               </div>
@@ -580,12 +657,12 @@ export default function StudentApp() {
             {/* Files Section */}
             <div className="p-4 flex-1">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm text-gray-600">ملفات</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">ملفات</span>
               </div>
               <div className="grid grid-cols-4 gap-2">
                 {mockFiles.map((file) => (
-                  <div key={file.id} className="aspect-square bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center">
-                    <FileText className="text-gray-400" size={24} />
+                  <div key={file.id} className="aspect-square bg-gray-100 dark:bg-gray-700 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 flex items-center justify-center">
+                    <FileText className="text-gray-400 dark:text-gray-500" size={24} />
                   </div>
                 ))}
               </div>
@@ -595,45 +672,45 @@ export default function StudentApp() {
           /* Chat Interface - Full Screen */
           <div className="w-full flex flex-col h-full">
             {/* Chat Header */}
-            <div className="bg-white p-4 border-b border-gray-200 flex items-center justify-between">
+            <div className="bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <button onClick={onBack}>
-                  <ChevronLeft className="text-gray-600" size={20} />
+                  <ChevronLeft className="text-gray-600 dark:text-gray-300" size={20} />
                 </button>
-                <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                  <User className="text-gray-600" size={20} />
+                <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
+                  <User className="text-gray-600 dark:text-gray-300" size={20} />
                 </div>
                 <div className="text-right">
-                  <h3 className="font-semibold text-gray-800">{chat.name}</h3>
+                  <h3 className="font-semibold text-gray-800 dark:text-white">{chat.name}</h3>
                   <div className="text-xs text-green-500">متصل الآن</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <h2 className="text-lg font-semibold text-gray-800">Chat</h2>
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Chat</h2>
                 <button
                   onClick={() => setShowChatDetails(!showChatDetails)}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                 >
                   <div className="flex flex-col gap-1">
-                    <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
-                    <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
-                    <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
-                    <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+                    <div className="w-1 h-1 bg-gray-600 dark:bg-gray-400 rounded-full"></div>
+                    <div className="w-1 h-1 bg-gray-600 dark:bg-gray-400 rounded-full"></div>
+                    <div className="w-1 h-1 bg-gray-600 dark:bg-gray-400 rounded-full"></div>
+                    <div className="w-1 h-1 bg-gray-600 dark:bg-gray-400 rounded-full"></div>
                   </div>
                 </button>
               </div>
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50">
+            <div className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50 dark:bg-gray-900">
               {messages.map(m => (
                 <div key={m.id} className={`flex ${m.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`max-w-[70%] p-3 rounded-2xl ${m.sender === 'me'
                     ? 'bg-blue-500 text-white rounded-br-md'
-                    : 'bg-white shadow-sm rounded-bl-md border'
+                    : 'bg-white dark:bg-gray-800 shadow-sm rounded-bl-md border dark:border-gray-700'
                     }`}>
-                    <div className="text-sm">{m.text}</div>
-                    <div className={`text-xs mt-1 ${m.sender === 'me' ? 'text-blue-100' : 'text-gray-500'}`}>
+                    <div className={`text-sm ${m.sender === 'me' ? 'text-white' : 'text-gray-900 dark:text-white'}`}>{m.text}</div>
+                    <div className={`text-xs mt-1 ${m.sender === 'me' ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>
                       {m.timestamp}
                     </div>
                   </div>
@@ -642,13 +719,13 @@ export default function StudentApp() {
             </div>
 
             {/* Input Area */}
-            <div className="bg-white p-4 border-t border-gray-200 flex gap-3 items-center">
+            <div className="bg-white dark:bg-gray-800 p-4 border-t border-gray-200 dark:border-gray-700 flex gap-3 items-center">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="اكتب رسالة..."
-                className="flex-1 border border-gray-300 rounded-full px-4 py-2 text-right focus:outline-none focus:border-blue-500"
+                className="flex-1 border border-gray-300 dark:border-gray-600 rounded-full px-4 py-2 text-right focus:outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 onKeyDown={(e) => { if (e.key === 'Enter') sendMessage(); }}
                 autoComplete="off"
               />
@@ -804,11 +881,11 @@ export default function StudentApp() {
                   setSearchQuery('');
                   setSelectedStudent(null);
                 }}
-                className="text-gray-500"
+                className="text-gray-500 dark:text-gray-400"
               >
                 إلغاء
               </button>
-              <h3 className="font-medium">البحث عن طالب</h3>
+              <h3 className="font-medium text-gray-900 dark:text-white">البحث عن طالب</h3>
             </div>
 
             <input
@@ -816,13 +893,13 @@ export default function StudentApp() {
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
               placeholder="ابحث بالرقم التعريفي او الاسم الكامل..."
-              className="w-full border rounded-lg px-4 py-2 mb-3"
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 mb-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               autoFocus
             />
 
             {selectedStudent ? (
               // Student Profile Card
-              <div className="bg-white p-4 rounded-lg shadow-sm">
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
                 <div className="flex justify-between items-start mb-4">
                   <button
                     onClick={() => startNewChat(selectedStudent)}
@@ -831,22 +908,22 @@ export default function StudentApp() {
                     إرسال طلب محادثة
                   </button>
                   <div className="text-right">
-                    <h4 className="font-bold text-lg">
+                    <h4 className="font-bold text-lg text-gray-900 dark:text-white">
                       {selectedStudent.displayName || selectedStudent.name}
                     </h4>
-                    <p className="text-gray-600">#{selectedStudent.id}</p>
+                    <p className="text-gray-600 dark:text-gray-400">#{selectedStudent.id}</p>
                   </div>
                 </div>
                 <div className="space-y-2 text-right">
-                  <p className="text-gray-600">الجامعة: {selectedStudent.university}</p>
-                  <p className="text-gray-600">الكلية: {selectedStudent.faculty}</p>
-                  <p className="text-gray-600">السنة: {selectedStudent.year || '—'}</p>
+                  <p className="text-gray-600 dark:text-gray-400">الجامعة: {selectedStudent.university}</p>
+                  <p className="text-gray-600 dark:text-gray-400">الكلية: {selectedStudent.faculty}</p>
+                  <p className="text-gray-600 dark:text-gray-400">السنة: {selectedStudent.year || '—'}</p>
                 </div>
               </div>
             ) : (
               <div className="space-y-2">
                 {searchQuery && !searchResults.length && (
-                  <div className="text-center text-gray-500 py-4">
+                  <div className="text-center text-gray-500 dark:text-gray-400 py-4">
                     لا توجد نتائج للبحث
                   </div>
                 )}
@@ -854,14 +931,14 @@ export default function StudentApp() {
                   <div
                     key={student.id}
                     onClick={() => viewStudentProfile(student)}
-                    className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-gray-50"
+                    className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
                   >
                     <div className="text-blue-500 text-sm">عرض الملف</div>
                     <div className="text-right">
-                      <div className="font-medium">
+                      <div className="font-medium text-gray-900 dark:text-white">
                         {student.displayName || student.name}
                       </div>
-                      <div className="text-sm text-gray-500">#{student.id}</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">#{student.id}</div>
                     </div>
                   </div>
                 ))}
@@ -869,19 +946,19 @@ export default function StudentApp() {
                 {/* Search History */}
                 {!searchQuery && searchHistory.length > 0 && (
                   <div className="mt-4">
-                    <h4 className="text-sm text-gray-500 mb-2 text-right">سجل البحث</h4>
+                    <h4 className="text-sm text-gray-500 dark:text-gray-400 mb-2 text-right">سجل البحث</h4>
                     {searchHistory.map(student => (
                       <div
                         key={student.id}
                         onClick={() => viewStudentProfile(student)}
-                        className="flex items-center justify-between p-3 bg-white rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 mb-2"
+                        className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 mb-2"
                       >
                         <div className="text-blue-500 text-sm">عرض الملف</div>
                         <div className="text-right">
-                          <div className="font-medium">
+                          <div className="font-medium text-gray-900 dark:text-white">
                             {student.displayName || student.name}
                           </div>
-                          <div className="text-sm text-gray-500">#{student.id}</div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">#{student.id}</div>
                         </div>
                       </div>
                     ))}
@@ -892,21 +969,21 @@ export default function StudentApp() {
           </div>
         ) : (
           <>
-            <div className="flex bg-gray-200 p-1 rounded-lg mb-4 text-sm">
+            <div className="flex bg-gray-200 dark:bg-gray-700 p-1 rounded-lg mb-4 text-sm">
               <button onClick={() => setActiveFilter('all')}
-                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'all' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>
+                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'all' ? 'bg-white dark:bg-gray-800 text-gray-700 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>
                 الكل ({activeChats.length})
               </button>
               <button onClick={() => setActiveFilter('students')}
-                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'students' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>
+                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'students' ? 'bg-white dark:bg-gray-800 text-gray-700 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>
                 الطلاب ({activeChats.filter(c => c.type === 'students').length})
               </button>
               <button onClick={() => setActiveFilter('faculty')}
-                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'faculty' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>
+                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'faculty' ? 'bg-white dark:bg-gray-800 text-gray-700 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>
                 هيئة التدريس ({activeChats.filter(c => c.type === 'faculty').length})
               </button>
               <button onClick={() => setActiveFilter('admin')}
-                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'admin' ? 'bg-white text-gray-700' : 'text-gray-500 hover:bg-gray-100'}`}>
+                className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'admin' ? 'bg-white dark:bg-gray-800 text-gray-700 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>
                 الإدارة ({adminChatsCount})
               </button>
             </div>
@@ -915,22 +992,22 @@ export default function StudentApp() {
               {filteredChats.map(chat => (
                 <div key={chat.id}
                   onClick={() => setOpenChat(chat)}
-                  className="bg-white p-4 rounded-lg shadow-sm flex items-center gap-3 hover:bg-gray-50 cursor-pointer"
+                  className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
                 >
                   <div className="relative">
-                    <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
-                      <User className="text-gray-600" size={20} />
+                    <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
+                      <User className="text-gray-600 dark:text-gray-300" size={20} />
                     </div>
                   </div>
                   <div className="flex-1 text-right">
-                    <div className="font-medium">{chat.name}</div>
+                    <div className="font-medium text-gray-900 dark:text-white">{chat.name}</div>
                     {chat.type === 'students' && chat.university && (
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-gray-500 dark:text-gray-400">
                         {chat.university} - {chat.faculty}
                       </div>
                     )}
                   </div>
-                  <div className="text-xs text-gray-500">{chat.time}</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">{chat.time}</div>
                 </div>
               ))}
             </div>
@@ -943,10 +1020,10 @@ export default function StudentApp() {
   // -------------------- PROFILE + SUB SCREENS --------------------
   const ProfileScreen = () => (
     <PageWrapper>
-      <div className="bg-white p-6 rounded-xl shadow-sm text-center mb-6">
-        <div className="w-20 h-20 bg-purple-200 rounded-full mx-auto mb-4 flex items-center justify-center"><User className="text-purple-600" size={32} /></div>
-        <h2 className="text-xl font-bold">{currentUser.displayName || currentUser.username || currentUser.name} {currentUser.studentId ? `#${currentUser.studentId}` : ''}</h2>
-        <div className="text-gray-600 text-sm mt-2">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm text-center mb-6">
+        <div className="w-20 h-20 bg-purple-200 dark:bg-purple-700 rounded-full mx-auto mb-4 flex items-center justify-center"><User className="text-purple-600 dark:text-purple-300" size={32} /></div>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">{currentUser.displayName || currentUser.username || currentUser.name} {currentUser.studentId ? `#${currentUser.studentId}` : ''}</h2>
+        <div className="text-gray-600 dark:text-gray-400 text-sm mt-2">
           <div>{currentUser.university || '—'}</div>
           <div>{currentUser.faculty || '—'}</div>
           <div>{currentUser.year ? `السنة ${currentUser.year}` : ''}</div>
@@ -954,46 +1031,46 @@ export default function StudentApp() {
       </div>
 
       <div className="space-y-3">
-        <button onClick={() => setCurrentScreen('financial')} className="w-full bg-white p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 transition-colors">
-          <ChevronLeft className="text-gray-400" size={20} />
-          <div className="flex items-center gap-3"><DollarSign className="text-green-500" size={20} /><span>المصروفات الدراسية</span></div>
+        <button onClick={() => setCurrentScreen('financial')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
+          <div className="flex items-center gap-3"><DollarSign className="text-green-500" size={20} /><span className="text-gray-900 dark:text-white">المصروفات الدراسية</span></div>
         </button>
-        <button onClick={() => setCurrentScreen('attendance')} className="w-full bg-white p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 transition-colors">
-          <ChevronLeft className="text-gray-400" size={20} />
-          <div className="flex items-center gap-3"><Clock className="text-blue-500" size={20} /><span>سجل الحضور</span></div>
+        <button onClick={() => setCurrentScreen('attendance')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
+          <div className="flex items-center gap-3"><Clock className="text-blue-500" size={20} /><span className="text-gray-900 dark:text-white">سجل الحضور</span></div>
         </button>
-        <button onClick={() => setCurrentScreen('support')} className="w-full bg-white p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 transition-colors">
-          <ChevronLeft className="text-gray-400" size={20} />
-          <div className="flex items-center gap-3"><HelpCircle className="text-orange-500" size={20} /><span>الدعم والمساعدة</span></div>
+        <button onClick={() => setCurrentScreen('support')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
+          <div className="flex items-center gap-3"><HelpCircle className="text-orange-500" size={20} /><span className="text-gray-900 dark:text-white">الدعم والمساعدة</span></div>
         </button>
-        <button className="w-full bg-white p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 transition-colors">
-          <ChevronLeft className="text-gray-400" size={20} />
-          <div className="flex items-center gap-3"><Settings className="text-gray-500" size={20} /><span>الإعدادات</span></div>
+        <button onClick={() => setCurrentScreen('settings')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
+          <div className="flex items-center gap-3"><Settings className="text-gray-500" size={20} /><span className="text-gray-900 dark:text-white">الإعدادات</span></div>
         </button>
       </div>
 
       <SectionCard title="إحصائيات الطالب" className="mt-6">
         <div className="grid grid-cols-2 gap-4">
-          <div className="text-center p-3 bg-blue-50 rounded-lg">
-            <div className="text-2xl font-bold text-blue-600">{currentUser.credits || 24}</div>
-            <div className="text-sm text-blue-700">الساعات المجتازة</div>
+          <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{currentUser.credits || 24}</div>
+            <div className="text-sm text-blue-700 dark:text-blue-300">الساعات المجتازة</div>
           </div>
-          <div className="text-center p-3 bg-green-50 rounded-lg">
-            <div className="text-2xl font-bold text-green-600">{currentUser.projectsCompleted || 15}</div>
-            <div className="text-sm text-green-700">المشاريع المكتملة</div>
+          <div className="text-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+            <div className="text-2xl font-bold text-green-600 dark:text-green-400">{currentUser.projectsCompleted || 15}</div>
+            <div className="text-sm text-green-700 dark:text-green-300">المشاريع المكتملة</div>
           </div>
         </div>
       </SectionCard>
 
       <SectionCard title="الأساتذة في الكلية" className="mt-6">
         <div className="space-y-2">
-          {facultyProfessors.length ? facultyProfessors.map((p, i) => <div key={i} className="p-3 bg-white rounded shadow">{typeof p === 'string' ? p : p.name || p.title}</div>) : <div className="text-sm text-gray-500">لا توجد بيانات للمحاضرين في هذه الكلية</div>}
+          {facultyProfessors.length ? facultyProfessors.map((p, i) => <div key={i} className="p-3 bg-white dark:bg-gray-700 rounded shadow text-gray-900 dark:text-white">{typeof p === 'string' ? p : p.name || p.title}</div>) : <div className="text-sm text-gray-500 dark:text-gray-400">لا توجد بيانات للمحاضرين في هذه الكلية</div>}
         </div>
       </SectionCard>
 
       <SectionCard title="الزملاء" className="mt-4">
         <div className="space-y-2">
-          {facultyStudents.length ? facultyStudents.map((s, i) => <div key={i} className="p-3 bg-white rounded shadow">{s.username || s.name || s.id}</div>) : <div className="text-sm text-gray-500">لا توجد بيانات للزملاء في هذه الكلية</div>}
+          {facultyStudents.length ? facultyStudents.map((s, i) => <div key={i} className="p-3 bg-white dark:bg-gray-700 rounded shadow text-gray-900 dark:text-white">{s.username || s.name || s.id}</div>) : <div className="text-sm text-gray-500 dark:text-gray-400">لا توجد بيانات للزملاء في هذه الكلية</div>}
         </div>
       </SectionCard>
     </PageWrapper>
@@ -1002,24 +1079,24 @@ export default function StudentApp() {
   const AttendanceScreen = () => (
     <PageWrapper>
       <div className="flex items-center gap-3 mb-4">
-        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600" size={24} /></button>
-        <h2 className="text-lg font-semibold text-right">سجل الحضور المفصل</h2>
+        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
+        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">سجل الحضور المفصل</h2>
       </div>
 
       <SectionCard title="إحصائيات عامة">
         <div className="grid grid-cols-3 gap-4 text-center">
-          <div className="p-3 bg-blue-50 rounded-lg"><div className="text-2xl font-bold text-blue-600">{currentUser.attendance ?? '—'}%</div><div className="text-xs text-blue-700">النسبة الكلية</div></div>
-          <div className="p-3 bg-red-50 rounded-lg"><div className="text-2xl font-bold text-red-600">{currentUser.absences ?? 7}</div><div className="text-xs text-red-700">إجمالي الغياب</div></div>
-          <div className="p-3 bg-green-50 rounded-lg"><div className="text-2xl font-bold text-green-600">{currentUser.attended ?? 30}</div><div className="text-xs text-green-700">إجمالي الحضور</div></div>
+          <div className="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg"><div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{currentUser.attendance ?? '—'}%</div><div className="text-xs text-blue-700 dark:text-blue-300">النسبة الكلية</div></div>
+          <div className="p-3 bg-red-50 dark:bg-red-900/30 rounded-lg"><div className="text-2xl font-bold text-red-600 dark:text-red-400">{currentUser.absences ?? 7}</div><div className="text-xs text-red-700 dark:text-red-300">إجمالي الغياب</div></div>
+          <div className="p-3 bg-green-50 dark:bg-green-900/30 rounded-lg"><div className="text-2xl font-bold text-green-600 dark:text-green-400">{currentUser.attended ?? 30}</div><div className="text-xs text-green-700 dark:text-green-300">إجمالي الحضور</div></div>
         </div>
       </SectionCard>
 
       <div className="space-y-4 mt-4">
         {(facultyData.attendanceSummary || [{ name: 'هندسة البرمجيات', pct: 80, abs: 3, pres: 12 }, { name: 'قواعد البيانات', pct: 83, abs: 2, pres: 10 }]).map((c) => (
-          <div key={c.name} className="bg-white p-4 rounded-xl shadow-sm">
-            <div className="flex justify-between items-center mb-3"><span className="text-green-600 font-bold">{c.pct}%</span><span className="font-medium">{c.name}</span></div>
-            <div className="flex justify-between text-sm text-gray-600 mb-2"><span>{c.abs} غياب</span><span>حضور {c.pres}</span></div>
-            <div className="w-full bg-gray-200 rounded-full h-2"><div className="bg-green-500 h-2 rounded-full" style={{ width: `${c.pct}%` }} /></div>
+          <div key={c.name} className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border dark:border-gray-700">
+            <div className="flex justify-between items-center mb-3"><span className="text-green-600 dark:text-green-400 font-bold">{c.pct}%</span><span className="font-medium text-gray-900 dark:text-white">{c.name}</span></div>
+            <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300 mb-2"><span>{c.abs} غياب</span><span>حضور {c.pres}</span></div>
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2"><div className="bg-green-500 dark:bg-green-400 h-2 rounded-full" style={{ width: `${c.pct}%` }} /></div>
           </div>
         ))}
       </div>
@@ -1029,24 +1106,24 @@ export default function StudentApp() {
   const FinancialScreen = () => (
     <PageWrapper>
       <div className="flex items-center gap-3 mb-4">
-        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600" size={24} /></button>
-        <h2 className="text-lg font-semibold text-right">المصروفات الدراسية</h2>
+        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
+        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">المصروفات الدراسية</h2>
       </div>
 
       <SectionCard title="العام الدراسي 2025">
         <div className="space-y-3">
-          <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg"><span className="text-gray-700">الفصل الأول</span><span className="font-medium text-green-600">مدفوع ✔</span></div>
-          <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg"><span className="text-gray-700">الفصل الثاني</span><span className="font-medium text-red-600">غير مدفوع</span></div>
+          <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"><span className="text-gray-700 dark:text-gray-200">الفصل الأول</span><span className="font-medium text-green-600 dark:text-green-400">مدفوع ✔</span></div>
+          <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"><span className="text-gray-700 dark:text-gray-200">الفصل الثاني</span><span className="font-medium text-red-600 dark:text-red-400">غير مدفوع</span></div>
         </div>
       </SectionCard>
 
       <SectionCard title="تفاصيل السداد" className="mt-4">
-        <div className="space-y-2 text-sm text-gray-700">
+        <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
           <div className="flex justify-between"><span>الرسوم الأساسية</span><span>8,000 EGP</span></div>
           <div className="flex justify-between"><span>المعمل</span><span>1,200 EGP</span></div>
           <div className="flex justify-between"><span>خصم تفوق</span><span>- 500 EGP</span></div>
-          <div className="border-t my-2" />
-          <div className="flex justify-between font-semibold"><span>الإجمالي المستحق</span><span>8,700 EGP</span></div>
+          <div className="border-t dark:border-gray-600 my-2" />
+          <div className="flex justify-between font-semibold text-gray-900 dark:text-white"><span>الإجمالي المستحق</span><span>8,700 EGP</span></div>
         </div>
       </SectionCard>
     </PageWrapper>
@@ -1055,25 +1132,129 @@ export default function StudentApp() {
   const SupportScreen = () => (
     <PageWrapper>
       <div className="flex items-center gap-3 mb-4">
-        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600" size={24} /></button>
-        <h2 className="text-lg font-semibold text-right">الدعم والمساعدة</h2>
+        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
+        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">الدعم والمساعدة</h2>
       </div>
 
       <SectionCard>
         <div className="space-y-3 text-right">
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div>
-              <div className="font-medium">مكتب شؤون الطلاب</div>
-              <div className="text-sm text-gray-600">الرد خلال يوم عمل</div>
+              <div className="font-medium text-gray-900 dark:text-white">مكتب شؤون الطلاب</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300">الرد خلال يوم عمل</div>
             </div>
-            <a href="#" className="flex items-center gap-2 text-blue-600"><Phone size={18} />اتصال</a>
+            <a href="#" className="flex items-center gap-2 text-blue-600 dark:text-blue-400"><Phone size={18} />اتصال</a>
           </div>
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div>
-              <div className="font-medium">الدعم الفني للمنصة</div>
-              <div className="text-sm text-gray-600">مشاكل الدخول والمواد</div>
+              <div className="font-medium text-gray-900 dark:text-white">الدعم الفني للمنصة</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300">مشاكل الدخول والمواد</div>
             </div>
-            <a href="#" className="flex items-center gap-2 text-blue-600"><Mail size={18} />إيميل</a>
+            <a href="#" className="flex items-center gap-2 text-blue-600 dark:text-blue-400"><Mail size={18} />إيميل</a>
+          </div>
+        </div>
+      </SectionCard>
+    </PageWrapper>
+  );
+
+  // -------------------- SETTINGS SCREEN --------------------
+  const SettingsScreen = () => (
+    <PageWrapper>
+      <div className="flex items-center gap-3 mb-4">
+        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
+        <h2 className="text-lg font-semibold text-right text-gray-800 dark:text-gray-100">الإعدادات</h2>
+      </div>
+
+      <SectionCard title="المظهر">
+        <div className="space-y-4">
+          {/* Dark Mode Toggle */}
+          <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={toggleDarkMode}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${darkMode ? 'bg-blue-600' : 'bg-gray-300'
+                  }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${darkMode ? '-translate-x-1' : '-translate-x-6'
+                    }`}
+                />
+              </button>
+              <span className="text-sm text-gray-600 dark:text-gray-300">
+                {darkMode ? 'تم تفعيل الوضع المظلم' : 'تم إيقاف الوضع المظلم'}
+              </span>
+            </div>
+          </div>
+
+          {/* Theme Options */}
+          <div className="space-y-3">
+            <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 text-right">خيارات المظهر</h3>
+
+            <div className="grid grid-cols-3 gap-3">
+              <button
+                onClick={() => setDarkMode(false)}
+                className={`p-3 rounded-lg border-2 transition-colors ${!darkMode
+                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900'
+                  : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700'
+                  }`}
+              >
+                <Sun className="mx-auto mb-2 text-yellow-500" size={24} />
+                <div className="text-xs text-center text-gray-700 dark:text-gray-300">فاتح</div>
+              </button>
+
+              <button
+                onClick={() => setDarkMode(true)}
+                className={`p-3 rounded-lg border-2 transition-colors ${darkMode
+                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900'
+                  : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700'
+                  }`}
+              >
+                <Moon className="mx-auto mb-2 text-blue-500" size={24} />
+                <div className="text-xs text-center text-gray-700 dark:text-gray-300">مظلم</div>
+              </button>
+
+              <button
+                onClick={() => {
+                  const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  setDarkMode(systemDark);
+                }}
+                className="p-3 rounded-lg border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 transition-colors"
+              >
+                <Monitor className="mx-auto mb-2 text-gray-500" size={24} />
+                <div className="text-xs text-center text-gray-700 dark:text-gray-300">النظام</div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </SectionCard>
+
+      <SectionCard title="إعدادات عامة" className="mt-4">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-right">
+              <div className="font-medium text-gray-800 dark:text-gray-100">اللغة</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">العربية</div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-right">
+              <div className="font-medium text-gray-800 dark:text-gray-100">الإشعارات</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">مفعلة</div>
+            </div>
+          </div>
+        </div>
+      </SectionCard>
+
+      <SectionCard title="معلومات التطبيق" className="mt-4">
+        <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400 text-right">
+          <div className="flex justify-between">
+            <span>الإصدار 1.0.0</span>
+            <span>إصدار التطبيق</span>
+          </div>
+          <div className="flex justify-between">
+            <span>2025</span>
+            <span>حقوق النشر</span>
           </div>
         </div>
       </SectionCard>
@@ -1085,6 +1266,7 @@ export default function StudentApp() {
     if (currentScreen === 'financial') return <FinancialScreen />;
     if (currentScreen === 'attendance') return <AttendanceScreen />;
     if (currentScreen === 'support') return <SupportScreen />;
+    if (currentScreen === 'settings') return <SettingsScreen />;
 
     switch (activeTab) {
       case 'home': return <DashboardScreen />;
@@ -1103,12 +1285,12 @@ export default function StudentApp() {
   );
 
   return (
-    <div className="relative min-h-screen bg-gray-50">
+    <div className="relative min-h-screen bg-gray-50 dark:bg-gray-900">
       {renderMain()}
 
       {/* Bottom Nav */}
       {currentScreen === 'main' && !openChat && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around py-2 shadow-sm">
+        <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t dark:border-gray-700 flex justify-around py-2 shadow-sm">
           <TabButton id="calendar" icon={Calendar} />
           <TabButton id="assignments" icon={FileText} />
           <TabButton id="home" icon={Home} />
