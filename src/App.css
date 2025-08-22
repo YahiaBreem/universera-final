@@ -1,38 +1,156 @@
-.App {
-  text-align: center;
+/* src/App.css */
+
+/* Fix for mobile viewport issues */
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* Fix scrolling issues */
+.app-container {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 100dvh;
+  /* Dynamic viewport height for mobile */
+  overflow-x: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+/* Ensure proper scrolling on mobile */
+.scrollable-content {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  height: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Hide scrollbars but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Fix for bottom navigation spacing */
+.content-with-bottom-nav {
+  padding-bottom: 5rem;
+  /* Space for bottom navigation */
+  min-height: calc(100vh - 5rem);
+  min-height: calc(100dvh - 5rem);
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 640px) {
+
+  /* Ensure content doesn't get cut off */
+  .mobile-safe-area {
+    padding-bottom: env(safe-area-inset-bottom, 1rem);
   }
-  to {
-    transform: rotate(360deg);
+
+  /* Fix for small screens */
+  .page-wrapper {
+    min-height: calc(100vh - 80px);
+    min-height: calc(100dvh - 80px);
+    padding-bottom: 6rem;
+  }
+
+  /* Ensure buttons are touchable on mobile */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Fix input fields on mobile */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+    /* Prevents zoom on iOS */
+  }
+}
+
+/* ✅ RTL & LTR support (fixed properly) */
+[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="ltr"] body {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Language-specific font optimizations */
+html[lang="ar"] {
+  font-family: 'Cairo', 'Amiri', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
+}
+
+html[lang="en"] {
+  font-family: 'Inter', 'Roboto', system-ui, -apple-system, sans-serif;
+}
+
+/* Fix for modals and dropdowns */
+.fixed {
+  position: fixed !important;
+}
+
+/* Prevent horizontal scroll */
+.no-horizontal-scroll {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Language selector improvements */
+.language-dropdown {
+  z-index: 9999;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Bottom navigation improvements */
+.bottom-nav {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark .bottom-nav {
+  background: rgba(31, 41, 55, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Loading states */
+.loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Smooth transitions */
+* {
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Fix for touch targets */
+@media (pointer: coarse) {
+
+  button,
+  a,
+  [role="button"] {
+    min-height: 48px;
+    min-width: 48px;
   }
 }

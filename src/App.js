@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Home,
   Calendar,
@@ -9,6 +9,7 @@ import {
   Download,
   Search,
   ChevronLeft,
+  ChevronDown,
   Clock,
   CheckCircle,
   AlertCircle,
@@ -24,19 +25,44 @@ import {
   Sun,
   Monitor
 } from 'lucide-react';
-
-// IMPORTANT: your data files should be placed in src/data/
-// Example imports (change if your filenames differ):
-// - If your file is src/data/courses.js -> default export an object or array
+import './App.css';
 import { courses as coursesRaw } from "./data/courses";
 import banner from './banner.svg';
+import arflag from './flags/ar.svg';
+import enflag from './flags/en.svg';
+import frflag from './flags/fr.svg';
+import chflag from './flags/ch.svg';
+import grflag from './flags/gr.svg';
 
-
-// Single-file, production-ready mobile-style app (no phone frame)
+import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 // TailwindCSS + lucide-react
 
 export default function StudentApp() {
+
+  return (
+    <LanguageProvider>
+      <StudentAppContent />
+    </LanguageProvider>
+  );
+}
+
+function StudentAppContent() {
+
+  const { language } = useLanguage();
+
+  useEffect(() => {
+    const html = document.documentElement;
+    if (["ar", "he", "fa", "ur"].includes(language)) {
+      html.setAttribute("dir", "rtl");
+      html.setAttribute("lang", language);
+    } else {
+      html.setAttribute("dir", "ltr");
+      html.setAttribute("lang", language);
+    }
+  }, [language]);
+
   // ---------- auth & core state ----------
+  const { t } = useLanguage();
   const [currentUser, setCurrentUser] = useState(null);
   const [showDisclaimer, setShowDisclaimer] = useState(true);
   const [activeTab, setActiveTab] = useState('home');
@@ -119,7 +145,7 @@ export default function StudentApp() {
         title: `واجب ${courseName}`,
         subject: courseName,
         dueDate: '20-08-2025',
-        status: 'لم يتم التسليم',
+        status: t("notsubmitted"),
         grade: null,
         file: course ? course.file : null,
       };
@@ -162,6 +188,17 @@ export default function StudentApp() {
 
   // -------------------- DISCLAIMER SCREEN --------------------
   const DisclaimerScreen = () => {
+    const [dropdownOpen, setDropdownOpen] = useState(false); // ✅ Added state
+    const { t, language, changeLanguage } = useLanguage(); // ✅ Language hook
+
+    const languages = [
+      { code: 'en', label: 'English', flag: enflag },
+      { code: 'ar', label: 'العربية', flag: arflag },
+      { code: 'fr', label: 'Français', flag: frflag },
+      { code: 'ch', label: '中国人', flag: chflag },
+      { code: 'gr', label: 'Deutsch', flag: grflag }
+    ];
+
     const handleAccept = () => {
       setShowDisclaimer(false);
     };
@@ -169,12 +206,44 @@ export default function StudentApp() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl">
-          {/* Dark mode toggle button */}
-          <div className="flex justify-end mb-4">
+
+          {/* Top bar with Language Dropdown + Dark mode */}
+          <div className="flex justify-between items-center mb-4">
+            {/* Custom Dropdown with Twemoji flags */}
+            <div className="relative">
+              <button
+                className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg focus:outline-none"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                <img src={languages.find(l => l.code === language)?.flag} alt="" className="w-5 h-5" />
+                <span className="text-sm text-gray-800 dark:text-gray-200">
+                  {languages.find(l => l.code === language)?.label}
+                </span>
+              </button>
+              {dropdownOpen && (
+                <div className="absolute mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 w-40 z-50">
+                  {languages.map(lang => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        changeLanguage(lang.code);
+                        setDropdownOpen(false);
+                      }}
+                      className="flex items-center gap-2 px-3 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      <img src={lang.flag} alt="" className="w-5 h-5" />
+                      <span className="text-sm text-gray-800 dark:text-gray-200">{lang.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Dark Mode Button */}
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-              title="تبديل المظهر"
+              title={t('appearance')}
             >
               {darkMode ? (
                 <Sun className="w-5 h-5 text-yellow-500" />
@@ -196,25 +265,26 @@ export default function StudentApp() {
           {/* Disclaimer content */}
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4" dir="rtl">
-              إخلاء المسؤولية
+              {t("disclaimerheader")}
             </h1>
             <div className="text-sm text-gray-600 dark:text-gray-300 text-right leading-relaxed space-y-4" dir="rtl">
               <p>
-                هذا التطبيق مجرد مفهوم تجريبي و ليس تطبيقاً رسمياً ولا يرتبط بأي جهة حكومية رسمية، خاصة وزارة التعليم العالي و البحث العلمي. فهو مجرد مفهوم و تصوير لفكرة.
+                {t("disclaimertext1")}
               </p>
               <p>
-                الجامعات الواردة هنا تم جمعها من نموذج Google Forms {' '}
+                {t("disclaimertext2")}
                 <a
                   href="https://forms.gle/32pKMeAUP5KpSnSr9"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 dark:text-blue-400 underline hover:text-blue-600 dark:hover:text-blue-300"
                 >
-                  https://forms.gle/32pKMeAUP5KpSnSr9
+                  {t("gform")}
                 </a>
               </p>
               <p>
-                جميع الأسماء او المقررات الواردة هنا غير حقيقية ولا تشير إلى الواقع على الإطلاق. أي تشابه هو مصادفة بحتة و غير مقصودة.              </p>
+                {t("disclaimertext3")}
+              </p>
             </div>
           </div>
 
@@ -222,27 +292,36 @@ export default function StudentApp() {
             onClick={handleAccept}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-medium transition-colors"
           >
-            فهمت، المتابعة
+            {t('disclaimerconfirm')}
           </button>
         </div>
       </div>
     );
   };
 
+
   // -------------------- AUTH / LOGIN SCREEN --------------------
   const LoginScreen = () => {
-    const [step, setStep] = useState(1); // 1: name, 2: university, 3: faculty
+    const [step, setStep] = useState(1);
     const [name, setName] = useState('');
     const [selectedUniversity, setSelectedUniversity] = useState('');
     const [selectedFaculty, setSelectedFaculty] = useState('');
     const [error, setError] = useState('');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const { t, language, changeLanguage } = useLanguage(); // ✅ Added for language control
 
-    // Get available universities from courses data
+    const languages = [
+      { code: 'en', label: 'English', flag: enflag },
+      { code: 'ar', label: 'العربية', flag: arflag },
+      { code: 'fr', label: 'Français', flag: frflag },
+      { code: 'ch', label: '中国人', flag: chflag },
+      { code: 'gr', label: 'Deutsch', flag: grflag }
+    ];
+
     const universities = React.useMemo(() => {
       return [...new Set(courses.map(course => course.university))].filter(Boolean);
     }, [courses]);
 
-    // Get available faculties for selected university
     const faculties = React.useMemo(() => {
       if (!selectedUniversity) return [];
       const uni = courses.find(u => u.university === selectedUniversity);
@@ -251,7 +330,7 @@ export default function StudentApp() {
 
     const handleNameNext = () => {
       if (!name.trim()) {
-        setError('يرجى إدخال الاسم');
+        setError(t('namereqwarn'));
         return;
       }
       setError('');
@@ -260,7 +339,7 @@ export default function StudentApp() {
 
     const handleUniversityNext = () => {
       if (!selectedUniversity) {
-        setError('يرجى اختيار الجامعة');
+        setError(t('collegeselectwarn'));
         return;
       }
       setError('');
@@ -269,7 +348,7 @@ export default function StudentApp() {
 
     const handleLogin = () => {
       if (!selectedFaculty) {
-        setError('يرجى اختيار الكلية');
+        setError(t('facultywarn'));
         return;
       }
 
@@ -280,16 +359,15 @@ export default function StudentApp() {
         name: name.trim(),
         university: selectedUniversity,
         faculty: selectedFaculty,
-        year: 'السنة الثالثة', // Default year
-        enrolledCourses: [], // Will be populated from faculty data
+        year: t('year'),
+        enrolledCourses: [],
         ...generateRandomStats()
       };
 
-      // Add enrolled courses from faculty data
       const uni = courses.find(u => u.university === selectedUniversity);
       const faculty = uni?.faculties?.find(f => f.name === selectedFaculty || f.faculty === selectedFaculty);
       if (faculty && faculty.courses) {
-        userData.enrolledCourses = faculty.courses.map(c => c.subtitle).slice(0, 5); // Take first 5 courses
+        userData.enrolledCourses = faculty.courses.map(c => c.subtitle).slice(0, 5);
       }
 
       setCurrentUser(userData);
@@ -298,12 +376,44 @@ export default function StudentApp() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl">
-          {/* Dark mode toggle button */}
-          <div className="flex justify-end mb-4">
+
+          {/* Top bar with Language Dropdown + Dark mode */}
+          <div className="flex justify-between items-center mb-4">
+            {/* Custom Dropdown with local flags */}
+            <div className="relative">
+              <button
+                className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg focus:outline-none"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                <img src={languages.find(l => l.code === language)?.flag} alt="" className="w-5 h-5" />
+                <span className="text-sm text-gray-800 dark:text-gray-200">
+                  {languages.find(l => l.code === language)?.label}
+                </span>
+              </button>
+              {dropdownOpen && (
+                <div className="absolute mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 w-40 z-50">
+                  {languages.map(lang => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        changeLanguage(lang.code);
+                        setDropdownOpen(false);
+                      }}
+                      className="flex items-center gap-2 px-3 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      <img src={lang.flag} alt="" className="w-5 h-5" />
+                      <span className="text-sm text-gray-800 dark:text-gray-200">{lang.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Dark Mode Button */}
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-              title="تبديل المظهر"
+              title={t('appearance')}
             >
               {darkMode ? (
                 <Sun className="w-5 h-5 text-yellow-500" />
@@ -338,17 +448,16 @@ export default function StudentApp() {
           {step === 1 && (
             <>
               <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
-                مرحباً بك
-              </h1>
+                {t("welcomelogin")}              </h1>
               <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
-                ما اسمك؟
+                {t("namereq")}
               </p>
               <input
                 type="text"
                 value={name}
                 onChange={e => setName(e.target.value)}
                 className="w-full border border-gray-200 dark:border-gray-600 px-4 py-3 rounded-xl mb-6 text-right bg-gray-50 dark:bg-gray-700 dark:text-white focus:bg-white dark:focus:bg-gray-600 focus:border-blue-500 focus:outline-none transition-colors"
-                placeholder="اكتب اسمك الكامل"
+                placeholder={t('namereqwarn')}
                 dir="rtl"
                 autoFocus
               />
@@ -356,7 +465,7 @@ export default function StudentApp() {
                 onClick={handleNameNext}
                 className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-medium transition-colors"
               >
-                التالي
+                {t('next')}
               </button>
             </>
           )}
@@ -364,10 +473,10 @@ export default function StudentApp() {
           {step === 2 && (
             <>
               <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
-                اختر جامعتك
+                {t("facultyselect")}
               </h1>
               <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
-                مرحباً {name}، اختر الجامعة التي تدرس بها
+                {t("welcome")} {name}، {t("collegeselectplaceholder")}
               </p>
               <div className="space-y-3 mb-6 max-h-64 overflow-y-auto">
                 {universities.map((uni) => (
@@ -389,13 +498,13 @@ export default function StudentApp() {
                   onClick={() => setStep(1)}
                   className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-xl font-medium transition-colors"
                 >
-                  رجوع
+                  {t("back")}
                 </button>
                 <button
                   onClick={handleUniversityNext}
                   className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-medium transition-colors"
                 >
-                  التالي
+                  {t("next")}
                 </button>
               </div>
             </>
@@ -404,10 +513,10 @@ export default function StudentApp() {
           {step === 3 && (
             <>
               <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
-                اختر كليتك
+                {t("facultyselect")}
               </h1>
               <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
-                اختر الكلية في {selectedUniversity}
+                {t("facultyselectplaceholder")}   {selectedUniversity}
               </p>
               <div className="space-y-3 mb-6 max-h-64 overflow-y-auto">
                 {faculties.map((faculty) => (
@@ -429,13 +538,13 @@ export default function StudentApp() {
                   onClick={() => setStep(2)}
                   className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-xl font-medium transition-colors"
                 >
-                  رجوع
+                  {t("back")}
                 </button>
                 <button
                   onClick={handleLogin}
                   className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-medium transition-colors"
                 >
-                  دخول
+                  {t("enter")}
                 </button>
               </div>
             </>
@@ -496,7 +605,7 @@ export default function StudentApp() {
     <div className="px-4 pb-2">
       <div className="flex items-center justify-between">
         <div className="text-right">
-          <div className="font-bold text-lg text-gray-900 dark:text-white"> مرحباََ {currentUser && (currentUser.firstName)} 👋</div>
+          <div className="font-bold text-lg text-gray-900 dark:text-white"> {t("welcome")} {currentUser && (currentUser.firstName)} 👋</div>
           <div className="text-sm text-gray-600 dark:text-gray-400"> {currentUser.university || '—'}</div>
           <div className="text-sm text-gray-600 dark:text-gray-400"> {currentUser.faculty || '—'}</div>
         </div>
@@ -506,7 +615,7 @@ export default function StudentApp() {
             <Bell size={18} />
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full" />
           </button>
-          <button onClick={() => { setCurrentUser(null); }} title="Logout" className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm text-sm text-gray-900 dark:text-white">خروج</button>
+          <button onClick={() => { setCurrentUser(null); }} title="Logout" className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm text-sm text-gray-900 dark:text-white">{t("exit")}</button>
         </div>
       </div>
     </div>
@@ -518,17 +627,14 @@ export default function StudentApp() {
       <Header />
 
       <div className="grid grid-cols-2 gap-4 mb-4">
-        <StatPill color="green" label="نسبة الحضور" value={`${currentUser.attendance ?? '—'}%`} />
-        <StatPill color="blue" label="المعدل التراكمي" value={`${currentUser.gpa ?? '—'}`} />
+        <StatPill color="green" label={t('attendance')} value={`${currentUser.attendance ?? '—'}%`} />
+        <StatPill color="blue" label={t('gpa')} value={`${currentUser.gpa ?? '—'}`} />
       </div>
 
-      <SectionCard title="جدول اليوم">
+      <SectionCard title={t('todaySchedule')}>
         <div className="space-y-3">
           {/* try to show today's schedule from facultyData or fallback */}
-          {(facultyData.schedule || [
-            { name: 'هندسة البرمجيات', place: 'قاعة 101', time: '9:00 AM', type: 'محاضرة' },
-            { name: 'قواعد البيانات', place: 'معمل 205', time: '11:00 AM', type: 'عملي' },
-          ]).map((s, idx) => (
+          {(facultyData.schedule).map((s, idx) => (
             <div key={idx} className={`flex items-center justify-between p-3 ${idx === 0 ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-gray-50 dark:bg-gray-700'} rounded-lg`}>
               <div className="text-right">
                 <div className="font-medium text-gray-900 dark:text-white">{s.name}</div>
@@ -545,17 +651,17 @@ export default function StudentApp() {
           onClick={() => setActiveTab('calendar')}
           className="text-blue-500 dark:text-blue-400 text-sm mt-3 text-center w-full hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
         >
-          عرض الجدول كاملاً
+          {t("showfullschedule")}
         </button>
       </SectionCard>
 
-      <SectionCard title="التكليفات الحالية" className="mt-4">
+      <SectionCard title={t('currentAssignments')} className="mt-4">
         <div className="space-y-3">
           {assignments.slice(0, 2).map(assignment => (
             <div key={assignment.id} className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
               <div className="flex justify-between items-start mb-1">
-                <div className={`text-xs px-2 py-1 rounded ${assignment.status === 'لم يتم التسليم' ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400' :
-                  assignment.status === 'تم التسليم' ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' :
+                <div className={`text-xs px-2 py-1 rounded ${assignment.status === t("notsubmitted") ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400' :
+                  assignment.status === t("submitted") ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' :
                     'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400'
                   }`}>
                   {assignment.grade || assignment.status}
@@ -565,7 +671,7 @@ export default function StudentApp() {
                   <div className="text-xs text-gray-600 dark:text-gray-400">{assignment.subject}</div>
                 </div>
               </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">موعد التسليم: {assignment.dueDate}</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400"> - {t("deadline")} {assignment.dueDate}</div>
             </div>
           ))}
         </div>
@@ -573,11 +679,11 @@ export default function StudentApp() {
           onClick={() => setActiveTab('assignments')}
           className="text-blue-500 dark:text-blue-400 text-sm mt-3 text-center w-full hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
         >
-          عرض جميع التكليفات
+          {t("showallassign")}
         </button>
       </SectionCard>
 
-      <SectionCard title="إعلانات حديثة" className="mt-4">
+      <SectionCard title={t('recentannouncements')} className="mt-4">
         <div className="space-y-3">
           <div className="flex gap-3 p-3 bg-red-50 dark:bg-red-900/30 rounded-lg border-r-4 border-red-400 dark:border-red-500">
             <AlertCircle className="text-red-500 dark:text-red-400 mt-1" size={20} />
@@ -623,7 +729,7 @@ export default function StudentApp() {
   // -------------------- SCHEDULE --------------------
   const ScheduleScreen = () => (
     <PageWrapper>
-      <h2 className="text-lg font-semibold mb-4 text-right">الجدول الدراسي</h2>
+      <h2 className="text-lg font-semibold mb-4 text-right">{t("studyschedule")}</h2>
       <SectionCard>
         <div className="space-y-3">
           {facultyCourses.length
@@ -631,7 +737,7 @@ export default function StudentApp() {
               <div key={idx} className="flex items-center justify-between p-3 border rounded-lg">
                 <div className="flex items-center gap-2">
                   <FileText size={16} className="text-blue-500" />
-                  <span className="text-blue-500 text-sm">{s.title || 'محاضرة'}</span>
+                  <span className="text-blue-500 text-sm">{t(s.title) || t("lecture")} </span>
                 </div>
                 <div className="text-right flex-1 mx-4">
                   <div className="font-medium">{s.subtitle}</div>
@@ -653,17 +759,17 @@ export default function StudentApp() {
       const file = e.target.files?.[0];
       if (file) {
         setSelectedFile(file.name);
-        setAssignments(prev => prev.map(a => a.id === assignmentId ? { ...a, status: 'تم التسليم' } : a));
+        setAssignments(prev => prev.map(a => a.id === assignmentId ? { ...a, status: t("submitted") } : a));
       }
     };
 
     // Update filter options to include all types
     const fileTypes = ['all', 'lecture', 'exercise', 'project'];
     const fileTypeLabels = {
-      all: 'الكل',
-      lecture: 'محاضرات',
-      exercise: 'تمارين',
-      project: 'مشاريع'
+      all: t("all"),
+      lecture: t("lecture"),
+      exercise: t("exercises"),
+      project: t("projects")
     };
 
     // Build files from faculty courses
@@ -672,28 +778,28 @@ export default function StudentApp() {
 
     return (
       <PageWrapper>
-        <h2 className="text-lg font-semibold mb-4 text-right text-gray-900 dark:text-white">التكليفات الحالية</h2>
+        <h2 className="text-lg font-semibold mb-4 text-right text-gray-900 dark:text-white">{t("currentAssignments")}</h2>
 
         <div className="space-y-3">
           {assignments.map(assignment => (
             <div key={assignment.id} className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
               <div className="flex justify-between items-start mb-2">
-                <div className={`text-sm px-2 py-1 rounded ${assignment.status === 'لم يتم التسليم' ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400' :
-                  assignment.status === 'تم التسليم' ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' :
+                <div className={`text-sm px-2 py-1 rounded ${assignment.status === t("notsubmitted") ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400' :
+                  assignment.status === t("submitted") ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' :
                     'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400'
                   }`}>
                   {assignment.grade || assignment.status}
                 </div>
                 <div className="text-right">
                   <div className="font-medium text-gray-900 dark:text-white">{assignment.title}</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">{assignment.subject} - موعد التسليم: {assignment.dueDate}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">{assignment.subject} - {t("deadline")} {assignment.dueDate}</div>
                 </div>
               </div>
 
-              {assignment.status === 'لم يتم التسليم' && (
+              {assignment.status === t("notsubmitted") && (
                 <label className="flex items-center gap-2 cursor-pointer text-blue-600 dark:text-blue-400 text-sm mt-2">
                   <Upload size={16} />
-                  <span>رفع ملف</span>
+                  <span>{t("uploadfile")}</span>
                   <input type="file" className="hidden" onChange={(e) => handleFileChange(e, assignment.id)} />
                 </label>
               )}
@@ -716,7 +822,7 @@ export default function StudentApp() {
                 className="flex items-center gap-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-1 rounded text-sm shadow-sm"
               >
                 <Filter size={16} />
-                <span className="text-xs">تصفية</span>
+                <span className="text-xs">{t("filter")}</span>
               </button>
 
               {showFileFilterMenu && (
@@ -734,7 +840,7 @@ export default function StudentApp() {
               )}
             </div>
 
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">المحاضرات والملفات</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t("lecturesandfiles")}</h2>
           </div>
 
           <div className="space-y-3">
@@ -760,7 +866,7 @@ export default function StudentApp() {
   // -------------------- CHAT / MESSAGES --------------------
   const ChatScreen = ({ chat, onBack }) => {
     const [messages, setMessages] = useState([
-      { id: 1, text: 'مرحباً! كيف يمكنني مساعدتك؟', sender: 'other', timestamp: '12:30' },
+      { id: 1, text: t("msg"), sender: 'other', timestamp: '12:30' },
     ]);
     const [input, setInput] = useState('');
     const [showChatDetails, setShowChatDetails] = useState(false);
@@ -816,7 +922,7 @@ export default function StudentApp() {
             {/* Photos Section */}
             <div className="p-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm text-gray-600 dark:text-gray-400">صور</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{t("pics")}</span>
               </div>
               <div className="grid grid-cols-4 gap-2">
                 {mockPhotos.map((photo) => (
@@ -932,7 +1038,7 @@ export default function StudentApp() {
         // Admin chat
         {
           id: 'admin-1',
-          name: 'شئون الطلاب',
+          name: t("studentaffairs"),
           message: 'إرشادات التسجيل متاحة',
           time: '10:10AM',
           type: 'admin'
@@ -1048,9 +1154,9 @@ export default function StudentApp() {
             onClick={() => setShowSearch(true)}
             className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm"
           >
-            محادثة جديدة +
+            {t("newchat")} +
           </button>
-          <h2 className="text-lg font-semibold">المحادثات</h2>
+          <h2 className="text-lg font-semibold">{t('messages')}</h2>
         </div>
 
         {showSearch ? (
@@ -1158,19 +1264,19 @@ export default function StudentApp() {
             <div className="flex bg-gray-200 dark:bg-gray-700 p-1 rounded-lg mb-4 text-sm">
               <button onClick={() => setActiveFilter('all')}
                 className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'all' ? 'bg-white dark:bg-gray-800 text-gray-700 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>
-                الكل ({activeChats.length})
+                {t("all")} ({activeChats.length})
               </button>
               <button onClick={() => setActiveFilter('students')}
                 className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'students' ? 'bg-white dark:bg-gray-800 text-gray-700 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>
-                الطلاب ({activeChats.filter(c => c.type === 'students').length})
+                {t("students")} ({activeChats.filter(c => c.type === 'students').length})
               </button>
               <button onClick={() => setActiveFilter('faculty')}
                 className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'faculty' ? 'bg-white dark:bg-gray-800 text-gray-700 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>
-                هيئة التدريس ({activeChats.filter(c => c.type === 'faculty').length})
+                {t("faculty")} ({activeChats.filter(c => c.type === 'faculty').length})
               </button>
               <button onClick={() => setActiveFilter('admin')}
                 className={`flex-1 py-2 text-center rounded-md ${activeFilter === 'admin' ? 'bg-white dark:bg-gray-800 text-gray-700 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>
-                الإدارة ({adminChatsCount})
+                {t("administration")} ({adminChatsCount})
               </button>
             </div>
 
@@ -1219,42 +1325,42 @@ export default function StudentApp() {
       <div className="space-y-3">
         <button onClick={() => setCurrentScreen('financial')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
-          <div className="flex items-center gap-3"><DollarSign className="text-green-500" size={20} /><span className="text-gray-900 dark:text-white">المصروفات الدراسية</span></div>
+          <div className="flex items-center gap-3"><DollarSign className="text-green-500" size={20} /><span className="text-gray-900 dark:text-white">{t('academicexpenses')}</span></div>
         </button>
         <button onClick={() => setCurrentScreen('attendance')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
-          <div className="flex items-center gap-3"><Clock className="text-blue-500" size={20} /><span className="text-gray-900 dark:text-white">سجل الحضور</span></div>
+          <div className="flex items-center gap-3"><Clock className="text-blue-500" size={20} /><span className="text-gray-900 dark:text-white">{t('attendancerecord')}</span></div>
         </button>
         <button onClick={() => setCurrentScreen('support')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
-          <div className="flex items-center gap-3"><HelpCircle className="text-orange-500" size={20} /><span className="text-gray-900 dark:text-white">الدعم والمساعدة</span></div>
+          <div className="flex items-center gap-3"><HelpCircle className="text-orange-500" size={20} /><span className="text-gray-900 dark:text-white">{t('supporthelp')}</span></div>
         </button>
         <button onClick={() => setCurrentScreen('settings')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
           <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
-          <div className="flex items-center gap-3"><Settings className="text-gray-500" size={20} /><span className="text-gray-900 dark:text-white">الإعدادات</span></div>
+          <div className="flex items-center gap-3"><Settings className="text-gray-500" size={20} /><span className="text-gray-900 dark:text-white">{t('settings')}</span></div>
         </button>
       </div>
 
-      <SectionCard title="إحصائيات الطالب" className="mt-6">
+      <SectionCard title={t('studentstats')} className="mt-6">
         <div className="grid grid-cols-2 gap-4">
           <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
             <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{currentUser.credits || 24}</div>
-            <div className="text-sm text-blue-700 dark:text-blue-300">الساعات المجتازة</div>
+            <div className="text-sm text-blue-700 dark:text-blue-300">{t('completedcredits')}</div>
           </div>
           <div className="text-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
             <div className="text-2xl font-bold text-green-600 dark:text-green-400">{currentUser.projectsCompleted || 15}</div>
-            <div className="text-sm text-green-700 dark:text-green-300">المشاريع المكتملة</div>
+            <div className="text-sm text-green-700 dark:text-green-300">{t('completedprojects')}</div>
           </div>
         </div>
       </SectionCard>
 
-      <SectionCard title="الأساتذة في الكلية" className="mt-6">
+      <SectionCard title={t('facultyprofessors')} className="mt-6">
         <div className="space-y-2">
           {facultyProfessors.length ? facultyProfessors.map((p, i) => <div key={i} className="p-3 bg-white dark:bg-gray-700 rounded shadow text-gray-900 dark:text-white">{typeof p === 'string' ? p : p.name || p.title}</div>) : <div className="text-sm text-gray-500 dark:text-gray-400">لا توجد بيانات للمحاضرين في هذه الكلية</div>}
         </div>
       </SectionCard>
 
-      <SectionCard title="الزملاء" className="mt-4">
+      <SectionCard title={t('colleagues')} className="mt-4">
         <div className="space-y-2">
           {facultyStudents.length ? facultyStudents.map((s, i) => <div key={i} className="p-3 bg-white dark:bg-gray-700 rounded shadow text-gray-900 dark:text-white">{s.username || s.name || s.id}</div>) : <div className="text-sm text-gray-500 dark:text-gray-400">لا توجد بيانات للزملاء في هذه الكلية</div>}
         </div>
@@ -1266,14 +1372,14 @@ export default function StudentApp() {
     <PageWrapper>
       <div className="flex items-center gap-3 mb-4">
         <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
-        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">سجل الحضور المفصل</h2>
+        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">{t("detailedattendancerecord")}</h2>
       </div>
 
-      <SectionCard title="إحصائيات عامة">
+      <SectionCard title={t("generalstatistics")}>
         <div className="grid grid-cols-3 gap-4 text-center">
-          <div className="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg"><div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{currentUser.attendance ?? '—'}%</div><div className="text-xs text-blue-700 dark:text-blue-300">النسبة الكلية</div></div>
-          <div className="p-3 bg-red-50 dark:bg-red-900/30 rounded-lg"><div className="text-2xl font-bold text-red-600 dark:text-red-400">{currentUser.absences ?? 7}</div><div className="text-xs text-red-700 dark:text-red-300">إجمالي الغياب</div></div>
-          <div className="p-3 bg-green-50 dark:bg-green-900/30 rounded-lg"><div className="text-2xl font-bold text-green-600 dark:text-green-400">{currentUser.attended ?? 30}</div><div className="text-xs text-green-700 dark:text-green-300">إجمالي الحضور</div></div>
+          <div className="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg"><div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{currentUser.attendance ?? '—'}%</div><div className="text-xs text-blue-700 dark:text-blue-300">{t("totalpercentage")}</div></div>
+          <div className="p-3 bg-red-50 dark:bg-red-900/30 rounded-lg"><div className="text-2xl font-bold text-red-600 dark:text-red-400">{currentUser.absences ?? 7}</div><div className="text-xs text-red-700 dark:text-red-300">{t("totalabsence")}</div></div>
+          <div className="p-3 bg-green-50 dark:bg-green-900/30 rounded-lg"><div className="text-2xl font-bold text-green-600 dark:text-green-400">{currentUser.attended ?? 30}</div><div className="text-xs text-green-700 dark:text-green-300">{t("totalattendance")}</div></div>
         </div>
       </SectionCard>
 
@@ -1281,7 +1387,7 @@ export default function StudentApp() {
         {(facultyData.attendanceSummary || [{ name: 'هندسة البرمجيات', pct: 80, abs: 3, pres: 12 }, { name: 'قواعد البيانات', pct: 83, abs: 2, pres: 10 }]).map((c) => (
           <div key={c.name} className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border dark:border-gray-700">
             <div className="flex justify-between items-center mb-3"><span className="text-green-600 dark:text-green-400 font-bold">{c.pct}%</span><span className="font-medium text-gray-900 dark:text-white">{c.name}</span></div>
-            <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300 mb-2"><span>{c.abs} غياب</span><span>حضور {c.pres}</span></div>
+            <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300 mb-2"><span>{c.abs} {t("absence")}</span><span>{t("attendance")}{c.pres}</span></div>
             <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2"><div className="bg-green-500 dark:bg-green-400 h-2 rounded-full" style={{ width: `${c.pct}%` }} /></div>
           </div>
         ))}
@@ -1293,23 +1399,23 @@ export default function StudentApp() {
     <PageWrapper>
       <div className="flex items-center gap-3 mb-4">
         <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
-        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">المصروفات الدراسية</h2>
+        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">{t('academicexpenses')}</h2>
       </div>
 
-      <SectionCard title="العام الدراسي 2025">
+      <SectionCard title={t("academicyear2025")}>
         <div className="space-y-3">
-          <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"><span className="text-gray-700 dark:text-gray-200">الفصل الأول</span><span className="font-medium text-green-600 dark:text-green-400">مدفوع ✔</span></div>
-          <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"><span className="text-gray-700 dark:text-gray-200">الفصل الثاني</span><span className="font-medium text-red-600 dark:text-red-400">غير مدفوع</span></div>
+          <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"><span className="text-gray-700 dark:text-gray-200">{t("semesterone")}</span><span className="font-medium text-green-600 dark:text-green-400">{t("paid")} ✓</span></div>
+          <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"><span className="text-gray-700 dark:text-gray-200">{t("semestertwo")}</span><span className="font-medium text-red-600 dark:text-red-400">{t("unpaid")}</span></div>
         </div>
       </SectionCard>
 
-      <SectionCard title="تفاصيل السداد" className="mt-4">
+      <SectionCard title={t("paymentdetails")} className="mt-4">
         <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <div className="flex justify-between"><span>الرسوم الأساسية</span><span>8,000 EGP</span></div>
-          <div className="flex justify-between"><span>المعمل</span><span>1,200 EGP</span></div>
-          <div className="flex justify-between"><span>خصم تفوق</span><span>- 500 EGP</span></div>
+          <div className="flex justify-between"><span>{t("basefees")}</span><span>8,000 EGP</span></div>
+          <div className="flex justify-between"><span>{t("lab")}</span><span>1,200 EGP</span></div>
+          <div className="flex justify-between"><span>{t("excellencediscount")}</span><span>- 500 EGP</span></div>
           <div className="border-t dark:border-gray-600 my-2" />
-          <div className="flex justify-between font-semibold text-gray-900 dark:text-white"><span>الإجمالي المستحق</span><span>8,700 EGP</span></div>
+          <div className="flex justify-between font-semibold text-gray-900 dark:text-white"><span>{t("totaldue")}</span><span>8,700 EGP</span></div>
         </div>
       </SectionCard>
     </PageWrapper>
@@ -1319,84 +1425,87 @@ export default function StudentApp() {
     <PageWrapper>
       <div className="flex items-center gap-3 mb-4">
         <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
-        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">الدعم والمساعدة</h2>
+        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">{t('supporthelp')}</h2>
       </div>
 
       <SectionCard>
         <div className="space-y-3 text-right">
           <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div>
-              <div className="font-medium text-gray-900 dark:text-white">مكتب شؤون الطلاب</div>
-              <div className="text-sm text-gray-600 dark:text-gray-300">الرد خلال يوم عمل</div>
+              <div className="font-medium text-gray-900 dark:text-white">{t("studentaffairsoffice")}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300">{t("replywithinoneday")}</div>
             </div>
-            <a href="#" className="flex items-center gap-2 text-blue-600 dark:text-blue-400"><Phone size={18} />اتصال</a>
+            <a href="#" className="flex items-center gap-2 text-blue-600 dark:text-blue-400"><Phone size={18} />{t("phone")}</a>
           </div>
           <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div>
-              <div className="font-medium text-gray-900 dark:text-white">الدعم الفني للمنصة</div>
-              <div className="text-sm text-gray-600 dark:text-gray-300">مشاكل الدخول والمواد</div>
+              <div className="font-medium text-gray-900 dark:text-white">{t("technicalsupport")}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300">{t("technicaldifficulities")}</div>
             </div>
-            <a href="#" className="flex items-center gap-2 text-blue-600 dark:text-blue-400"><Mail size={18} />إيميل</a>
+            <a href="#" className="flex items-center gap-2 text-blue-600 dark:text-blue-400"><Mail size={18} />{t("email")}</a>
           </div>
         </div>
       </SectionCard>
     </PageWrapper>
   );
 
-  // -------------------- SETTINGS SCREEN --------------------
-  const SettingsScreen = () => (
-    <PageWrapper>
-      <div className="flex items-center gap-3 mb-4">
-        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
-        <h2 className="text-lg font-semibold text-right text-gray-800 dark:text-gray-100">الإعدادات</h2>
-      </div>
+  // -------------------- SETTINGS SCREEN ---------------------
+  const SettingsScreen = () => {
+    const [dropdownOpen, setDropdownOpen] = useState(false); // state for language dropdown
+    const { t, language, changeLanguage } = useLanguage();
 
-      <SectionCard title="المظهر">
-        <div className="space-y-4">
-          {/* Dark Mode Toggle */}
-          <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="flex items-center gap-3">
-              <button
-                onClick={toggleDarkMode}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${darkMode ? 'bg-blue-600' : 'bg-gray-300'
-                  }`}
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${darkMode ? '-translate-x-1' : '-translate-x-6'
-                    }`}
-                />
-              </button>
-              <span className="text-sm text-gray-600 dark:text-gray-300">
-                {darkMode ? 'تم تفعيل الوضع المظلم' : 'تم إيقاف الوضع المظلم'}
-              </span>
-            </div>
-          </div>
+    const languages = [
+      { code: 'en', label: 'English', flag: enflag },
+      { code: 'ar', label: 'العربية', flag: arflag },
+      { code: 'fr', label: 'Français', flag: frflag },
+      { code: 'ch', label: '中国人', flag: chflag },
+      { code: 'gr', label: 'Deutsch', flag: grflag }
+    ];
+
+    return (
+      <PageWrapper>
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-4">
+          <button onClick={() => setCurrentScreen('main')}>
+            <ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} />
+          </button>
+          <h2 className="text-lg font-semibold text-right text-gray-800 dark:text-gray-100">
+            {t('settings')}
+          </h2>
+        </div>
+
+        {/* Appearance Section */}
+        <SectionCard title={t("appearance")} className="mb-4">
+
 
           {/* Theme Options */}
           <div className="space-y-3">
-            <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 text-right">خيارات المظهر</h3>
-
+            <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 text-right">
+              {t("appearancesettings")}
+            </h3>
             <div className="grid grid-cols-3 gap-3">
               <button
                 onClick={() => setDarkMode(false)}
                 className={`p-3 rounded-lg border-2 transition-colors ${!darkMode
                   ? 'border-blue-500 bg-blue-50 dark:bg-blue-900'
-                  : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700'
-                  }`}
+                  : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700'}`}
               >
                 <Sun className="mx-auto mb-2 text-yellow-500" size={24} />
-                <div className="text-xs text-center text-gray-700 dark:text-gray-300">فاتح</div>
+                <div className="text-xs text-center text-gray-700 dark:text-gray-300">
+                  فاتح
+                </div>
               </button>
 
               <button
                 onClick={() => setDarkMode(true)}
                 className={`p-3 rounded-lg border-2 transition-colors ${darkMode
                   ? 'border-blue-500 bg-blue-50 dark:bg-blue-900'
-                  : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700'
-                  }`}
+                  : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700'}`}
               >
                 <Moon className="mx-auto mb-2 text-blue-500" size={24} />
-                <div className="text-xs text-center text-gray-700 dark:text-gray-300">مظلم</div>
+                <div className="text-xs text-center text-gray-700 dark:text-gray-300">
+                  مظلم
+                </div>
               </button>
 
               <button
@@ -1407,45 +1516,76 @@ export default function StudentApp() {
                 className="p-3 rounded-lg border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 transition-colors"
               >
                 <Monitor className="mx-auto mb-2 text-gray-500" size={24} />
-                <div className="text-xs text-center text-gray-700 dark:text-gray-300">النظام</div>
+                <div className="text-xs text-center text-gray-700 dark:text-gray-300">
+                  النظام
+                </div>
               </button>
             </div>
           </div>
-        </div>
-      </SectionCard>
+        </SectionCard>
 
-      <SectionCard title="إعدادات عامة" className="mt-4">
-        <div className="space-y-3">
-          <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-right">
-              <div className="font-medium text-gray-800 dark:text-gray-100">اللغة</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">العربية</div>
+        {/* General Settings */}
+        <SectionCard title={t("generalsettings")} className="mt-4">
+          <div className="space-y-3">
+            {/* Language Custom Dropdown */}
+            <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg relative">
+              <span className="text-gray-900 dark:text-white">{t('language')}</span>
+              <div className="relative">
+                <button
+                  className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg focus:outline-none"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
+                  <img src={languages.find(l => l.code === language)?.flag} alt="" className="w-5 h-5" />
+                  <span className="text-sm text-gray-800 dark:text-gray-200">
+                    {languages.find(l => l.code === language)?.label}
+                  </span>
+                  <ChevronDown className="text-gray-600 dark:text-gray-300" size={16} />
+                </button>
+
+                {dropdownOpen && (
+                  <div className="absolute mt-2 right-0 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 w-40 z-50">
+                    {languages.map(lang => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          changeLanguage(lang.code);
+                          setDropdownOpen(false);
+                        }}
+                        className="flex items-center gap-2 px-3 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-700"
+                      >
+                        <img src={lang.flag} alt="" className="w-5 h-5" />
+                        <span className="text-sm text-gray-800 dark:text-gray-200">{lang.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Notifications */}
+            <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <div className="font-medium text-gray-800 dark:text-gray-100">{t("notifications")}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">{t("enabled")}</div>
             </div>
           </div>
+        </SectionCard>
 
-          <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-right">
-              <div className="font-medium text-gray-800 dark:text-gray-100">الإشعارات</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">مفعلة</div>
+        {/* App Info */}
+        <SectionCard title={t("appinformation")} className="mt-4">
+          <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400 text-right">
+            <div className="flex justify-between">
+              <span>{t("version")} 1.0</span>
+              <span>{t("appversion")}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>2025</span>
+              <span>{t("copyright")}</span>
             </div>
           </div>
-        </div>
-      </SectionCard>
-
-      <SectionCard title="معلومات التطبيق" className="mt-4">
-        <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400 text-right">
-          <div className="flex justify-between">
-            <span>الإصدار 1.0.0</span>
-            <span>إصدار التطبيق</span>
-          </div>
-          <div className="flex justify-between">
-            <span>2025</span>
-            <span>حقوق النشر</span>
-          </div>
-        </div>
-      </SectionCard>
-    </PageWrapper>
-  );
+        </SectionCard>
+      </PageWrapper>
+    );
+  };
 
   // -------------------- MAIN RENDER --------------------
   const renderMain = () => {
