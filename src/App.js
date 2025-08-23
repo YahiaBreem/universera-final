@@ -629,7 +629,7 @@ function StudentAppContent() {
         <StatPill color="blue" label={t('gpa')} value={`${currentUser.gpa ?? '—'}`} />
       </div>
 
-      <SectionCard title={t('todaySchedule')}>
+      <SectionCard title={t('todayschedule')}>
         <div className="space-y-3">
           {/* try to show today's schedule from facultyData or fallback */}
           {(facultyData.schedule).map((s, idx) => (
