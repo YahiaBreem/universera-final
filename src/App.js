@@ -26,7 +26,7 @@ import {
   Monitor
 } from 'lucide-react';
 import './App.css';
-import { courses as coursesRaw } from "./data/courses";
+import { courses as getcourses } from "./data/courses";
 import banner from './banner.svg';
 import arflag from './flags/ar.svg';
 import enflag from './flags/en.svg';
@@ -48,8 +48,7 @@ export default function StudentApp() {
 
 function StudentAppContent() {
 
-  const { language } = useLanguage();
-
+  const { t, language } = useLanguage();
   useEffect(() => {
     const html = document.documentElement;
     if (["ar", "he", "fa", "ur"].includes(language)) {
@@ -62,7 +61,6 @@ function StudentAppContent() {
   }, [language]);
 
   // ---------- auth & core state ----------
-  const { t } = useLanguage();
   const [currentUser, setCurrentUser] = useState(null);
   const [showDisclaimer, setShowDisclaimer] = useState(true);
   const [activeTab, setActiveTab] = useState('home');
@@ -73,6 +71,7 @@ function StudentAppContent() {
   const [showFileFilterMenu, setShowFileFilterMenu] = useState(false);
   const [assignments, setAssignments] = useState([]);
 
+  const courses = React.useMemo(() => getcourses(t), [t]);
   // ---------- dark mode state ----------
   const [darkMode, setDarkMode] = useState(() => {
     // Check system preference since we can't use localStorage
@@ -94,7 +93,6 @@ function StudentAppContent() {
   };
 
   // Data normalization
-  const courses = coursesRaw || [];
 
   // Generate random stats for user
   const generateRandomStats = () => ({

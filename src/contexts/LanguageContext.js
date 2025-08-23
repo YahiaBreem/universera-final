@@ -14,6 +14,7 @@ const translations = {
         facocomputerai: "Faculty of Computers and Artificial Intelligence",
         facoeng: "Faculty of Engineering",
         facocommerce: "Faculty of Commerce",
+        facobusiness: "Faculty of Business",
         facomedicine: "Faculty of Medicine",
         facoscience: "Faculty of Science",
         facoarts: "Faculty of Arts",
@@ -170,6 +171,8 @@ const translations = {
         searchhistory: "Search history",
 
         // chat / interaction
+        next: "Next",
+        back: "Back",
         sendchatrequest: "Send chat request",
         howcanihelp: "How can I help you?",
         onlinenow: "Online now",
@@ -199,6 +202,7 @@ const translations = {
         facocomputerai: "كلية الحاسبات والذكاء الاصطناعي",
         facoeng: "كلية الهندسة",
         facocommerce: "كلية التجارة",
+        facobusiness: "كلية الأعمال",
         facomedicine: "كلية الطب",
         facoscience: "كلية العلوم",
         facoarts: "كلية الآداب",
@@ -354,6 +358,8 @@ const translations = {
         searchhistory: "سجل البحث",
 
         // chat / interaction
+        next: "التالي",
+        back: "السابق",
         sendchatrequest: "إرسال طلب محادثة",
         howcanihelp: "كيف أقدر أساعدك؟",
         onlinenow: "متصل الآن",
