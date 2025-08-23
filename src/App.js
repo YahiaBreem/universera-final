@@ -653,7 +653,7 @@ function StudentAppContent() {
         </button>
       </SectionCard>
 
-      <SectionCard title={t('currentAssignments')} className="mt-4">
+      <SectionCard title={t('currentassignments')} className="mt-4">
         <div className="space-y-3">
           {assignments.slice(0, 2).map(assignment => (
             <div key={assignment.id} className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
@@ -776,7 +776,7 @@ function StudentAppContent() {
 
     return (
       <PageWrapper>
-        <h2 className="text-lg font-semibold mb-4 text-right text-gray-900 dark:text-white">{t("currentAssignments")}</h2>
+        <h2 className="text-lg font-semibold mb-4 text-right text-gray-900 dark:text-white">{t("currentassignments")}</h2>
 
         <div className="space-y-3">
           {assignments.map(assignment => (
@@ -1490,7 +1490,7 @@ function StudentAppContent() {
               >
                 <Sun className="mx-auto mb-2 text-yellow-500" size={24} />
                 <div className="text-xs text-center text-gray-700 dark:text-gray-300">
-                  فاتح
+                  t{("light")}
                 </div>
               </button>
 
@@ -1502,7 +1502,7 @@ function StudentAppContent() {
               >
                 <Moon className="mx-auto mb-2 text-blue-500" size={24} />
                 <div className="text-xs text-center text-gray-700 dark:text-gray-300">
-                  مظلم
+                  t{("dark")}
                 </div>
               </button>
 
@@ -1515,7 +1515,7 @@ function StudentAppContent() {
               >
                 <Monitor className="mx-auto mb-2 text-gray-500" size={24} />
                 <div className="text-xs text-center text-gray-700 dark:text-gray-300">
-                  النظام
+                  t{("system")}
                 </div>
               </button>
             </div>
