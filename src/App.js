@@ -1490,7 +1490,7 @@ function StudentAppContent() {
               >
                 <Sun className="mx-auto mb-2 text-yellow-500" size={24} />
                 <div className="text-xs text-center text-gray-700 dark:text-gray-300">
-                  t{("light")}
+                  {t("light")}
                 </div>
               </button>
 
@@ -1502,7 +1502,7 @@ function StudentAppContent() {
               >
                 <Moon className="mx-auto mb-2 text-blue-500" size={24} />
                 <div className="text-xs text-center text-gray-700 dark:text-gray-300">
-                  t{("dark")}
+                  {t("dark")}
                 </div>
               </button>
 
@@ -1515,7 +1515,7 @@ function StudentAppContent() {
               >
                 <Monitor className="mx-auto mb-2 text-gray-500" size={24} />
                 <div className="text-xs text-center text-gray-700 dark:text-gray-300">
-                  t{("system")}
+                  {t("system")}
                 </div>
               </button>
             </div>
