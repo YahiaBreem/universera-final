@@ -32,7 +32,7 @@ import arflag from './flags/ar.svg';
 import enflag from './flags/en.svg';
 import frflag from './flags/fr.svg';
 import chflag from './flags/ch.svg';
-import grflag from './flags/gr.svg';
+import grflag from './flags/ger.svg';
 
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 // TailwindCSS + lucide-react
@@ -49,16 +49,24 @@ export default function StudentApp() {
 function StudentAppContent() {
 
   const { t, language } = useLanguage();
+  
+  // Helper function to get text alignment based on language direction
+  const getTextAlign = () => {
+    return ["ar", "he", "fa", "ur"].includes(language) ? "text-right" : "text-left";
+  };
+  
+  const isRTL = ["ar", "he", "fa", "ur"].includes(language);
+  
   useEffect(() => {
     const html = document.documentElement;
-    if (["ar", "he", "fa", "ur"].includes(language)) {
+    if (isRTL) {
       html.setAttribute("dir", "rtl");
       html.setAttribute("lang", language);
     } else {
       html.setAttribute("dir", "ltr");
       html.setAttribute("lang", language);
     }
-  }, [language]);
+  }, [language, isRTL]);
 
   // ---------- auth & core state ----------
   const [currentUser, setCurrentUser] = useState(null);
@@ -91,8 +99,6 @@ function StudentAppContent() {
   const toggleDarkMode = () => {
     setDarkMode(prev => !prev);
   };
-
-  // Data normalization
 
   // Generate random stats for user
   const generateRandomStats = () => ({
@@ -194,7 +200,7 @@ function StudentAppContent() {
       { code: 'ar', label: 'العربية', flag: arflag },
       { code: 'fr', label: 'Français', flag: frflag },
       { code: 'ch', label: '中国人', flag: chflag },
-      { code: 'gr', label: 'Deutsch', flag: grflag }
+      { code: 'ger', label: 'Deutsch', flag: grflag }
     ];
 
     const handleAccept = () => {
@@ -240,7 +246,7 @@ function StudentAppContent() {
             {/* Dark Mode Button */}
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
               title={t('appearance')}
             >
               {darkMode ? (
@@ -265,7 +271,7 @@ function StudentAppContent() {
             <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4" dir="rtl">
               {t("disclaimerheader")}
             </h1>
-            <div className="text-sm text-gray-600 dark:text-gray-300 text-right leading-relaxed space-y-4" dir="rtl">
+            <div className={`text-sm text-gray-600 dark:text-gray-300 ${getTextAlign()} leading-relaxed space-y-4`} dir={isRTL ? "rtl" : "ltr"}>
               <p>
                 {t("disclaimertext1")}
               </p>
@@ -308,16 +314,39 @@ function StudentAppContent() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const { t, language, changeLanguage } = useLanguage(); // ✅ Added for language control
 
+    // Helper functions for RTL/LTR support
+    const getTextAlign = () => {
+      return ["ar", "he", "fa", "ur"].includes(language) ? "text-right" : "text-left";
+    };
+    
+    const isRTL = ["ar", "he", "fa", "ur"].includes(language);
+
+    // Helper function to capitalize each word
+    const capitalizeWords = (str) => {
+      return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+    };
+
+    // Helper function to get first name only
+    const getFirstName = (fullName) => {
+      return capitalizeWords(fullName.split(' ')[0] || '');
+    };
+
+    // Helper function to get first two names
+    const getFirstTwoNames = (fullName) => {
+      const names = fullName.split(' ');
+      return capitalizeWords(names.slice(0, 2).join(' '));
+    };
+
     const languages = [
       { code: 'en', label: 'English', flag: enflag },
       { code: 'ar', label: 'العربية', flag: arflag },
       { code: 'fr', label: 'Français', flag: frflag },
       { code: 'ch', label: '中国人', flag: chflag },
-      { code: 'gr', label: 'Deutsch', flag: grflag }
+      { code: 'ger', label: 'Deutsch', flag: grflag }
     ];
 
     const universities = React.useMemo(() => {
-      return [...new Set(courses.map(course => course.university))].filter(Boolean);
+      return courses.filter(Boolean);
     }, [courses]);
 
     const faculties = React.useMemo(() => {
@@ -368,6 +397,11 @@ function StudentAppContent() {
         userData.enrolledCourses = faculty.courses.map(c => c.subtitle).slice(0, 5);
       }
 
+      // Store the properly formatted names
+      userData.fullName = capitalizeWords(name.trim());
+      userData.firstName = getFirstName(name.trim());
+      userData.firstTwoNames = getFirstTwoNames(name.trim());
+
       setCurrentUser(userData);
     };
 
@@ -410,7 +444,7 @@ function StudentAppContent() {
             {/* Dark Mode Button */}
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
               title={t('appearance')}
             >
               {darkMode ? (
@@ -445,18 +479,19 @@ function StudentAppContent() {
 
           {step === 1 && (
             <>
-              <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
-                {t("welcomelogin")}              </h1>
-              <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
+              <h1 className={`text-2xl font-bold text-center text-gray-800 dark:text-white mb-2`} dir={isRTL ? "rtl" : "ltr"}>
+                {t("welcomelogin")}
+              </h1>
+              <p className={`text-center text-gray-600 dark:text-gray-300 mb-8 text-sm`} dir={isRTL ? "rtl" : "ltr"}>
                 {t("namereq")}
               </p>
               <input
-                type="text"
+                type="textarea"
                 value={name}
                 onChange={e => setName(e.target.value)}
-                className="w-full border border-gray-200 dark:border-gray-600 px-4 py-3 rounded-xl mb-6 text-right bg-gray-50 dark:bg-gray-700 dark:text-white focus:bg-white dark:focus:bg-gray-600 focus:border-blue-500 focus:outline-none transition-colors"
+                className={`w-full border border-gray-200 dark:border-gray-600 px-4 py-3 rounded-xl mb-6 ${getTextAlign()} bg-gray-50 dark:bg-gray-700 dark:text-white focus:bg-white dark:focus:bg-gray-600 focus:border-blue-500 focus:outline-none transition-colors`}
                 placeholder={t('namereqwarn')}
-                dir="rtl"
+                dir={isRTL ? "rtl" : "ltr"}
                 autoFocus
               />
               <button
@@ -470,24 +505,24 @@ function StudentAppContent() {
 
           {step === 2 && (
             <>
-              <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
+              <h1 className={`text-2xl font-bold text-center text-gray-800 dark:text-white mb-2`} dir={isRTL ? "rtl" : "ltr"}>
                 {t("facultyselect")}
               </h1>
-              <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
-                {t("welcome")} {name}، {t("collegeselectplaceholder")}
+              <p className={`text-center text-gray-600 dark:text-gray-300 mb-8 text-sm`} dir={isRTL ? "rtl" : "ltr"}>
+                {t("welcome")} <span className="font-bold">{getFirstName(name)}</span>، {t("collegeselectplaceholder")}
               </p>
               <div className="space-y-3 mb-6 max-h-64 overflow-y-auto">
                 {universities.map((uni) => (
                   <button
-                    key={uni}
-                    onClick={() => setSelectedUniversity(uni)}
-                    className={`w-full p-4 text-right rounded-xl border-2 transition-colors ${selectedUniversity === uni
+                    key={uni.university}
+                    onClick={() => setSelectedUniversity(uni.university)}
+                    className={`w-full p-4 ${getTextAlign()} rounded-xl border-2 transition-colors ${selectedUniversity === uni.university
                       ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
                       : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500'
                       }`}
-                    dir="rtl"
+                    dir={isRTL ? "rtl" : "ltr"}
                   >
-                    <span className="text-gray-900 dark:text-white">{uni}</span>
+                    <span className="text-gray-900 dark:text-white">{uni.displayname}</span>
                   </button>
                 ))}
               </div>
@@ -510,24 +545,24 @@ function StudentAppContent() {
 
           {step === 3 && (
             <>
-              <h1 className="text-2xl font-bold text-center text-gray-800 dark:text-white mb-2" dir="rtl">
+              <h1 className={`text-2xl font-bold text-center text-gray-800 dark:text-white mb-2`} dir={isRTL ? "rtl" : "ltr"}>
                 {t("facultyselect")}
               </h1>
-              <p className="text-center text-gray-600 dark:text-gray-300 mb-8 text-sm" dir="rtl">
-                {t("facultyselectplaceholder")}   {selectedUniversity}
+              <p className={`text-center text-gray-600 dark:text-gray-300 mb-8 text-sm`} dir={isRTL ? "rtl" : "ltr"}>
+                {t("facultyselectplaceholder")}   <span className="font-bold">{universities.find(u => u.university === selectedUniversity)?.displayname || selectedUniversity}</span>
               </p>
               <div className="space-y-3 mb-6 max-h-64 overflow-y-auto">
                 {faculties.map((faculty) => (
                   <button
                     key={faculty.name || faculty.faculty}
                     onClick={() => setSelectedFaculty(faculty.name || faculty.faculty)}
-                    className={`w-full p-4 text-right rounded-xl border-2 transition-colors ${selectedFaculty === (faculty.name || faculty.faculty)
+                    className={`w-full p-4 ${getTextAlign()} rounded-xl border-2 transition-colors ${selectedFaculty === (faculty.name || faculty.faculty)
                       ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
                       : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500'
                       }`}
-                    dir="rtl"
+                    dir={isRTL ? "rtl" : "ltr"}
                   >
-                    <span className="text-gray-900 dark:text-white">{faculty.name || faculty.faculty}</span>
+                    <span className="text-gray-900 dark:text-white">{faculty.displayname || faculty.name || faculty.faculty}</span>
                   </button>
                 ))}
               </div>
@@ -573,16 +608,16 @@ function StudentAppContent() {
   // (facultyCourses, facultyProfessors, and facultyStudents are already declared above)
 
   // -------------------- UTIL --------------------
-  // Make PageWrapper a flex column and scrollable
+  // Make PageWrapper responsive and properly handle different screen sizes
   const PageWrapper = ({ children, paddedBottom = true }) => (
-    <div className={`flex flex-col h-screen bg-gray-50 dark:bg-gray-900 pt-4 px-4`}>
-      <div className="flex-1 overflow-y-auto scrollbar-hide">{children}</div>
+    <div className={`flex flex-col h-screen bg-gray-50 dark:bg-gray-900 pt-4 px-2 sm:px-4 max-w-full overflow-hidden`}>
+      <div className="flex-1 overflow-y-auto scrollbar-hide pb-20 min-h-0">{children}</div>
     </div>
   );
 
   const SectionCard = ({ title, children, className }) => (
     <div className={`bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm ${className || ''}`}>
-      {title && <h2 className="text-lg font-semibold mb-3 text-right text-gray-900 dark:text-white">{title}</h2>}
+      {title && <h2 className={`text-lg font-semibold mb-3 ${getTextAlign()} text-gray-900 dark:text-white`}>{title}</h2>}
       {children}
     </div>
   );
@@ -599,42 +634,62 @@ function StudentAppContent() {
     </div>
   );
 
-  const Header = () => (
-    <div className="px-4 pb-2">
-      <div className="flex items-center justify-between">
-        <div className="text-right">
-          <div className="font-bold text-lg text-gray-900 dark:text-white"> {t("welcome")} {currentUser && (currentUser.firstName)} 👋</div>
-          <div className="text-sm text-gray-600 dark:text-gray-400"> {currentUser.university || '—'}</div>
-          <div className="text-sm text-gray-600 dark:text-gray-400"> {currentUser.faculty || '—'}</div>
-        </div>
-        <div className="flex items-center gap-2">
-          <button className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm text-gray-900 dark:text-white"><Search size={18} /></button>
-          <button className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm relative text-gray-900 dark:text-white">
-            <Bell size={18} />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full" />
-          </button>
-          <button onClick={() => { setCurrentUser(null); }} title="Logout" className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm text-sm text-gray-900 dark:text-white">{t("exit")}</button>
+  const Header = () => {
+    // Get display names for university and faculty
+    const getUniversityDisplayName = () => {
+      if (!currentUser?.university) return '—';
+      const uni = courses.find(u => u.university === currentUser.university);
+      return uni?.displayname || currentUser.university;
+    };
+
+    const getFacultyDisplayName = () => {
+      if (!currentUser?.faculty) return '—';
+      const uni = courses.find(u => u.university === currentUser.university);
+      const faculty = uni?.faculties?.find(f => f.name === currentUser.faculty || f.faculty === currentUser.faculty);
+      return faculty?.displayname || currentUser.faculty;
+    };
+
+    return (
+      <div className="px-4 pb-2">
+        <div className="flex items-center justify-between">
+          <div className={getTextAlign()}>
+            <div className="font-bold text-lg text-gray-900 dark:text-white"> {t("welcome")} {currentUser && (currentUser.firstTwoNames)} 👋</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400"> {getUniversityDisplayName()}</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400"> {getFacultyDisplayName()}</div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm text-gray-900 dark:text-white"><Search size={18} /></button>
+            <button className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm relative text-gray-900 dark:text-white">
+              <Bell size={18} />
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full" />
+            </button>
+            <button onClick={() => { setCurrentUser(null); }} title="Logout" className="p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm text-sm text-gray-900 dark:text-white">{t("exit")}</button>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   // -------------------- DASHBOARD --------------------
   const DashboardScreen = () => (
     <PageWrapper>
       <Header />
 
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4">
         <StatPill color="green" label={t('attendance')} value={`${currentUser.attendance ?? '—'}%`} />
         <StatPill color="blue" label={t('gpa')} value={`${currentUser.gpa ?? '—'}`} />
       </div>
 
       <SectionCard title={t('todayschedule')}>
         <div className="space-y-3">
-          {/* try to show today's schedule from facultyData or fallback */}
-          {(facultyData.schedule).map((s, idx) => (
+          {/* Add default schedule if facultyData.schedule is undefined */}
+          {(facultyData.schedule || [
+            { name: 'هندسة البرمجيات', instructor: 'د. محمد أحمد', place: 'قاعة 301', time: '10:00 AM', type: 'محاضرة' },
+            { name: 'قواعد البيانات', instructor: 'د. سارة محمود', place: 'معمل 2', time: '12:30 PM', type: 'معمل' },
+            { name: 'شبكات الحاسوب', instructor: 'د. أحمد مراد', place: 'معمل 205', time: '1:00 PM', type: 'عملي' }
+          ]).slice(0, 2).map((s, idx) => (
             <div key={idx} className={`flex items-center justify-between p-3 ${idx === 0 ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-gray-50 dark:bg-gray-700'} rounded-lg`}>
-              <div className="text-right">
+              <div className={getTextAlign()}>
                 <div className="font-medium text-gray-900 dark:text-white">{s.name}</div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">{s.instructor || s.teacher || 'د. غير محدد'} - {s.place}</div>
               </div>
@@ -664,7 +719,7 @@ function StudentAppContent() {
                   }`}>
                   {assignment.grade || assignment.status}
                 </div>
-                <div className="text-right">
+                <div className={getTextAlign()}>
                   <div className="font-medium text-gray-900 dark:text-white text-sm">{assignment.title}</div>
                   <div className="text-xs text-gray-600 dark:text-gray-400">{assignment.subject}</div>
                 </div>
@@ -727,7 +782,7 @@ function StudentAppContent() {
   // -------------------- SCHEDULE --------------------
   const ScheduleScreen = () => (
     <PageWrapper>
-      <h2 className="text-lg font-semibold mb-4 text-right">{t("studyschedule")}</h2>
+      <h2 className={`text-lg font-semibold mb-4 ${getTextAlign()}`}>{t("studyschedule")}</h2>
       <SectionCard>
         <div className="space-y-3">
           {facultyCourses.length
@@ -737,7 +792,7 @@ function StudentAppContent() {
                   <FileText size={16} className="text-blue-500" />
                   <span className="text-blue-500 text-sm">{t(s.title) || t("lecture")} </span>
                 </div>
-                <div className="text-right flex-1 mx-4">
+                <div className={`${getTextAlign()} flex-1 mx-4`}>
                   <div className="font-medium">{s.subtitle}</div>
                   <div className="text-sm text-gray-600">{s.professor || 'د. غير محدد'} - {s.room || 'قاعة غير محددة'}</div>
                 </div>
@@ -776,7 +831,7 @@ function StudentAppContent() {
 
     return (
       <PageWrapper>
-        <h2 className="text-lg font-semibold mb-4 text-right text-gray-900 dark:text-white">{t("currentassignments")}</h2>
+        <h2 className={`text-lg font-semibold mb-4 ${getTextAlign()} text-gray-900 dark:text-white`}>{t("currentassignments")}</h2>
 
         <div className="space-y-3">
           {assignments.map(assignment => (
@@ -895,10 +950,10 @@ function StudentAppContent() {
     const participantData = getChatParticipantData();
 
     return (
-      <div className="bg-gray-50 dark:bg-gray-900 min-h-screen h-screen">
+      <div className="bg-gray-50 dark:bg-gray-900 min-h-screen h-screen flex flex-col">
         {showChatDetails ? (
           /* Chat Details - Full Screen */
-          <div className="w-full bg-white dark:bg-gray-800 flex flex-col h-full">
+          <div className="w-full bg-white dark:bg-gray-800 flex flex-col h-full overflow-hidden">
             {/* Header */}
             <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center gap-3">
               <button onClick={() => setShowChatDetails(false)}>
@@ -936,7 +991,7 @@ function StudentAppContent() {
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm text-gray-600 dark:text-gray-400">ملفات</span>
               </div>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {mockFiles.map((file) => (
                   <div key={file.id} className="aspect-square bg-gray-100 dark:bg-gray-700 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 flex items-center justify-center">
                     <FileText className="text-gray-400 dark:text-gray-500" size={24} />
@@ -947,9 +1002,9 @@ function StudentAppContent() {
           </div>
         ) : (
           /* Chat Interface - Full Screen */
-          <div className="w-full flex flex-col h-full">
+          <div className="w-full flex flex-col h-full overflow-hidden">
             {/* Chat Header */}
-            <div className="bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+            <div className="bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between flex-shrink-0">
               <div className="flex items-center gap-3">
                 <button onClick={onBack}>
                   <ChevronLeft className="text-gray-600 dark:text-gray-300" size={20} />
@@ -979,7 +1034,7 @@ function StudentAppContent() {
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50 dark:bg-gray-900">
+            <div className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50 dark:bg-gray-900 min-h-0">
               {messages.map(m => (
                 <div key={m.id} className={`flex ${m.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`max-w-[70%] p-3 rounded-2xl ${m.sender === 'me'
@@ -996,19 +1051,20 @@ function StudentAppContent() {
             </div>
 
             {/* Input Area */}
-            <div className="bg-white dark:bg-gray-800 p-4 border-t border-gray-200 dark:border-gray-700 flex gap-3 items-center">
+            <div className="bg-white dark:bg-gray-800 p-4 border-t border-gray-200 dark:border-gray-700 flex gap-3 items-center flex-shrink-0 safe-area-inset-bottom">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="اكتب رسالة..."
-                className="flex-1 border border-gray-300 dark:border-gray-600 rounded-full px-4 py-2 text-right focus:outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className={`flex-1 border border-gray-300 dark:border-gray-600 rounded-full px-4 py-2 ${getTextAlign()} focus:outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white`}
                 onKeyDown={(e) => { if (e.key === 'Enter') sendMessage(); }}
                 autoComplete="off"
+                dir={isRTL ? "rtl" : "ltr"}
               />
               <button
                 onClick={sendMessage}
-                className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors"
+                className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors flex-shrink-0"
               >
                 <Send size={20} />
               </button>
@@ -1289,7 +1345,7 @@ function StudentAppContent() {
                       <User className="text-gray-600 dark:text-gray-300" size={20} />
                     </div>
                   </div>
-                  <div className="flex-1 text-right">
+                  <div className={`flex-1 ${getTextAlign()}`}>
                     <div className="font-medium text-gray-900 dark:text-white">{chat.name}</div>
                     {chat.type === 'students' && chat.university && (
                       <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -1308,39 +1364,54 @@ function StudentAppContent() {
   };
 
   // -------------------- PROFILE + SUB SCREENS --------------------
-  const ProfileScreen = () => (
+  const ProfileScreen = () => {
+    // Get display names for university and faculty
+    const getUniversityDisplayName = () => {
+      if (!currentUser?.university) return '—';
+      const uni = courses.find(u => u.university === currentUser.university);
+      return uni?.displayname || currentUser.university;
+    };
+
+    const getFacultyDisplayName = () => {
+      if (!currentUser?.faculty) return '—';
+      const uni = courses.find(u => u.university === currentUser.university);
+      const faculty = uni?.faculties?.find(f => f.name === currentUser.faculty || f.faculty === currentUser.faculty);
+      return faculty?.displayname || currentUser.faculty;
+    };
+
+    return (
     <PageWrapper>
       <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm text-center mb-6">
         <div className="w-20 h-20 bg-purple-200 dark:bg-purple-700 rounded-full mx-auto mb-4 flex items-center justify-center"><User className="text-purple-600 dark:text-purple-300" size={32} /></div>
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">{currentUser.displayName || currentUser.name}</h2>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">{currentUser.fullName || currentUser.displayName || currentUser.name}</h2>
         <div className="text-gray-600 dark:text-gray-400 text-sm mt-2">
-          <div>{currentUser.university || '—'}</div>
-          <div>{currentUser.faculty || '—'}</div>
+          <div>{getUniversityDisplayName()}</div>
+          <div>{getFacultyDisplayName()}</div>
           <div>{currentUser.year || ''}</div>
         </div>
       </div>
 
       <div className="space-y-3">
-        <button onClick={() => setCurrentScreen('financial')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-          <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
+        <button onClick={() => setCurrentScreen('financial')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
+          <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
           <div className="flex items-center gap-3"><DollarSign className="text-green-500" size={20} /><span className="text-gray-900 dark:text-white">{t('academicexpenses')}</span></div>
         </button>
-        <button onClick={() => setCurrentScreen('attendance')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-          <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
+        <button onClick={() => setCurrentScreen('attendance')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
+          <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
           <div className="flex items-center gap-3"><Clock className="text-blue-500" size={20} /><span className="text-gray-900 dark:text-white">{t('attendancerecord')}</span></div>
         </button>
-        <button onClick={() => setCurrentScreen('support')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-          <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
+        <button onClick={() => setCurrentScreen('support')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
+          <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
           <div className="flex items-center gap-3"><HelpCircle className="text-orange-500" size={20} /><span className="text-gray-900 dark:text-white">{t('supporthelp')}</span></div>
         </button>
-        <button onClick={() => setCurrentScreen('settings')} className="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-          <ChevronLeft className="text-gray-400 dark:text-gray-500" size={20} />
+        <button onClick={() => setCurrentScreen('settings')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
+          <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
           <div className="flex items-center gap-3"><Settings className="text-gray-500" size={20} /><span className="text-gray-900 dark:text-white">{t('settings')}</span></div>
         </button>
       </div>
 
       <SectionCard title={t('studentstats')} className="mt-6">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
             <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{currentUser.credits || 24}</div>
             <div className="text-sm text-blue-700 dark:text-blue-300">{t('completedcredits')}</div>
@@ -1365,16 +1436,17 @@ function StudentAppContent() {
       </SectionCard>
     </PageWrapper>
   );
+  };
 
   const AttendanceScreen = () => (
     <PageWrapper>
-      <div className="flex items-center gap-3 mb-4">
-        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
-        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">{t("detailedattendancerecord")}</h2>
+      <div className={`flex items-center gap-3 mb-4 ${isRTL ? '' : 'flex-row-reverse'}`}>
+        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className={`text-gray-600 dark:text-gray-300 ${isRTL ? '' : 'rotate-180'}`} size={24} /></button>
+        <h2 className={`text-lg font-semibold ${getTextAlign()} text-gray-900 dark:text-white`}>{t("detailedattendancerecord")}</h2>
       </div>
 
       <SectionCard title={t("generalstatistics")}>
-        <div className="grid grid-cols-3 gap-4 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-center">
           <div className="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg"><div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{currentUser.attendance ?? '—'}%</div><div className="text-xs text-blue-700 dark:text-blue-300">{t("totalpercentage")}</div></div>
           <div className="p-3 bg-red-50 dark:bg-red-900/30 rounded-lg"><div className="text-2xl font-bold text-red-600 dark:text-red-400">{currentUser.absences ?? 7}</div><div className="text-xs text-red-700 dark:text-red-300">{t("totalabsence")}</div></div>
           <div className="p-3 bg-green-50 dark:bg-green-900/30 rounded-lg"><div className="text-2xl font-bold text-green-600 dark:text-green-400">{currentUser.attended ?? 30}</div><div className="text-xs text-green-700 dark:text-green-300">{t("totalattendance")}</div></div>
@@ -1395,9 +1467,9 @@ function StudentAppContent() {
 
   const FinancialScreen = () => (
     <PageWrapper>
-      <div className="flex items-center gap-3 mb-4">
-        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
-        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">{t('academicexpenses')}</h2>
+      <div className={`flex items-center gap-3 mb-4 ${isRTL ? '' : 'flex-row-reverse'}`}>
+        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className={`text-gray-600 dark:text-gray-300 ${isRTL ? '' : 'rotate-180'}`} size={24} /></button>
+        <h2 className={`text-lg font-semibold ${getTextAlign()} text-gray-900 dark:text-white`}>{t('academicexpenses')}</h2>
       </div>
 
       <SectionCard title={t("academicyear2025")}>
@@ -1421,9 +1493,9 @@ function StudentAppContent() {
 
   const SupportScreen = () => (
     <PageWrapper>
-      <div className="flex items-center gap-3 mb-4">
-        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} /></button>
-        <h2 className="text-lg font-semibold text-right text-gray-900 dark:text-white">{t('supporthelp')}</h2>
+      <div className={`flex items-center gap-3 mb-4 ${isRTL ? '' : 'flex-row-reverse'}`}>
+        <button onClick={() => setCurrentScreen('main')}><ChevronLeft className={`text-gray-600 dark:text-gray-300 ${isRTL ? '' : 'rotate-180'}`} size={24} /></button>
+        <h2 className={`text-lg font-semibold ${getTextAlign()} text-gray-900 dark:text-white`}>{t('supporthelp')}</h2>
       </div>
 
       <SectionCard>
@@ -1457,17 +1529,17 @@ function StudentAppContent() {
       { code: 'ar', label: 'العربية', flag: arflag },
       { code: 'fr', label: 'Français', flag: frflag },
       { code: 'ch', label: '中国人', flag: chflag },
-      { code: 'gr', label: 'Deutsch', flag: grflag }
+      { code: 'ger', label: 'Deutsch', flag: grflag }
     ];
 
     return (
       <PageWrapper>
         {/* Header */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className={`flex items-center gap-3 mb-4 ${isRTL ? '' : 'flex-row-reverse'}`}>
           <button onClick={() => setCurrentScreen('main')}>
-            <ChevronLeft className="text-gray-600 dark:text-gray-300" size={24} />
+            <ChevronLeft className={`text-gray-600 dark:text-gray-300 ${isRTL ? '' : 'rotate-180'}`} size={24} />
           </button>
-          <h2 className="text-lg font-semibold text-right text-gray-800 dark:text-gray-100">
+          <h2 className={`text-lg font-semibold ${getTextAlign()} text-gray-800 dark:text-gray-100`}>
             {t('settings')}
           </h2>
         </div>

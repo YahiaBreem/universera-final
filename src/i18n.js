@@ -1,6 +1,9 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+// i18n.js - Create this file in your src folder
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-const translations = {
+// Translation resources - add your translations here
+const resources = {
     en: {
         // universities
         asu: "Ain Shams University",
@@ -114,8 +117,8 @@ const translations = {
         // academic
         year: "Third Year",
         academicyear2025: "Academic year 2025",
-        semesterone: "First Semester",
-        semestertwo: "Second Semester",
+        semesterone: "Semester one",
+        semestertwo: "Semester two",
         classschedule: "Class schedule",
         viewfullschedule: "View full schedule",
         finalprojectdeadline: "Final semester project deadline",
@@ -299,7 +302,7 @@ const translations = {
         facultywarn: "من فضلك اختر كلية",
 
         // academic
-        year: "السنة الثالثة",
+        year: "الفرقة الثالثة",
         academicyear2025: "العام الدراسي 2025",
         semesterone: "الفصل الأول",
         semestertwo: "الفصل الثاني",
@@ -377,59 +380,20 @@ const translations = {
     },
 };
 
+i18n
+    .use(initReactI18next)
+    .init({
+        resources,
+        lng: 'ar', // default language
+        fallbackLng: 'en',
 
-const LanguageContext = createContext();
+        interpolation: {
+            escapeValue: false, // react already does escaping
+        },
 
-export const useLanguage = () => {
-    const context = useContext(LanguageContext);
-    if (!context) {
-        throw new Error('useLanguage must be used within a LanguageProvider');
-    }
-    return context;
-};
-
-export const LanguageProvider = ({ children }) => {
-    // Initialize from browser language or default to Arabic
-    const [language, setLanguage] = useState(() => {
-        const saved = sessionStorage.getItem('preferred-language');
-        if (saved) return saved;
-
-        // Detect browser language
-        const browserLang = navigator.language || navigator.userLanguage;
-        return browserLang.startsWith('ar') ? 'ar' : 'en';
+        react: {
+            useSuspense: false, // This prevents the "t is not a function" error
+        }
     });
 
-    // Save language preference
-    useEffect(() => {
-        sessionStorage.setItem('preferred-language', language);
-
-        // Apply RTL/LTR to document
-        document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
-        document.documentElement.lang = language;
-    }, [language]);
-
-    const t = (key) => {
-        return translations[language]?.[key] || key;
-    };
-
-    const changeLanguage = (newLanguage) => {
-        if (translations[newLanguage]) {
-            setLanguage(newLanguage);
-        }
-    };
-
-    const isRTL = language === 'ar';
-
-    return (
-        <LanguageContext.Provider value={{
-            language,
-            changeLanguage,
-            t,
-            isRTL,
-            isArabic: language === 'ar',
-            isEnglish: language === 'en'
-        }}>
-            {children}
-        </LanguageContext.Provider>
-    );
-};
+export default i18n;

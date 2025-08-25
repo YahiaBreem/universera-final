@@ -1,13 +1,11 @@
-import React from 'react';
-import { useLanguage } from '../contexts/LanguageContext';
-
 export const courses = (t) => [
-
     {
-        university: t("asu"),
+        university: "asu",
+        displayname: t("asu"),
         faculties: [
             {
-                name: t("facocomputerai"),
+                name: "facultyofcomputerai",
+                displayname: t("facocomputerai"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -55,7 +53,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoeng"),
+                name: "facoeng",
+                displayname: t("facoeng"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -91,6 +90,7 @@ export const courses = (t) => [
             },
             {
                 name: t("facocommerce"),
+                facid: 3,
                 courses: [
                     {
                         title: "محاضرة",
@@ -125,7 +125,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomedicine"),
+                name: "facomedicine",
+                displayname: t("facomedicine"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -160,7 +161,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoscience"),
+                name: "facoscience",
+                displayname: t("facoscience"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -195,7 +197,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoarts"),
+                name: "facoarts",
+                displayname: t("facoarts"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -230,7 +233,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facolaw"),
+                name: "facolaw",
+                displayname: t("facolaw"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -265,7 +269,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomasscomms"),
+                name: "facomasscomms",
+                displayname: t("facomasscomms"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -300,7 +305,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoagri"),
+                name: "facoagri",
+                displayname: t("facoagri"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -337,10 +343,12 @@ export const courses = (t) => [
         ]
     },
     {
-        university: t(t("au")),
+        university: "au",
+        displayname: t("au"),
         faculties: [
             {
-                name: t("facocomputerai"),
+                name: "facultyofcomputerai",
+                displayname: t("facocomputerai"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -388,7 +396,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoeng"),
+                name: "facoeng",
+                displayname: t("facoeng"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -423,7 +432,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facobusiness"),
+                name: "facobusiness",
+                displayname: t("facobusiness"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -458,7 +468,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomedicine"),
+                name: "facomedicine",
+                displayname: t("facomedicine"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -493,7 +504,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoscience"),
+                name: "facoscience",
+                displayname: t("facoscience"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -528,7 +540,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoarts"),
+                name: "facoarts",
+                displayname: t("facoarts"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -563,7 +576,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facolaw"),
+                name: "facolaw",
+                displayname: t("facolaw"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -598,7 +612,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomasscomms"),
+                name: "facomasscomms",
+                displayname: t("facomasscomms"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -633,7 +648,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoagri"),
+                name: "facoagri",
+                displayname: t("facoagri"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -670,10 +686,12 @@ export const courses = (t) => [
         ]
     },
     {
-        university: t("cu"),
+        university: "cu",
+        displayname: t("cu"),
         faculties: [
             {
-                name: t("facocomputerai"),
+                name: "facultyofcomputerai",
+                displayname: t("facocomputerai"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -721,7 +739,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoeng"),
+                name: "facoeng",
+                displayname: t("facoeng"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -757,6 +776,7 @@ export const courses = (t) => [
             },
             {
                 name: t("facocommerce"),
+                facid: 3,
                 courses: [
                     {
                         title: "محاضرة",
@@ -791,7 +811,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomedicine"),
+                name: "facomedicine",
+                displayname: t("facomedicine"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -826,7 +847,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoscience"),
+                name: "facoscience",
+                displayname: t("facoscience"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -861,7 +883,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoarts"),
+                name: "facoarts",
+                displayname: t("facoarts"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -896,7 +919,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facolaw"),
+                name: "facolaw",
+                displayname: t("facolaw"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -931,7 +955,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomasscomms"),
+                name: "facomasscomms",
+                displayname: t("facomasscomms"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -966,7 +991,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoagri"),
+                name: "facoagri",
+                displayname: t("facoagri"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1003,10 +1029,12 @@ export const courses = (t) => [
         ]
     },
     {
-        university: t("hu"),
+        university: "hu",
+        displayname: t("hu"),
         faculties: [
             {
-                name: t("facocomputerai"),
+                name: "facultyofcomputerai",
+                displayname: t("facocomputerai"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1054,7 +1082,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoeng"),
+                name: "facoeng",
+                displayname: t("facoeng"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1090,6 +1119,7 @@ export const courses = (t) => [
             },
             {
                 name: t("facocommerce"),
+                facid: 3,
                 courses: [
                     {
                         title: "محاضرة",
@@ -1124,7 +1154,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomedicine"),
+                name: "facomedicine",
+                displayname: t("facomedicine"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1159,7 +1190,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoscience"),
+                name: "facoscience",
+                displayname: t("facoscience"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1194,7 +1226,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoarts"),
+                name: "facoarts",
+                displayname: t("facoarts"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1229,7 +1262,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facolaw"),
+                name: "facolaw",
+                displayname: t("facolaw"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1264,7 +1298,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomasscomms"),
+                name: "facomasscomms",
+                displayname: t("facomasscomms"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1299,7 +1334,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoagri"),
+                name: "facoagri",
+                displayname: t("facoagri"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1336,10 +1372,12 @@ export const courses = (t) => [
         ]
     },
     {
-        university: t("mu"),
+        university: "mu",
+        displayname: t("mu"),
         faculties: [
             {
-                name: t("facocomputerai"),
+                name: "facultyofcomputerai",
+                displayname: t("facocomputerai"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1387,7 +1425,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoeng"),
+                name: "facoeng",
+                displayname: t("facoeng"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1423,6 +1462,7 @@ export const courses = (t) => [
             },
             {
                 name: t("facocommerce"),
+                facid: 3,
                 courses: [
                     {
                         title: "محاضرة",
@@ -1457,7 +1497,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomedicine"),
+                name: "facomedicine",
+                displayname: t("facomedicine"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1492,7 +1533,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoscience"),
+                name: "facoscience",
+                displayname: t("facoscience"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1527,7 +1569,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoarts"),
+                name: "facoarts",
+                displayname: t("facoarts"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1562,7 +1605,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facolaw"),
+                name: "facolaw",
+                displayname: t("facolaw"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1597,7 +1641,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomasscomms"),
+                name: "facomasscomms",
+                displayname: t("facomasscomms"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1632,7 +1677,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoagri"),
+                name: "facoagri",
+                displayname: t("facoagri"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1669,10 +1715,12 @@ export const courses = (t) => [
         ]
     },
     {
-        university: t("su"),
+        university: "su",
+        displayname: t("su"),
         faculties: [
             {
-                name: t("facocomputerai"),
+                name: "facultyofcomputerai",
+                displayname: t("facocomputerai"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1720,7 +1768,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoeng"),
+                name: "facoeng",
+                displayname: t("facoeng"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1756,6 +1805,7 @@ export const courses = (t) => [
             },
             {
                 name: t("facocommerce"),
+                facid: 3,
                 courses: [
                     {
                         title: "محاضرة",
@@ -1790,7 +1840,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomedicine"),
+                name: "facomedicine",
+                displayname: t("facomedicine"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1825,7 +1876,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoscience"),
+                name: "facoscience",
+                displayname: t("facoscience"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1860,7 +1912,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoarts"),
+                name: "facoarts",
+                displayname: t("facoarts"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1895,7 +1948,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facolaw"),
+                name: "facolaw",
+                displayname: t("facolaw"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1930,7 +1984,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facomasscomms"),
+                name: "facomasscomms",
+                displayname: t("facomasscomms"),
                 courses: [
                     {
                         title: "محاضرة",
@@ -1965,7 +2020,8 @@ export const courses = (t) => [
                 ]
             },
             {
-                name: t("facoagri"),
+                name: "facoagri",
+                displayname: t("facoagri"),
                 courses: [
                     {
                         title: "محاضرة",
