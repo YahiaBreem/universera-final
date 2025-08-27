@@ -965,7 +965,7 @@ function StudentAppContent() {
         </div>
 
         {/* Input */}
-        <div className="p-3 bg-white dark:bg-gray-800 shadow-md flex-shrink-0">
+        <div className="p-3 bg-white dark:bg-gray-800 shadow-md flex-shrink-0 safe-area-inset-bottom">
           <div className="flex items-center gap-2">
             <input
               type="text"
