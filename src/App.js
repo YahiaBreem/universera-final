@@ -49,14 +49,14 @@ export default function StudentApp() {
 function StudentAppContent() {
 
   const { t, language } = useLanguage();
-  
+
   // Helper function to get text alignment based on language direction
   const getTextAlign = () => {
     return ["ar", "he", "fa", "ur"].includes(language) ? "text-right" : "text-left";
   };
-  
+
   const isRTL = ["ar", "he", "fa", "ur"].includes(language);
-  
+
   useEffect(() => {
     const html = document.documentElement;
     if (isRTL) {
@@ -318,7 +318,7 @@ function StudentAppContent() {
     const getTextAlign = () => {
       return ["ar", "he", "fa", "ur"].includes(language) ? "text-right" : "text-left";
     };
-    
+
     const isRTL = ["ar", "he", "fa", "ur"].includes(language);
 
     // Helper function to capitalize each word
@@ -486,7 +486,7 @@ function StudentAppContent() {
                 {t("namereq")}
               </p>
               <input
-                type="textarea"
+                type="text"
                 value={name}
                 onChange={e => setName(e.target.value)}
                 className={`w-full border border-gray-200 dark:border-gray-600 px-4 py-3 rounded-xl mb-6 ${getTextAlign()} bg-gray-50 dark:bg-gray-700 dark:text-white focus:bg-white dark:focus:bg-gray-600 focus:border-blue-500 focus:outline-none transition-colors`}
@@ -689,14 +689,15 @@ function StudentAppContent() {
             { name: 'شبكات الحاسوب', instructor: 'د. أحمد مراد', place: 'معمل 205', time: '1:00 PM', type: 'عملي' }
           ]).slice(0, 2).map((s, idx) => (
             <div key={idx} className={`flex items-center justify-between p-3 ${idx === 0 ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-gray-50 dark:bg-gray-700'} rounded-lg`}>
-              <div className={getTextAlign()}>
-                <div className="font-medium text-gray-900 dark:text-white">{s.name}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">{s.instructor || s.teacher || 'د. غير محدد'} - {s.place}</div>
+              <div className="flex items-center gap-2">
+                <FileText className="text-blue-500 dark:text-blue-400" size={16} />
+                <span className="text-blue-500 text-sm">{t(s.title) || t("lecture")} </span>
               </div>
-              <div className="text-left">
-                <div className={`${idx === 0 ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'} font-medium`}>{s.time}</div>
-                <div className={`text-xs ${idx === 0 ? 'text-blue-500 bg-blue-100 dark:text-blue-300 dark:bg-blue-900' : 'text-gray-500 bg-gray-100 dark:text-gray-400 dark:bg-gray-600'} px-2 py-1 rounded`}>{s.type}</div>
+              <div className={`${getTextAlign()} flex-1 mx-4`}>
+                <div className="font-medium">{s.name}</div>
+                <div className="text-sm text-gray-600">{s.instructor || 'د. غير محدد'} - {s.place || 'قاعة غير محددة'}</div>
               </div>
+              <div className="text-blue-600 font-medium">—</div>
             </div>
           ))}
         </div>
@@ -905,7 +906,7 @@ function StudentAppContent() {
                     {fileTypeLabels[file.type] || file.type}
                   </span>
                 </div>
-                <div className="text-right flex-1 mx-4">
+                <div className="text-left flex-1 mx-4">
                   <div className="text-sm font-medium truncate text-gray-900 dark:text-white">{file.name || file.title || (file.course && `${file.course} - ملف`)}</div>
                 </div>
               </div>
@@ -921,156 +922,67 @@ function StudentAppContent() {
     const [messages, setMessages] = useState([
       { id: 1, text: t("msg"), sender: 'other', timestamp: '12:30' },
     ]);
-    const [input, setInput] = useState('');
-    const [showChatDetails, setShowChatDetails] = useState(false);
+    const [newMessage, setNewMessage] = useState('');
 
-    const sendMessage = () => {
-      if (!input.trim()) return;
-      setMessages(prev => ([
-        ...prev,
-        { id: Date.now(), text: input, sender: 'me', timestamp: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }) }
-      ]));
-      setInput('');
+    const handleSendMessage = () => {
+      if (newMessage.trim()) {
+        setMessages([...messages, {
+          id: Date.now(),
+          text: newMessage,
+          sender: 'me',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        }]);
+        setNewMessage('');
+      }
     };
-
-    // Mock data for photos and files
-    const mockPhotos = Array(8).fill(null).map((_, i) => ({ id: i + 1, url: '#' }));
-    const mockFiles = Array(4).fill(null).map((_, i) => ({ id: i + 1, name: `ملف ${i + 1}`, type: 'pdf' }));
-
-    // Get chat participant data
-    const getChatParticipantData = () => {
-      // For all chats, use the chat's stored data
-      return {
-        name: chat.name,
-        university: chat.university || currentUser.university || 'جامعة غير محددة',
-        faculty: chat.faculty || currentUser.faculty || 'كلية غير محددة'
-      };
-    };
-
-    const participantData = getChatParticipantData();
 
     return (
-      <div className="bg-gray-50 dark:bg-gray-900 min-h-screen h-screen flex flex-col">
-        {showChatDetails ? (
-          /* Chat Details - Full Screen */
-          <div className="w-full bg-white dark:bg-gray-800 flex flex-col h-full overflow-hidden">
-            {/* Header */}
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center gap-3">
-              <button onClick={() => setShowChatDetails(false)}>
-                <ChevronLeft className="text-gray-600 dark:text-gray-300" size={20} />
-              </button>
-              <h2 className="text-lg font-semibold text-gray-800 dark:text-white">chat details</h2>
-            </div>
-
-            {/* Profile Section */}
-            <div className="p-6 text-center border-b border-gray-200 dark:border-gray-700">
-              <div className="w-24 h-24 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <User className="text-gray-600 dark:text-gray-300" size={40} />
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-1">{participantData.name}</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">{participantData.university}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">{participantData.faculty}</p>
-            </div>
-
-            {/* Photos Section */}
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm text-gray-600 dark:text-gray-400">{t("pics")}</span>
-              </div>
-              <div className="grid grid-cols-4 gap-2">
-                {mockPhotos.map((photo) => (
-                  <div key={photo.id} className="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                    <div className="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded"></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Files Section */}
-            <div className="p-4 flex-1">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm text-gray-600 dark:text-gray-400">ملفات</span>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {mockFiles.map((file) => (
-                  <div key={file.id} className="aspect-square bg-gray-100 dark:bg-gray-700 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 flex items-center justify-center">
-                    <FileText className="text-gray-400 dark:text-gray-500" size={24} />
-                  </div>
-                ))}
-              </div>
-            </div>
+      <div className="absolute inset-0 flex flex-col bg-gray-100 dark:bg-gray-900 z-50 h-screen max-h-screen">
+        {/* Header */}
+        <div className="flex items-center p-3 bg-white dark:bg-gray-800 shadow-md flex-shrink-0">
+          <button onClick={onBack}>
+            <ChevronLeft className="text-gray-600 dark:text-gray-300" size={20} />
+          </button>
+          <div className="text-right flex-1 mx-4">
+            <h3 className="font-semibold text-gray-800 dark:text-white">{chat.name}</h3>
+            <div className="text-xs text-green-500">متصل الآن</div>
           </div>
-        ) : (
-          /* Chat Interface - Full Screen */
-          <div className="w-full flex flex-col h-full overflow-hidden">
-            {/* Chat Header */}
-            <div className="bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between flex-shrink-0">
-              <div className="flex items-center gap-3">
-                <button onClick={onBack}>
-                  <ChevronLeft className="text-gray-600 dark:text-gray-300" size={20} />
-                </button>
-                <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
-                  <User className="text-gray-600 dark:text-gray-300" size={20} />
-                </div>
-                <div className="text-right">
-                  <h3 className="font-semibold text-gray-800 dark:text-white">{chat.name}</h3>
-                  <div className="text-xs text-green-500">متصل الآن</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Chat</h2>
-                <button
-                  onClick={() => setShowChatDetails(!showChatDetails)}
-                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                >
-                  <div className="flex flex-col gap-1">
-                    <div className="w-1 h-1 bg-gray-600 dark:bg-gray-400 rounded-full"></div>
-                    <div className="w-1 h-1 bg-gray-600 dark:bg-gray-400 rounded-full"></div>
-                    <div className="w-1 h-1 bg-gray-600 dark:bg-gray-400 rounded-full"></div>
-                    <div className="w-1 h-1 bg-gray-600 dark:bg-gray-400 rounded-full"></div>
-                  </div>
-                </button>
+        </div>
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
+          {messages.map(msg => (
+            <div key={msg.id} className={`flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
+              <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${msg.sender === 'me'
+                ? 'bg-blue-500 text-white rounded-br-none'
+                : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-white rounded-bl-none'
+                }`}>
+                <p>{msg.text}</p>
+                <div className={`text-xs mt-1 ${msg.sender === 'me' ? 'text-blue-200' : 'text-gray-400'}`}>{msg.timestamp}</div>
               </div>
             </div>
+          ))}
+        </div>
 
-            {/* Messages Area */}
-            <div className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50 dark:bg-gray-900 min-h-0">
-              {messages.map(m => (
-                <div key={m.id} className={`flex ${m.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[70%] p-3 rounded-2xl ${m.sender === 'me'
-                    ? 'bg-blue-500 text-white rounded-br-md'
-                    : 'bg-white dark:bg-gray-800 shadow-sm rounded-bl-md border dark:border-gray-700'
-                    }`}>
-                    <div className={`text-sm ${m.sender === 'me' ? 'text-white' : 'text-gray-900 dark:text-white'}`}>{m.text}</div>
-                    <div className={`text-xs mt-1 ${m.sender === 'me' ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>
-                      {m.timestamp}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Input Area */}
-            <div className="bg-white dark:bg-gray-800 p-4 border-t border-gray-200 dark:border-gray-700 flex gap-3 items-center flex-shrink-0 safe-area-inset-bottom">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="اكتب رسالة..."
-                className={`flex-1 border border-gray-300 dark:border-gray-600 rounded-full px-4 py-2 ${getTextAlign()} focus:outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white`}
-                onKeyDown={(e) => { if (e.key === 'Enter') sendMessage(); }}
-                autoComplete="off"
-                dir={isRTL ? "rtl" : "ltr"}
-              />
-              <button
-                onClick={sendMessage}
-                className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors flex-shrink-0"
-              >
-                <Send size={20} />
-              </button>
-            </div>
+        {/* Input */}
+        <div className="p-3 bg-white dark:bg-gray-800 shadow-md flex-shrink-0">
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={newMessage}
+              onChange={e => setNewMessage(e.target.value)}
+              placeholder={t('typemessage')}
+              className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full px-4 py-2 focus:outline-none text-right"
+              dir="rtl"
+            />
+            <button
+              onClick={handleSendMessage}
+              className="bg-blue-500 text-white rounded-full p-3 flex-shrink-0"
+            >
+              <Send size={18} />
+            </button>
           </div>
-        )}
+        </div>
       </div>
     );
   };
@@ -1258,7 +1170,7 @@ function StudentAppContent() {
                 <div className="space-y-2 text-right">
                   <p className="text-gray-600 dark:text-gray-400">الجامعة: {selectedStudent.university}</p>
                   <p className="text-gray-600 dark:text-gray-400">الكلية: {selectedStudent.faculty}</p>
-                  <p className="text-gray-600 dark:text-gray-400">السنة: {selectedStudent.year || '—'}</p>
+                  <p className="text-gray-600 dark:text-gray-400">السنة: {selectedStudent.year || ''}</p>
                 </div>
               </div>
             ) : (
@@ -1380,62 +1292,62 @@ function StudentAppContent() {
     };
 
     return (
-    <PageWrapper>
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm text-center mb-6">
-        <div className="w-20 h-20 bg-purple-200 dark:bg-purple-700 rounded-full mx-auto mb-4 flex items-center justify-center"><User className="text-purple-600 dark:text-purple-300" size={32} /></div>
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">{currentUser.fullName || currentUser.displayName || currentUser.name}</h2>
-        <div className="text-gray-600 dark:text-gray-400 text-sm mt-2">
-          <div>{getUniversityDisplayName()}</div>
-          <div>{getFacultyDisplayName()}</div>
-          <div>{currentUser.year || ''}</div>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        <button onClick={() => setCurrentScreen('financial')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
-          <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
-          <div className="flex items-center gap-3"><DollarSign className="text-green-500" size={20} /><span className="text-gray-900 dark:text-white">{t('academicexpenses')}</span></div>
-        </button>
-        <button onClick={() => setCurrentScreen('attendance')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
-          <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
-          <div className="flex items-center gap-3"><Clock className="text-blue-500" size={20} /><span className="text-gray-900 dark:text-white">{t('attendancerecord')}</span></div>
-        </button>
-        <button onClick={() => setCurrentScreen('support')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
-          <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
-          <div className="flex items-center gap-3"><HelpCircle className="text-orange-500" size={20} /><span className="text-gray-900 dark:text-white">{t('supporthelp')}</span></div>
-        </button>
-        <button onClick={() => setCurrentScreen('settings')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
-          <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
-          <div className="flex items-center gap-3"><Settings className="text-gray-500" size={20} /><span className="text-gray-900 dark:text-white">{t('settings')}</span></div>
-        </button>
-      </div>
-
-      <SectionCard title={t('studentstats')} className="mt-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
-            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{currentUser.credits || 24}</div>
-            <div className="text-sm text-blue-700 dark:text-blue-300">{t('completedcredits')}</div>
-          </div>
-          <div className="text-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
-            <div className="text-2xl font-bold text-green-600 dark:text-green-400">{currentUser.projectsCompleted || 15}</div>
-            <div className="text-sm text-green-700 dark:text-green-300">{t('completedprojects')}</div>
+      <PageWrapper>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm text-center mb-6">
+          <div className="w-20 h-20 bg-purple-200 dark:bg-purple-700 rounded-full mx-auto mb-4 flex items-center justify-center"><User className="text-purple-600 dark:text-purple-300" size={32} /></div>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">{currentUser.fullName || currentUser.displayName || currentUser.name}</h2>
+          <div className="text-gray-600 dark:text-gray-400 text-sm mt-2">
+            <div>{getUniversityDisplayName()}</div>
+            <div>{getFacultyDisplayName()}</div>
+            <div>{currentUser.year || ''}</div>
           </div>
         </div>
-      </SectionCard>
 
-      <SectionCard title={t('facultyprofessors')} className="mt-6">
-        <div className="space-y-2">
-          {facultyProfessors.length ? facultyProfessors.map((p, i) => <div key={i} className="p-3 bg-white dark:bg-gray-700 rounded shadow text-gray-900 dark:text-white">{typeof p === 'string' ? p : p.name || p.title}</div>) : <div className="text-sm text-gray-500 dark:text-gray-400">لا توجد بيانات للمحاضرين في هذه الكلية</div>}
+        <div className="space-y-3">
+          <button onClick={() => setCurrentScreen('financial')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
+            <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
+            <div className="flex items-center gap-3"><DollarSign className="text-green-500" size={20} /><span className="text-gray-900 dark:text-white">{t('academicexpenses')}</span></div>
+          </button>
+          <button onClick={() => setCurrentScreen('attendance')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
+            <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
+            <div className="flex items-center gap-3"><Clock className="text-blue-500" size={20} /><span className="text-gray-900 dark:text-white">{t('attendancerecord')}</span></div>
+          </button>
+          <button onClick={() => setCurrentScreen('support')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
+            <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
+            <div className="flex items-center gap-3"><HelpCircle className="text-orange-500" size={20} /><span className="text-gray-900 dark:text-white">{t('supporthelp')}</span></div>
+          </button>
+          <button onClick={() => setCurrentScreen('settings')} className={`w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm flex items-center ${isRTL ? 'justify-between' : 'justify-between flex-row-reverse'} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}>
+            <ChevronLeft className={`text-gray-400 dark:text-gray-500 ${isRTL ? '' : 'rotate-180'}`} size={20} />
+            <div className="flex items-center gap-3"><Settings className="text-gray-500" size={20} /><span className="text-gray-900 dark:text-white">{t('settings')}</span></div>
+          </button>
         </div>
-      </SectionCard>
 
-      <SectionCard title={t('colleagues')} className="mt-4">
-        <div className="space-y-2">
-          {facultyStudents.length ? facultyStudents.map((s, i) => <div key={i} className="p-3 bg-white dark:bg-gray-700 rounded shadow text-gray-900 dark:text-white">{s.username || s.name || s.id}</div>) : <div className="text-sm text-gray-500 dark:text-gray-400">لا توجد بيانات للزملاء في هذه الكلية</div>}
-        </div>
-      </SectionCard>
-    </PageWrapper>
-  );
+        <SectionCard title={t('studentstats')} className="mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{currentUser.credits || 24}</div>
+              <div className="text-sm text-blue-700 dark:text-blue-300">{t('completedcredits')}</div>
+            </div>
+            <div className="text-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+              <div className="text-2xl font-bold text-green-600 dark:text-green-400">{currentUser.projectsCompleted || 15}</div>
+              <div className="text-sm text-green-700 dark:text-green-300">{t('completedprojects')}</div>
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard title={t('facultyprofessors')} className="mt-6">
+          <div className="space-y-2">
+            {facultyProfessors.length ? facultyProfessors.map((p, i) => <div key={i} className="p-3 bg-white dark:bg-gray-700 rounded shadow text-gray-900 dark:text-white">{typeof p === 'string' ? p : p.name || p.title}</div>) : <div className="text-sm text-gray-500 dark:text-gray-400">لا توجد بيانات للمحاضرين في هذه الكلية</div>}
+          </div>
+        </SectionCard>
+
+        <SectionCard title={t('colleagues')} className="mt-4">
+          <div className="space-y-2">
+            {facultyStudents.length ? facultyStudents.map((s, i) => <div key={i} className="p-3 bg-white dark:bg-gray-700 rounded shadow text-gray-900 dark:text-white">{s.username || s.name || s.id}</div>) : <div className="text-sm text-gray-500 dark:text-gray-400">لا توجد بيانات للزملاء في هذه الكلية</div>}
+          </div>
+        </SectionCard>
+      </PageWrapper>
+    );
   };
 
   const AttendanceScreen = () => (
@@ -1503,14 +1415,14 @@ function StudentAppContent() {
           <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div>
               <div className="font-medium text-gray-900 dark:text-white">{t("studentaffairsoffice")}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-300">{t("replywithinoneday")}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">{t("replywithinoneday")}</div>
             </div>
             <a href="#" className="flex items-center gap-2 text-blue-600 dark:text-blue-400"><Phone size={18} />{t("phone")}</a>
           </div>
           <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div>
               <div className="font-medium text-gray-900 dark:text-white">{t("technicalsupport")}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-300">{t("technicaldifficulities")}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">{t("technicaldifficulities")}</div>
             </div>
             <a href="#" className="flex items-center gap-2 text-blue-600 dark:text-blue-400"><Mail size={18} />{t("email")}</a>
           </div>
